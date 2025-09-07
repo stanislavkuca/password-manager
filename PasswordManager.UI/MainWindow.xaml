@@ -7,12 +7,31 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1000">
     <Grid>
-        <StackPanel Orientation="Vertical" Width="250" HorizontalAlignment="Left" Background="LightGray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Background="LightGray" Grid.Column="0">
             <TextBlock Text="Password Manager" FontSize="16" FontWeight="Bold" Margin="10" HorizontalAlignment="Center"/>
-            <Button x:Name="button" Content="Button" Width="120" Height="30" Margin="20" />
-            <Button x:Name="button2" Content="Button2" Width="120" Height="30" Margin="20" />
-            <Button x:Name="button3" Content="Button3" Width="120" Height="30" Margin="20" />
-            <Button x:Name="button4" Content="Button4" Width="120" Height="30" Margin="20" />
+            
+            <Button x:Name="passwordsButton" Content="Passwords" Width="120" Height="30" Margin="20" />
+            <Button x:Name="passwordGeneratorButton" Content="Password Generator" Width="120" Height="30" Margin="20" />
+            <Button x:Name="settingsButton" Content="Settings" Width="120" Height="30" Margin="20" />
         </StackPanel>
+        
+        <DockPanel Grid.Column="1">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="20" Height="30">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="0,0,20,0"/>
+                    </Style>
+                </StackPanel.Resources>
+                
+                <Button Content="Add new"/>
+                <Button Content="Share"/>
+                <Button Content="Change passwords"/>
+            </StackPanel>
+            
+        </DockPanel>
     </Grid>
 </Window>
