@@ -3,35 +3,152 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:PasswordManager.UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1000">
+        Title="Password Manager Alpha" Height="620" Width="1000">
+    
+    <!--Button Styles-->
+    <Window.Resources>
+        <!--Base Button Style-->
+        <Style x:Key="BaseButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                CornerRadius="5"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!--Left Main Menu Style-->
+        <Style x:Key="MainMenuButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Width" Value="180"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Background" Value="LightBlue"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+        </Style>
+
+        <!--Top Right Menu Style-->
+        <Style x:Key="SecondaryMenuButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="15,15,0,10"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        
+        <!--Item Button Style-->
+        <Style x:Key="ItemButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="15,0,0,0"/>
+        </Style>
+        
+        <!--Delete Button From Item Buttons Syle-->
+        <Style x:Key="DeleteButtonStyle" TargetType="Button" BasedOn="{StaticResource ItemButtonStyle}">
+            <Setter Property="Background" Value="IndianRed"/>
+        </Style>
+    </Window.Resources>
+    
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Background="LightGray" Grid.Column="0">
-            <TextBlock Text="Password Manager" FontSize="16" FontWeight="Bold" Margin="10" HorizontalAlignment="Center"/>
-            
-            <Button x:Name="passwordsButton" Content="Passwords" Width="120" Height="30" Margin="20" />
-            <Button x:Name="passwordGeneratorButton" Content="Password Generator" Width="120" Height="30" Margin="20" />
-            <Button x:Name="settingsButton" Content="Settings" Width="120" Height="30" Margin="20" />
+        
+        <!--Main Menu Side-->
+        <StackPanel Background="LightGray" Grid.Column="0" >
+            <TextBlock Text="Password Manager" FontSize="22" FontWeight="Bold" Margin="20" HorizontalAlignment="Center"/>
+
+            <Button Content="Passwords" Style="{StaticResource MainMenuButtonStyle}"/>
+            <Button Content="Password Generator" Style="{StaticResource MainMenuButtonStyle}"/>
+            <Button Content="Settings" Style="{StaticResource MainMenuButtonStyle}"/>
         </StackPanel>
         
-        <DockPanel Grid.Column="1">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="20" Height="30">
-                <StackPanel.Resources>
-                    <Style TargetType="Button">
-                        <Setter Property="Margin" Value="0,0,20,0"/>
-                    </Style>
-                </StackPanel.Resources>
-                
-                <Button Content="Add new"/>
-                <Button Content="Share"/>
-                <Button Content="Change passwords"/>
+        <!--Passwords Page-->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!--Secondary Menu on the Top Right-->
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Button Content="New account" Style="{StaticResource SecondaryMenuButtonStyle}"/>
+                <Button Content="Change all passwords" Style="{StaticResource SecondaryMenuButtonStyle}"/>
+                <Button Content="Backup" Style="{StaticResource SecondaryMenuButtonStyle}"/>
             </StackPanel>
             
-        </DockPanel>
+            <!--Account Item List-->
+            <ListBox Grid.Row="1" Margin="10,0,10,10" 
+                     BorderThickness="0" 
+                     Background="Transparent" 
+                     HorizontalContentAlignment="Stretch">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5" 
+                                Padding="10" Margin="0,5,0,5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <!--Account Credentials-->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="Account Name:" FontWeight="Bold" Margin="0,0,10,0" FontSize="14"/>
+                                    <TextBlock Text="Username123" Margin="0,0,10,0" FontSize="14"/>
+                                    <TextBlock Text="Password123" Margin="20,0,0,0" FontSize="14"/>
+                                </StackPanel>
+                                
+                                <!--Account Option Buttons-->
+                                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                    <Button Content="Regenerate Password" Style="{StaticResource ItemButtonStyle}"/>
+                                    <Button Content="Edit" Style="{StaticResource ItemButtonStyle}"/>
+                                    <Button Content="Delete" Style="{StaticResource DeleteButtonStyle}"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                
+                <!--Dummy Items-->
+                <ListBox.Items>
+                    <sys:String>Item</sys:String>
+                    <sys:String>Item</sys:String>
+                    <sys:String>Item</sys:String>
+                    <sys:String>Item</sys:String>
+                    <sys:String>Item</sys:String>
+                    <sys:String>Item</sys:String>
+                    <sys:String>Item</sys:String>
+                    <sys:String>Item</sys:String>
+                    <sys:String>Item</sys:String>
+                    <sys:String>Item</sys:String>
+                    <sys:String>Item</sys:String>
+                </ListBox.Items>
+            </ListBox>
+        </Grid>
     </Grid>
 </Window>
