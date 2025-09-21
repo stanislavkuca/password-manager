@@ -1,4 +1,4 @@
-﻿<Window x:Class="PasswordManager.UI.MainWindow"
+﻿<Window x:Class="PasswordManager.UI.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -139,7 +139,7 @@
             
             <!--Secondary Menu on the Top Right-->
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <Button Style="{StaticResource SecondaryMenuButtonStyle}">
+                <Button Style="{StaticResource SecondaryMenuButtonStyle}" Click="NewAccountButton_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="{StaticResource NewAccountIcon}" Width="24" Height="24" Margin="0,0,10,0"/>
                         <TextBlock Text="New account"/>
@@ -171,7 +171,8 @@
                      BorderThickness="0" 
                      Background="{StaticResource PrimaryGradient}" 
                      HorizontalContentAlignment="Stretch"
-                     Margin="15,0,0,0">
+                     Margin="15,0,0,0" SelectionChanged="ListBox_SelectionChanged"
+                     x:Name="AccountList">
 
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
@@ -203,9 +204,10 @@
                                 
                                 <!--Account Credentials-->
                                 <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                                    <TextBlock Text="Account Name:" FontWeight="Bold" Margin="0,0,10,0" FontSize="14"/>
-                                    <TextBlock Text="Username123" Margin="0,0,10,0" FontSize="14"/>
-                                    <TextBlock Text="Password123" Margin="20,0,0,0" FontSize="14"/>
+                                    <TextBlock Text="{Binding AccountName}" FontWeight="Bold" Margin="0,0,10,0" FontSize="14"/>
+                                    <TextBlock Text="{Binding AccountUsername}" Margin="0,0,10,0" FontSize="14"/>
+                                    <TextBlock Text="{Binding AccountPassword}" Margin="20,0,0,0" FontSize="14"/>
+                                    <TextBlock Text="{Binding AccountNote}" Margin="20,0,0,0" FontSize="14"/>
                                 </StackPanel>
                                 
                                 <!--Account Option Buttons-->
@@ -221,6 +223,7 @@
                 
                 
                 <!--Dummy Items-->
+                <!--
                 <ListBox.Items>
                     <sys:String>Item</sys:String>
                     <sys:String>Item</sys:String>
@@ -240,6 +243,7 @@
                     <sys:String>Item</sys:String>
                     <sys:String>Item</sys:String>
                 </ListBox.Items>
+                -->
             </ListBox>
         </Grid>
     </Grid>
