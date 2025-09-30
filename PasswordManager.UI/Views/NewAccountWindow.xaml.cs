@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PasswordManager.UI.Models;
 
 namespace PasswordManager.UI.Views
 {
@@ -20,20 +21,12 @@ namespace PasswordManager.UI.Views
     /// </summary>
     public partial class NewAccountWindow : Window
     {
-        public class Account(string name, string username, string password, string? note = null)
-        {
-            public string AccountName { get; } = name;
-            public string AccountUsername { get; } = username;
-            public string AccountPassword { get; } = password;
-            public string? AccountNote { get; } = note;
-        }
-        
-        public Account? CreatedAccount { get; private set; }
-
         public NewAccountWindow()
         {
             InitializeComponent();
         }
+
+        public Account? CreatedAccount { get; private set; }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
