@@ -6,6 +6,8 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:PasswordManager.UI"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
         Title="Password Manager Alpha" Width="1520" Height="880" >
     
     <Window.Resources>
@@ -167,7 +169,7 @@
                         </Setter>
                     </Style>
                 </ListBox.ItemContainerStyle>
-                
+
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" CornerRadius="5" 
@@ -177,7 +179,7 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                
+
                                 <!--Account Credentials-->
                                 <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
                                     <TextBlock Text="{Binding AccountName}" FontWeight="Bold" Margin="0,0,10,0" FontSize="14"/>
@@ -185,41 +187,17 @@
                                     <TextBlock Text="{Binding AccountPassword}" Margin="20,0,0,0" FontSize="14"/>
                                     <TextBlock Text="{Binding AccountNote}" Margin="20,0,0,0" FontSize="14"/>
                                 </StackPanel>
-                                
+
                                 <!--Account Option Buttons-->
                                 <StackPanel Grid.Column="1" Orientation="Horizontal">
                                     <Button Content="More" Style="{StaticResource ItemButtonStyle}"/>
-                                    <Button Content="Delete" Style="{StaticResource DeleteButtonStyle}"/>
+                                    <Button Content="Delete" Style="{StaticResource DeleteButtonStyle}" Click="DeleteConfirmation_Click"/>
                                     <Button Style="{StaticResource FavouriteButtonStyle}"/>
                                 </StackPanel>
                             </Grid>
                         </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-                
-                
-                <!--Dummy Items-->
-                <!--
-                <ListBox.Items>
-                    <sys:String>Item</sys:String>
-                    <sys:String>Item</sys:String>
-                    <sys:String>Item</sys:String>
-                    <sys:String>Item</sys:String>
-                    <sys:String>Item</sys:String>
-                    <sys:String>Item</sys:String>
-                    <sys:String>Item</sys:String>
-                    <sys:String>Item</sys:String>
-                    <sys:String>Item</sys:String>
-                    <sys:String>Item</sys:String>
-                    <sys:String>Item</sys:String>
-                    <sys:String>Item</sys:String>
-                    <sys:String>Item</sys:String>
-                    <sys:String>Item</sys:String>
-                    <sys:String>Item</sys:String>
-                    <sys:String>Item</sys:String>
-                    <sys:String>Item</sys:String>
-                </ListBox.Items>
-                -->
             </ListBox>
         </Grid>
     </Grid>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,10 +14,14 @@ namespace PasswordManager.UI.Helpers
         /// <summary>
         /// Used for showing a simple window
         /// </summary>
-        public static void OpenWindow<TWindow>(bool showDialog = true)
+        public static void OpenWindow<TWindow>(Window owner, bool showDialog = true)
             where TWindow : Window, new()
         {
-            var window = new TWindow();
+            var window = new TWindow
+            {
+                Owner = owner,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
 
             if (showDialog)
             {
