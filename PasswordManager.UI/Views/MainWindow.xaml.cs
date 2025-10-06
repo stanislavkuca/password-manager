@@ -28,13 +28,7 @@ namespace PasswordManager.UI.Views
 
         private void NewAccountButton_Click(object sender, RoutedEventArgs e)
         {
-            var newAccountWindow = new NewAccountWindow
-            {
-                Owner = this,
-                WindowStartupLocation = WindowStartupLocation.CenterOwner
-            };
-
-            if (newAccountWindow.ShowDialog() == true)
+            if (Helpers.WindowHelper.OpenDialog(this, out NewAccountWindow newAccountWindow) == true)
             {
                 var account = newAccountWindow.CreatedAccount;
                 AccountList.Items.Add(account);

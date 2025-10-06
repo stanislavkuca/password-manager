@@ -29,30 +29,6 @@
             <Setter Property="Margin" Value="15,15,10,10"/>
         </Style>
         
-        <!--Item Button Style-->
-        <Style x:Key="ItemButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Margin" Value="15,0,0,0"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#969696"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        
-        <!--Delete Button From Item Button Syle-->
-        <Style x:Key="DeleteButtonStyle" TargetType="Button" BasedOn="{StaticResource ItemButtonStyle}">
-            <Setter Property="Background" Value="#CD5C5C"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#C33C3C"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
         <!--Favourite Button Syle-->
         <Style x:Key="FavouriteButtonStyle" TargetType="Button" BasedOn="{StaticResource ItemButtonStyle}">
             <Setter Property="Template">
