@@ -22,8 +22,8 @@
             <Button Click="DeleteConfirmationButton_Click" 
                     Content="Delete" Style="{StaticResource DeleteButtonStyle}" 
                     Height="30" Width="60" Margin="50,5,30,5"/>
-            <Button Click="StornoConfirmationButton_Click" 
-                    Content="Storno" Style="{StaticResource DefaultButtonStyle}" 
+            <Button Click="CancelButton_Click" 
+                    Content="Cancel" Style="{StaticResource DefaultButtonStyle}" 
                     Height="30" Width="60" Margin="50,5,20,5"/>
         </StackPanel>
     </Grid>

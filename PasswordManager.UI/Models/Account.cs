@@ -6,11 +6,19 @@ using System.Threading.Tasks;
 
 namespace PasswordManager.UI.Models
 {
-    public class Account(string name, string username, string password, string? note = null)
+    public class Account
     {
-        public string AccountName { get; } = name;
-        public string AccountUsername { get; } = username;
-        public string AccountPassword { get; } = password;
-        public string? AccountNote { get; } = note;
+        public string Name { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string? Note { get; set; }
+
+        public Account(string name, string username, string password, string? note = null)
+        {
+            Name = name;
+            Username = username;
+            Password = password;
+            Note = note;
+        }
     }
 }

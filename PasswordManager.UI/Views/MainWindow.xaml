@@ -3,163 +3,115 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        xmlns:local="clr-namespace:PasswordManager.UI"
+        xmlns:models="clr-namespace:PasswordManager.UI.Models"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=models:AccountListData, IsDesignTimeCreatable=True}"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Title="Password Manager Alpha" Width="1520" Height="880" >
-    
-    <Window.Resources>
-        <!--AudioWide font-->
-        <FontFamily x:Key="AudiowideFont">pack://application:,,,/Assets/Fonts/#Audiowide</FontFamily>
-        
-        <!--Main Menu Style-->
-        <Style x:Key="MainMenuButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
-            <Setter Property="Height" Value="50"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Margin" Value="20,10,20,15"/>
-        </Style>
+        Title="Password Manager Alpha"
+        Width="1520" Height="880">
 
-        <!--Top Right Menu Style-->
-        <Style x:Key="SecondaryMenuButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="Padding" Value="15"/>
-            <Setter Property="Margin" Value="15,15,10,10"/>
-        </Style>
-        
-        <!--Favourite Button Syle-->
-        <Style x:Key="FavouriteButtonStyle" TargetType="Button" BasedOn="{StaticResource ItemButtonStyle}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Image x:Name="Icon" Source="{StaticResource FavouriteIconEmpty}" 
-                               Width="24" Height="24" Margin="0,0,5,0"
-                               RenderOptions.BitmapScalingMode="HighQuality"/>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Icon" Property="Source"
-                                        Value="{StaticResource FavouriteIconFilled}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-    
-    
     <Grid Background="{StaticResource PrimaryGradient}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!--Main Menu Side-->
+        <!-- LEFT MENU -->
         <StackPanel Grid.Column="0">
-            <TextBlock  FontSize="23" 
-                        FontWeight="Bold" 
-                        Margin="20" 
-                        HorizontalAlignment="Center"
-                        FontFamily="{StaticResource AudiowideFont}">
+            <TextBlock FontSize="23"
+                       FontWeight="Bold"
+                       Margin="20"
+                       HorizontalAlignment="Center"
+                       FontFamily="{StaticResource AudiowideFont}">
                 <Run Text="Password"/>
                 <LineBreak/>
-                <Run Text="          Manager"/>
+                <Run Text="Manager"/>
             </TextBlock>
 
             <Button Style="{StaticResource MainMenuButtonStyle}">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="{StaticResource PasswordsIcon}" 
-                           RenderOptions.BitmapScalingMode="HighQuality"
-                           Width="24" Height="24" Margin="0,0,10,0"/>
+                    <Image Source="{StaticResource PasswordsIcon}" Width="24" Height="24" Margin="10,0,15,0"/>
                     <TextBlock Text="Passwords"/>
                 </StackPanel>
             </Button>
 
             <Button Style="{StaticResource MainMenuButtonStyle}">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="{StaticResource PasswordGeneratorIcon}" 
-                           RenderOptions.BitmapScalingMode="HighQuality"
-                           Width="24" Height="24" Margin="0,0,10,0"/>
+                    <Image Source="{StaticResource PasswordGeneratorIcon}" Width="24" Height="24" Margin="10,0,15,0"/>
                     <TextBlock Text="Password Generator"/>
                 </StackPanel>
             </Button>
 
             <Button Style="{StaticResource MainMenuButtonStyle}">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="{StaticResource BackupIcon}" 
-                       RenderOptions.BitmapScalingMode="HighQuality"
-                       Width="24" Height="24" Margin="0,0,10,0"/>
+                    <Image Source="{StaticResource BackupIcon}" Width="24" Height="24" Margin="10,0,15,0"/>
                     <TextBlock Text="Backup"/>
                 </StackPanel>
             </Button>
         </StackPanel>
 
-        <Button Style="{StaticResource MainMenuButtonStyle}" Grid.Column="0" VerticalAlignment="Bottom">
+        <!-- SETTINGS BUTTON AT BOTTOM -->
+        <Button Style="{StaticResource MainMenuButtonStyle}"
+                Grid.Column="0"
+                VerticalAlignment="Bottom">
             <StackPanel Orientation="Horizontal">
-                <Image Source="{StaticResource SettingsIcon}" 
-                       RenderOptions.BitmapScalingMode="HighQuality"
-                       Width="24" Height="24" Margin="0,0,10,0"/>
+                <Image Source="{StaticResource SettingsIcon}" Width="24" Height="24" Margin="10,0,15,0"/>
                 <TextBlock Text="Settings"/>
             </StackPanel>
         </Button>
 
-        
-        <!--Passwords Page-->
+        <!-- RIGHT SIDE CONTENT -->
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="100"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
-            <!--Secondary Menu on the Top Right-->
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <Button Style="{StaticResource SecondaryMenuButtonStyle}" Click="NewAccountButton_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="{StaticResource NewAccountIcon}" Width="24" Height="24" Margin="0,0,10,0"/>
-                        <TextBlock Text="New account"/>
-                    </StackPanel>
-                </Button>
 
-                <Button Style="{StaticResource SecondaryMenuButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="{StaticResource NewFolderIcon}" Width="24" Height="24" Margin="0,0,10,0"/>
-                        <TextBlock Text="New folder"/>
+            <!-- TOP RIGHT ACTION MENU -->
+            <DockPanel Grid.Row="0" Margin="10,10,10,10">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                    <Button Style="{StaticResource SecondaryMenuButtonStyle}" Click="NewAccountButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{StaticResource NewAccountIcon}" Width="24" Height="24" Margin="0,0,10,0"/>
+                            <TextBlock Text="New account"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Style="{StaticResource SecondaryMenuButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{StaticResource NewFolderIcon}" Width="24" Height="24" Margin="0,0,10,0"/>
+                            <TextBlock Text="New folder"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <!-- SEARCH BUTTON RIGHT -->
+                <Button Style="{StaticResource SecondaryMenuButtonStyle}"
+                        HorizontalAlignment="Right"
+                        BorderThickness="1"
+                        BorderBrush="{StaticResource BorderBrush}">
+                    <StackPanel Width="350">
+                        <Image Source="{StaticResource SearchIcon}" Width="24" Height="24" HorizontalAlignment="Right"/>
                     </StackPanel>
                 </Button>
-            </StackPanel>
-                
-            <Button Style="{StaticResource SecondaryMenuButtonStyle}" 
-                    HorizontalAlignment="Right" Margin="15,15,20,10"
-                    BorderThickness="1" BorderBrush="{StaticResource BorderBrush}">
-                <StackPanel Width="350">
-                    <Image Source="{StaticResource SearchIcon}" 
-                            RenderOptions.BitmapScalingMode="HighQuality"
-                            Width="24" Height="24"
-                            HorizontalAlignment="Right"/>
-                </StackPanel>
-            </Button>
-            
-            
-            <!--Account Item List-->
-            <ListBox Grid.Row="1" 
-                     BorderThickness="0" 
-                     Background="{StaticResource PrimaryGradient}" 
+            </DockPanel>
+
+            <!-- ACCOUNT LIST -->
+            <ListBox Grid.Row="1"
+                     ItemsSource="{Binding Accounts}"
+                     BorderThickness="0"
+                     Background="Transparent"
                      HorizontalContentAlignment="Stretch"
-                     Margin="15,0,0,0" SelectionChanged="ListBox_SelectionChanged"
+                     Margin="15,0,0,0"
                      x:Name="AccountList">
 
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Focusable" Value="False"/>
                         <Setter Property="Padding" Value="0"/>
                         <Setter Property="Margin" Value="0"/>
-                        <Setter Property="Focusable" Value="False"/>
-
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">
@@ -172,23 +124,43 @@
 
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" CornerRadius="5" 
-                                Padding="10" Margin="0,5">
+                        <Border BorderBrush="{StaticResource BorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="5"
+                                Padding="10"
+                                Margin="0,5">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <!--Account Credentials-->
+                                <!-- Account fields -->
                                 <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding AccountName}" FontWeight="Bold" Margin="0,0,10,0" FontSize="14"/>
-                                    <TextBlock Text="{Binding AccountUsername}" Margin="0,0,10,0" FontSize="14"/>
-                                    <TextBlock Text="{Binding AccountPassword}" Margin="20,0,0,0" FontSize="14"/>
-                                    <TextBlock Text="{Binding AccountNote}" Margin="20,0,0,0" FontSize="14"/>
+                                    <Grid HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="180"/>
+                                            <ColumnDefinition Width="160"/>
+                                            <ColumnDefinition Width="130"/>
+                                            <ColumnDefinition Width="500"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="{Binding Name}" Style="{StaticResource AccountItemTemplateStyle}"
+                                               Grid.Column="0" MaxWidth="180"
+                                               FontWeight="Bold"/>
+
+                                        <TextBlock Text="{Binding Username}" Style="{StaticResource AccountItemTemplateStyle}"
+                                                   Grid.Column="1" MaxWidth="160"/>
+
+                                        <TextBlock Text="********..." Style="{StaticResource AccountItemTemplateStyle}"
+                                                   Grid.Column="2"/>
+
+                                        <TextBlock Text="{Binding Note}" Style="{StaticResource AccountItemTemplateStyle}"
+                                                   Grid.Column="3" MaxWidth="490"/>
+                                    </Grid>
                                 </StackPanel>
 
-                                <!--Account Option Buttons-->
+                                <!-- Buttons -->
                                 <StackPanel Grid.Column="1" Orientation="Horizontal">
                                     <Button Content="More" Style="{StaticResource ItemButtonStyle}"/>
                                     <Button Content="Delete" Style="{StaticResource DeleteButtonStyle}" Click="DeleteConfirmation_Click"/>
