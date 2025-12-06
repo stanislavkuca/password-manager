@@ -8,6 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/Base.xaml"/>
                 <ResourceDictionary Source="/Themes/WhiteTheme.xaml"/>
+                <ResourceDictionary Source="/Styles/DialogWindow.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -9,16 +9,18 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Title="Password Manager Alpha"
-        Width="1520" Height="880">
+        Width="1520" Height="910">
 
     <Grid Background="{StaticResource PrimaryGradient}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="12"/>
+            <ColumnDefinition Width="10.5"/>
+            <ColumnDefinition Width="277.5"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!-- LEFT MENU -->
-        <StackPanel Grid.Column="0">
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="3">
             <TextBlock FontSize="23"
                        FontWeight="Bold"
                        Margin="20"
@@ -29,32 +31,40 @@
                 <Run Text="Manager"/>
             </TextBlock>
 
-            <Button Style="{StaticResource MainMenuButtonStyle}">
+            <Button Style="{StaticResource MainMenuButtonStyle}" Click="AllPasswords_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{StaticResource PasswordsIcon}" Width="24" Height="24" Margin="10,0,15,0"/>
-                    <TextBlock Text="Passwords"/>
+                    <TextBlock Text="All Passwords"/>
                 </StackPanel>
             </Button>
 
-            <Button Style="{StaticResource MainMenuButtonStyle}">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="{StaticResource PasswordGeneratorIcon}" Width="24" Height="24" Margin="10,0,15,0"/>
-                    <TextBlock Text="Password Generator"/>
-                </StackPanel>
-            </Button>
-
-            <Button Style="{StaticResource MainMenuButtonStyle}">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="{StaticResource BackupIcon}" Width="24" Height="24" Margin="10,0,15,0"/>
-                    <TextBlock Text="Backup"/>
-                </StackPanel>
-            </Button>
+            <ListBox ItemsSource="{Binding Folders}"
+                     ItemContainerStyle="{StaticResource FolderItemStyle}"
+                     SelectedItem="{Binding SelectedFolder, Mode=TwoWay}"
+                     BorderThickness="0"
+                     Background="Transparent"
+                     x:Name="FoldersListBox"
+                     HorizontalAlignment="Stretch"
+                     Margin="20,0,20,0"
+                     MaxHeight="500">
+                
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name, StringFormat=• {0}}"
+                                   Padding="30 6"
+                                   FontSize="18"
+                                   TextTrimming="CharacterEllipsis"
+                                   MaxWidth="250"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                
+            </ListBox>
         </StackPanel>
 
         <!-- SETTINGS BUTTON AT BOTTOM -->
         <Button Style="{StaticResource MainMenuButtonStyle}"
-                Grid.Column="0"
-                VerticalAlignment="Bottom">
+                Grid.Column="1"
+                VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="8,799,20,0">
             <StackPanel Orientation="Horizontal">
                 <Image Source="{StaticResource SettingsIcon}" Width="24" Height="24" Margin="10,0,15,0"/>
                 <TextBlock Text="Settings"/>
@@ -62,7 +72,7 @@
         </Button>
 
         <!-- RIGHT SIDE CONTENT -->
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="*"/>
@@ -78,7 +88,7 @@
                         </StackPanel>
                     </Button>
 
-                    <Button Style="{StaticResource SecondaryMenuButtonStyle}">
+                    <Button Style="{StaticResource SecondaryMenuButtonStyle}" Click="NewFolderButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="{StaticResource NewFolderIcon}" Width="24" Height="24" Margin="0,0,10,0"/>
                             <TextBlock Text="New folder"/>

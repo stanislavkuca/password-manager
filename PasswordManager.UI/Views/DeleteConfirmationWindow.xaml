@@ -5,26 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PasswordManager.UI.Views"
         mc:Ignorable="d"
-        ResizeMode="NoResize"
-        WindowStyle="None"
-        Height="150" Width="300">
+        Style="{StaticResource DialogWindowStyle}"
+        Title="Confirm deletion">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Are you sure?" Grid.Row="0" 
-                   HorizontalAlignment="Center" VerticalAlignment="Center" 
-                   FontWeight="Bold" FontSize="20"/>
-
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
+        <StackPanel Grid.Row="1" Orientation="Horizontal"
+                    HorizontalAlignment="Center">
             <Button Click="DeleteConfirmationButton_Click" 
-                    Content="Delete" Style="{StaticResource DeleteButtonStyle}" 
-                    Height="30" Width="60" Margin="50,5,30,5"/>
+                    Content="Delete" Style="{StaticResource DialogButtonOK}" 
+                    Background="IndianRed"/>
             <Button Click="CancelButton_Click" 
-                    Content="Cancel" Style="{StaticResource DefaultButtonStyle}" 
-                    Height="30" Width="60" Margin="50,5,20,5"/>
+                    Content="Cancel" Style="{StaticResource DialogButtonCancel}"/>
         </StackPanel>
     </Grid>
 </Window>

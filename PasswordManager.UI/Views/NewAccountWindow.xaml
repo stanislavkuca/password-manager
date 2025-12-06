@@ -3,49 +3,50 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PasswordManager.UI.Views"
-        mc:Ignorable="d"
-        WindowStyle="None"
-        ResizeMode="NoResize"
-        Title="New account window" Height="300" Width="350">
+        Style="{StaticResource DialogWindowStyle}"
+        Title="Create new account">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="New account" HorizontalAlignment="Center" Margin="5" FontWeight="Bold" FontSize="15"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="0,20,0,0">
+            <Button Content="Add" Click="AddButton_Click" Style="{StaticResource DialogButtonOK}"/>
+            <Button Content="Cancel" Click="CancelButton_Click" Style="{StaticResource DialogButtonCancel}"/>
+        </StackPanel>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0" HorizontalAlignment="Left">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            
+            <TextBlock Text="Service name:" Grid.Row="0" Grid.Column="0" Style="{StaticResource DialogTextBlockStyle}"/>
+            <TextBox x:Name="AccountNameTextBox" Style="{StaticResource DialogTextBoxStyle}"
+                     Grid.Row="0" Grid.Column="1"/>
 
-            <TextBlock Text="Account name:" Grid.Row="0" Grid.Column="0" Margin="3"/>
-            <TextBox x:Name="AccountNameTextBox" Grid.Row="0" Grid.Column="1"/>
+            <TextBlock Text="Username:" Grid.Row="1" Grid.Column="0" Style="{StaticResource DialogTextBlockStyle}"/>
+            <TextBox x:Name="AccountUsernameTextBox" Style="{StaticResource DialogTextBoxStyle}"
+                     Grid.Row="1" Grid.Column="1"/>
 
-            <TextBlock Text="Username:" Grid.Row="1" Grid.Column="0" Margin="3"/>
-            <TextBox x:Name="AccountUsernameTextBox" Grid.Row="1" Grid.Column="1"/>
+            <TextBlock Text="Password:" Grid.Row="2" Grid.Column="0" Style="{StaticResource DialogTextBlockStyle}"/>
+            <TextBox x:Name="AccountPasswordTextBox" Style="{StaticResource DialogTextBoxStyle}"
+                     Grid.Row="2" Grid.Column="1"/>
 
-            <TextBlock Text="Password:" Grid.Row="2" Grid.Column="0" Margin="3"/>
-            <TextBox x:Name="AccountPasswordTextBox" Grid.Row="2" Grid.Column="1"/>
-
-            <TextBlock Text="Note:" Grid.Row="3" Grid.Column="0" Margin="3"/>
-            <TextBox x:Name="AccountNoteTextBox" Grid.Row="3" Grid.Column="1"/>
-
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="4" Grid.ColumnSpan="2">
-                <Button Content="Add" Click="AddButton_Click" Width="75" Margin="5,5,50,5"/>
-                <Button Content="Cancel" Click="CancelButton_Click" Width="75" Margin="5"/>
-            </StackPanel>
+            <TextBlock Text="Note:" Grid.Row="3" Grid.Column="0" Style="{StaticResource DialogTextBlockStyle}"/>
+            <TextBox x:Name="AccountNoteTextBox" Style="{StaticResource DialogTextBoxStyle}"
+                     Grid.Row="3" Grid.Column="1" TextWrapping="Wrap" MaxLines="5" MaxLength="180" MaxHeight="145"/>
         </Grid>
     </Grid>
 </Window>
