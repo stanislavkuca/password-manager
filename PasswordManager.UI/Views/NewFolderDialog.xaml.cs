@@ -30,14 +30,7 @@ namespace PasswordManager.UI.Views
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            var name = FolderNameTextBox.Text?.Trim();
-
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                MessageBox.Show(this, "Please enter a folder name.", "Validation", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            CreatedFolderName = name;
+            CreatedFolderName = FolderNameTextBox.Text;
             DialogResult = true;
             Close();
         }

@@ -6,24 +6,23 @@ namespace PasswordManager.UI.Views
 {
     public partial class DeleteConfirmationWindow : Window
     {
-        private readonly ObservableCollection<Account> _accounts;
-        private readonly Account _accountToDelete;
+        public Account AccountToDelete { get; }
 
-        public DeleteConfirmationWindow(ObservableCollection<Account> accounts, Account account)
+        public DeleteConfirmationWindow(Account account)
         {
             InitializeComponent();
-            _accounts = accounts;
-            _accountToDelete = account;
+            AccountToDelete = account;
         }
 
         private void DeleteConfirmationButton_Click(object sender, RoutedEventArgs e)
         {
-            _accounts.Remove(_accountToDelete);
+            DialogResult = true;
             Close();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = false;
             Close();
         }
     }

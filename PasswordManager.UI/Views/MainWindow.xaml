@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Title="Password Manager Alpha"
-        Width="1520" Height="910">
+        Width="1550" Height="910">
 
     <Grid Background="{StaticResource PrimaryGradient}">
         <Grid.ColumnDefinitions>
@@ -172,9 +172,17 @@
 
                                 <!-- Buttons -->
                                 <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                    <Button Content="More" Style="{StaticResource ItemButtonStyle}"/>
+                                    <!--<Button Content="More" Style="{StaticResource ItemButtonStyle}"/>-->
                                     <Button Content="Delete" Style="{StaticResource DeleteButtonStyle}" Click="DeleteConfirmation_Click"/>
                                     <Button Style="{StaticResource FavouriteButtonStyle}"/>
+                                    <Button Style="{StaticResource PlusFolderButtonStyle}" 
+                                            Tag="{Binding Id}"
+                                            Click="FolderButton_Click"
+                                            Content="+">
+                                        <Button.ContextMenu>
+                                            <ContextMenu />
+                                        </Button.ContextMenu>
+                                    </Button>
                                 </StackPanel>
                             </Grid>
                         </Border>

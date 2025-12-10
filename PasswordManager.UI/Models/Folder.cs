@@ -10,9 +10,7 @@ namespace PasswordManager.UI.Models
     public class Folder
     {
         public string Name { get; set; }
-        public ObservableCollection<Account> Accounts { get; set; } = new();
-
-        public Folder() { }
+        public ObservableCollection<Guid> AccountIds { get; } = new();
 
         public Folder(string name)
         {

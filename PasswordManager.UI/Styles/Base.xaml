@@ -299,4 +299,39 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!-- Plus Folder Button -->
+    <Style x:Key="PlusFolderButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Margin" Value="10 1 0 0"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="Background" Value="Transparent"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Name="Border"
+                            CornerRadius="10"
+                            BorderThickness="2"
+                            BorderBrush="LightGray"
+                            Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="DarkGray"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="Gray"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>
