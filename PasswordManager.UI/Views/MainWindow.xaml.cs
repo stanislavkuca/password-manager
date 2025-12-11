@@ -52,15 +52,23 @@ namespace PasswordManager.UI.Views
 
         private void RefreshAccountList()
         {
-            Accounts.Clear();
+            IEnumerable<Account> source;
 
-            var filtered = SelectedFolder == null
-                ? AllAccounts
-                : AllAccounts.Where(a => SelectedFolder.AccountIds.Contains(a.Id));
-            foreach (var acc in filtered)
+            if (SelectedFolder == null)
             {
-                Accounts.Add(acc);
+                source = AllAccounts;
             }
+            else
+            {
+                source = SelectedFolder.AccountIds
+                    .Select(id => AllAccounts.FirstOrDefault(a => a.Id == id))
+                    .Where(a => a != null)
+                    .Cast<Account>();
+            }
+
+            AccountList.ItemsSource = source.ToList();
+
+            ApplySearchFilter();
         }
 
         private void NewAccountButton_Click(object sender, RoutedEventArgs e) 
@@ -197,6 +205,41 @@ namespace PasswordManager.UI.Views
                     RefreshAccountList();
                 }
             }
+        }
+
+        private void ApplySearchFilter()
+        {
+            if (AccountList == null) return;
+
+            string query = SearchBox.Text?.Trim().ToLower() ?? "";
+
+            IEnumerable<Account> source;
+
+            if (SelectedFolder == null)
+            {
+                source = AllAccounts;
+            }
+            else
+            {
+                source = SelectedFolder.AccountIds
+                    .Select(id => AllAccounts.FirstOrDefault(a => a.Id == id))
+                    .Where(a => a != null)
+                    .Cast<Account>();
+            }
+
+            if (!string.IsNullOrEmpty(query))
+            {
+                source = source.Where(a =>
+                    (a.Name?.ToLower().Contains(query) ?? false) ||
+                    (a.Note?.ToLower().Contains(query) ?? false));
+            }
+
+            AccountList.ItemsSource = source.ToList();
+        }
+
+        private void SearchBox_TextChanged(object sender, EventArgs e)
+        {
+            ApplySearchFilter();
         }
     }
 }

@@ -334,4 +334,40 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    
+    <!-- Search Box Top Right -->
+    <Style x:Key="SearchBoxStyle" TargetType="TextBox">
+        <Setter Property="Width" Value="300"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="MaxLines" Value="1"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Margin" Value="0 0 30 0"/>
+        <Setter Property="Padding" Value="10 10 50 10"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="Border"
+                    CornerRadius="5"
+                    BorderBrush="DarkGray"
+                    BorderThickness="1"
+                    Background="{TemplateBinding Background}">
+
+                        <Grid>
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Hidden"/>
+
+                            <Image Source="{StaticResource SearchIcon}" 
+                                   Width="20" Height="20" 
+                                   Margin="0 0 10 0" 
+                                   HorizontalAlignment="Right" 
+                                   VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

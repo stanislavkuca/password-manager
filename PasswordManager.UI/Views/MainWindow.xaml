@@ -96,15 +96,11 @@
                     </Button>
                 </StackPanel>
 
-                <!-- SEARCH BUTTON RIGHT -->
-                <Button Style="{StaticResource SecondaryMenuButtonStyle}"
-                        HorizontalAlignment="Right"
-                        BorderThickness="1"
-                        BorderBrush="{StaticResource BorderBrush}">
-                    <StackPanel Width="350">
-                        <Image Source="{StaticResource SearchIcon}" Width="24" Height="24" HorizontalAlignment="Right"/>
-                    </StackPanel>
-                </Button>
+                <!-- SEARCH BOX RIGHT -->
+                <TextBox x:Name="SearchBox"
+                         TextChanged="SearchBox_TextChanged"
+                         Style="{StaticResource SearchBoxStyle}"
+                         HorizontalAlignment="Right"/>
             </DockPanel>
 
             <!-- ACCOUNT LIST -->
