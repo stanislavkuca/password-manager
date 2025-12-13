@@ -66,6 +66,10 @@ namespace PasswordManager.UI.Views
                     .Cast<Account>();
             }
 
+            source = source
+                .OrderByDescending(a => a.IsFavourite)
+                .ThenBy(a => a.Name);
+
             AccountList.ItemsSource = source.ToList();
 
             ApplySearchFilter();
@@ -240,6 +244,15 @@ namespace PasswordManager.UI.Views
         private void SearchBox_TextChanged(object sender, EventArgs e)
         {
             ApplySearchFilter();
+        }
+
+        private void FavouriteButton_Click(object sender, EventArgs e)
+        {
+            if (sender is Button btn && btn.DataContext is Account account)
+            {
+                account.IsFavourite = !account.IsFavourite;
+                RefreshAccountList();
+            }
         }
     }
 }

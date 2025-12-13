@@ -170,7 +170,7 @@
                                 <StackPanel Grid.Column="1" Orientation="Horizontal">
                                     <!--<Button Content="More" Style="{StaticResource ItemButtonStyle}"/>-->
                                     <Button Content="Delete" Style="{StaticResource DeleteButtonStyle}" Click="DeleteConfirmation_Click"/>
-                                    <Button Style="{StaticResource FavouriteButtonStyle}"/>
+                                    <Button Style="{StaticResource FavouriteButtonStyle}" Click="FavouriteButton_Click"/>
                                     <Button Style="{StaticResource PlusFolderButtonStyle}" 
                                             Tag="{Binding Id}"
                                             Click="FolderButton_Click"

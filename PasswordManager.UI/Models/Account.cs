@@ -10,6 +10,8 @@ namespace PasswordManager.UI.Models
     {
         public Guid Id { get; } = Guid.NewGuid();
 
+        public bool IsFavourite {  get; set; }
+
         public string Name { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
