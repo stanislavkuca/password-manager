@@ -63,7 +63,9 @@ namespace PasswordManager.Views
             else
             {
                 source = SelectedFolder.AccountIds
-                    .Select(id => AllAccounts.First(a => a.Id == id));
+                    .Select(id => AllAccounts.FirstOrDefault(a => a.Id == id))
+                    .Where(a => a != null)
+                    .Cast<Account>();
             }
 
             string query = SearchBox.Text?.Trim().ToLower() ?? "";
@@ -221,37 +223,9 @@ namespace PasswordManager.Views
             }
         }
 
-        private void ApplySearchFilter()
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (AccountList == null) return;
-
-            string query = SearchBox.Text?.Trim().ToLower() ?? "";
-
-            IEnumerable<Account> source;
-
-            if (SelectedFolder == null)
-            {
-                source = AllAccounts;
-            }
-            else
-            {
-                source = SelectedFolder.AccountIds
-                    .Select(id => AllAccounts.FirstOrDefault(a => a.Id == id))
-                    .Where(a => a != null)
-                    .Cast<Account>();
-            }
-
-            if (!string.IsNullOrEmpty(query))
-            {
-                source = source.Where(a =>
-                    (a.Name?.ToLower().Contains(query) ?? false) ||
-                    (a.Note?.ToLower().Contains(query) ?? false));
-            }
-        }
-
-        private void SearchBox_TextChanged(object sender, EventArgs e)
-        {
-            ApplySearchFilter();
+            RefreshAccountList();
         }
 
         private void FavouriteButton_Click(object sender, EventArgs e)
