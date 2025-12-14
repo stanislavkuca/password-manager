@@ -47,9 +47,9 @@ Developed using Visual Studio
 ---
 ## Author
 
-Stanislav Kuča
-Střední průmyslová škola, Obchodní akademie a Jazyková škola s právem státní jazykové zkoušky, Frýdek≈Místek, příspěvková organizace
-2025/26
+- Stanislav Kuča
+- Střední průmyslová škola, Obchodní akademie a Jazyková škola s právem státní jazykové zkoušky, Frýdek≈Místek, příspěvková organizace
+- 2025/26
 
 
 
