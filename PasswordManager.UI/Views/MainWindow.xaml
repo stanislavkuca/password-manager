@@ -34,7 +34,7 @@
             <Button Style="{StaticResource MainMenuButtonStyle}" Click="AllPasswords_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{StaticResource PasswordsIcon}" Width="24" Height="24" Margin="10,0,15,0"/>
-                    <TextBlock Text="All Passwords"/>
+                    <TextBlock Text="All Accounts"/>
                 </StackPanel>
             </Button>
 

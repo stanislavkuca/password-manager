@@ -114,10 +114,10 @@
                            RenderOptions.BitmapScalingMode="HighQuality"/>
 
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
+                        <DataTrigger Binding="{Binding IsFavourite}" Value="True">
                             <Setter TargetName="Icon" Property="Source"
                                     Value="{StaticResource FavouriteIconFilled}"/>
-                        </Trigger>
+                        </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
