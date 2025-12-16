@@ -33,8 +33,6 @@ The goal of this project was to create a functional desktop application using WP
 - C#
 - .NET (WPF)
 - XAML
-- ObservableCollection
-- INotifyPropertyChanged
 
 Developed using Visual Studio
 
