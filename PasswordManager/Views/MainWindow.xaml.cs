@@ -35,20 +35,35 @@ namespace PasswordManager.Views
 
             var data = DataService.Load();
 
-            foreach (var acc in data.Accounts) 
+            foreach (var acc in data.Accounts)
+            {
+                acc.Password = acc.DecryptPassword(acc.Password);
                 AllAccounts.Add(acc);
+            }
 
             foreach (var folder in data.Folders)
+            {
                 Folders.Add(folder);
+            }
 
             RefreshAccountList();
         }
 
         private void SaveData()
         {
+            var accountsToSave = AllAccounts.Select(a => new Account(
+                a.Name,
+                a.Username,
+                a.EncryptPassword(a.Password),
+                a.Note
+            )
+            {
+                IsFavourite = a.IsFavourite
+            }).ToList();
+
             var data = new AppData
             {
-                Accounts = AllAccounts.ToList(),
+                Accounts = accountsToSave,
                 Folders = Folders.ToList(),
             };
 
