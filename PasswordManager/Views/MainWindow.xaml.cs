@@ -3,7 +3,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Xaml.Permissions;
 using PasswordManager.Models;
+using PasswordManager.Services;
 
 namespace PasswordManager.Views
 {
@@ -31,19 +33,39 @@ namespace PasswordManager.Views
             InitializeComponent();
             DataContext = this;
 
-            // Dummy folder
-            var work = new Folder("Work");
-            var acc1 = new Account("Lorem", "Ipsum", "pass", "note");
+            var data = DataService.Load();
 
-            AllAccounts.Add(acc1);
-            work.AccountIds.Add(acc1.Id);
-            Folders.Add(work);
+            foreach (var acc in data.Accounts) 
+                AllAccounts.Add(acc);
 
-            // Fill AllAccounts
-            AllAccounts.Add(new Account("Email", "admin", "pass123", "My Gmail"));
-            AllAccounts.Add(new Account("Steam", "sSAdadsa", "xxxx", "Games"));
+            foreach (var folder in data.Folders)
+                Folders.Add(folder);
 
             RefreshAccountList();
+        }
+
+        private void SaveData()
+        {
+            var data = new AppData
+            {
+                Accounts = AllAccounts.ToList(),
+                Folders = Folders.ToList(),
+            };
+
+            DataService.Save(data);
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            var data = new AppData
+            {
+                Accounts = AllAccounts.ToList(),
+                Folders = Folders.ToList()
+            };
+
+            DataService.Save(data);
+
+            base.OnClosing(e);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -100,6 +122,7 @@ namespace PasswordManager.Views
                 var acc = window.CreatedAccount; 
                 
                 AllAccounts.Add(acc); 
+                SaveData();
                 
                 if (SelectedFolder != null) 
                 { 
@@ -123,6 +146,7 @@ namespace PasswordManager.Views
                 var folder = new Folder(window.CreatedFolderName);
 
                 Folders.Add(folder);
+                SaveData();
             }
         }
 
@@ -139,6 +163,7 @@ namespace PasswordManager.Views
                 if (dialog.ShowDialog() == true)
                 {
                     DeleteAccount(account.Id);
+                    SaveData();
                 }
             }
         }
@@ -154,7 +179,7 @@ namespace PasswordManager.Views
                 if (folder.AccountIds.Contains(accountId))
                     folder.AccountIds.Remove(accountId);
             }
-
+            SaveData();
             RefreshAccountList();
         }
 

@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace PasswordManager.Models
 {
@@ -41,5 +43,19 @@ namespace PasswordManager.Models
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged(string prop)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+
+        public string EncryptPassword(string password)
+        {
+            var bytes = Encoding.UTF8.GetBytes(password);
+            var encrypted = ProtectedData.Protect(bytes, null, DataProtectionScope.CurrentUser);
+            return Convert.ToBase64String(encrypted);
+        }
+
+        public string DecryptPassword(string encryptedPassword)
+        {
+            var bytes = Convert.FromBase64String(encryptedPassword);
+            var decrypted = ProtectedData.Unprotect(bytes, null, DataProtectionScope.CurrentUser);
+            return Encoding.UTF8.GetString(decrypted);
+        }
     }
 }
