@@ -6,6 +6,8 @@ using System.Windows.Controls;
 using System.Xaml.Permissions;
 using PasswordManager.Models;
 using PasswordManager.Services;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace PasswordManager.Views
 {
@@ -15,6 +17,7 @@ namespace PasswordManager.Views
         public ObservableCollection<Account> AllAccounts { get; set; } = new();
         public ObservableCollection<Folder> Folders { get; set; } = new();
 
+        DispatcherTimer lockTimer = new DispatcherTimer();
 
         private Folder? _selectedFolder;
         public Folder? SelectedFolder
@@ -33,6 +36,10 @@ namespace PasswordManager.Views
             InitializeComponent();
             DataContext = this;
 
+            lockTimer.Interval = TimeSpan.FromMinutes(5);
+            lockTimer.Tick += LockTimer_LogOff;
+            lockTimer.Start();
+
             var data = DataService.Load();
 
             foreach (var acc in data.Accounts)
@@ -47,6 +54,22 @@ namespace PasswordManager.Views
             }
 
             RefreshAccountList();
+        }
+
+        private void LockTimer_LogOff(object? sender, EventArgs e)
+        {
+            lockTimer.Stop();
+
+            var login = new LoginDialog();
+
+            if (login.ShowDialog() == true)
+            {
+                lockTimer.Start();
+            }
+            else
+            {
+                Application.Current.Shutdown();
+            }
         }
 
         private void SaveData()

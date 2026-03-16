@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace PasswordManager.Views
 {
@@ -28,6 +29,17 @@ namespace PasswordManager.Views
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             string entered = MasterPasswordBox.Password;
+            string path = "Data/master.hash";
+
+            if (!File.Exists(path))
+            {
+                string hash = AuthService.Hash(entered);
+                File.WriteAllText(path, hash);
+                DialogResult = true;
+                return;
+            }
+
+            string storedHash = File.ReadAllText(path);
 
             if (AuthService.Verify(entered, storedHash))
             {
@@ -37,12 +49,6 @@ namespace PasswordManager.Views
             {
                 MessageBox.Show("Wrong password");
             }
-        }
-
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = false;
-            Close();
         }
     }
 }
