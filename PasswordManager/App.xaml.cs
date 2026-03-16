@@ -1,7 +1,9 @@
 ﻿using PasswordManager.Views;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Windows;
+using PasswordManager.Services;
 
 namespace PasswordManager
 {
@@ -14,17 +16,26 @@ namespace PasswordManager
         {
             base.OnStartup(e);
 
-            var login = new LoginDialog();
+            string masterPath = Path.Combine("Data", "master.hash");
 
-            if(login.ShowDialog() == true)
+            if (!File.Exists(masterPath))
             {
-                var main = new MainWindow();
-                main.Show();
+                var newPasswordDialog = new NewMasterPasswordDialog();
+
+                if (newPasswordDialog.ShowDialog() != true)
+                {
+                    MessageBox.Show("Master password not created. Appliacation will exit.");
+                    Shutdown();
+                    return;
+                }
+
+                Directory.CreateDirectory("Data");
+                File.WriteAllText(masterPath, AuthService.Hash(newPasswordDialog.NewPassword));
+                MessageBox.Show("Master password created.");
             }
-            else
-            {
-                Shutdown();
-            }
+
+            var login = new LoginDialog();
+            login.Show();
         }
     }
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using System.Windows;
 
 namespace PasswordManager.Models
 {
@@ -52,9 +53,17 @@ namespace PasswordManager.Models
 
         public string DecryptPassword(string encryptedPassword)
         {
-            var bytes = Convert.FromBase64String(encryptedPassword);
-            var decrypted = ProtectedData.Unprotect(bytes, null, DataProtectionScope.CurrentUser);
-            return Encoding.UTF8.GetString(decrypted);
+            try
+            {
+                var bytes = Convert.FromBase64String(encryptedPassword);
+                var decrypted = ProtectedData.Unprotect(bytes, null, DataProtectionScope.CurrentUser);
+                return Encoding.UTF8.GetString(decrypted);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Stored password is corrupted or not encrypted correctly.");
+                return string.Empty;
+            }
         }
     }
 }
