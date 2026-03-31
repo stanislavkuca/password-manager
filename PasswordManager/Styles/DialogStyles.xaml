@@ -2,43 +2,46 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    
+
     <Style x:Key="DialogWindowStyle" TargetType="Window">
-    <Setter Property="WindowStyle" Value="None"/>
-    <Setter Property="ResizeMode" Value="NoResize"/>
-    <Setter Property="Background" Value="Transparent"/>
-    <Setter Property="ShowInTaskbar" Value="False"/>
-    <Setter Property="AllowsTransparency" Value="True"/>
+        <Setter Property="WindowStyle" Value="None"/>
+        <Setter Property="ResizeMode" Value="NoResize"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="ShowInTaskbar" Value="False"/>
+        <Setter Property="AllowsTransparency" Value="True"/>
         <Setter Property="SizeToContent" Value="WidthAndHeight"/>
 
         <Setter Property="Template">
-        <Setter.Value>
+            <Setter.Value>
                 <ControlTemplate TargetType="Window">
-                    <Border Background="White"
-                            BorderBrush="DarkSlateGray"
-                            BorderThickness="1"
+                    <Border Background="{DynamicResource NavBackground}"
                             CornerRadius="12"
-                            Padding="20"
-                            Margin="20">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                            Padding="24">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="25" ShadowDepth="4" Opacity="0.15" Direction="270" Color="Black"/>
+                        </Border.Effect>
+                        
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
-                                <!-- Title -->
-                                <TextBlock Text="{TemplateBinding Title}"
-                                       FontSize="22"
-                                       Margin="0,0,0,15"
-                                       FontWeight="Bold"/>
+                            <!-- Title -->
+                            <TextBlock Text="{TemplateBinding Title}"
+                                       FontSize="20"
+                                       Foreground="{DynamicResource TextBrush}"
+                                       Margin="0 0 0 20"
+                                       FontWeight="SemiBold"/>
 
-                                <!-- Content -->
-                                <ContentPresenter Grid.Row="1"/>
-                            </Grid>
-                        </Border>
+                            <!-- Content -->
+                            <ContentPresenter Grid.Row="1"/>
+                        </Grid>
+                    </Border>
                 </ControlTemplate>
-        </Setter.Value>
-    </Setter>
-</Style>
-
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
 </ResourceDictionary>

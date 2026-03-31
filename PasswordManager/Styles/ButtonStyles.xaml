@@ -4,36 +4,30 @@
     <!-- DEFAULT BUTTON STYLE -->
     <Style x:Key="DefaultButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="Padding" Value="5"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="FontFamily" Value="{StaticResource AudiowideFont}"/>
         <Setter Property="FontSize" Value="14"/>
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border x:Name="border"
+                    <Border x:Name="Border"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="6"
+                        CornerRadius="8"
                         Padding="{TemplateBinding Padding}">
-
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="BorderBrush" Value="#B6B6B6"/>
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource ControlHoverBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
-
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -71,11 +65,13 @@
     </Style>
 
     <!-- DELETE BUTTON STYLE -->
-    <Style x:Key="DeleteButtonStyle" TargetType="Button" BasedOn="{StaticResource ItemButtonStyle}">
-        <Setter Property="Background" Value="#CD5C5C"/>
+    <Style x:Key="DeleteButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+        <Setter Property="Background" Value="{DynamicResource DangerBrush}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="12 6"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#C33C3C"/>
+                <Setter Property="Background" Value="{DynamicResource DangerHoverBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -143,35 +139,31 @@
     </Style>
 
     <!-- Ok Dialog Button -->
-    <Style x:Key="DialogButtonOK"
-   TargetType="Button"
-   BasedOn="{StaticResource DialogButtonBase}">
-        <Setter Property="Background" Value="#4C8BF5"/>
-        <Setter Property="Foreground" Value="White"/>
+    <Style x:Key="DialogButtonOK" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+        <Setter Property="Background" Value="{DynamicResource PrimaryAccentBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentForegroundBrush}"/>
+        <Setter Property="Padding" Value="24 10"/>
+        <Setter Property="Margin" Value="10 0 0 0"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#3D79E0"/>
-            </Trigger>
-            <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="#3468C7"/>
+                <Setter Property="Background" Value="{DynamicResource PrimaryAccentHoverBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <!-- Cancel Dialog Button -->
-    <Style x:Key="DialogButtonCancel"
-   TargetType="Button"
-   BasedOn="{StaticResource DialogButtonBase}">
-        <Setter Property="Background" Value="#E5E5E5"/>
-        <Setter Property="Foreground" Value="Black"/>
+    <Style x:Key="DialogButtonCancel" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+        <Setter Property="Background" Value="{DynamicResource NavBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+        <Setter Property="Padding" Value="24 10"/>
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#D5D5D5"/>
-            </Trigger>
-            <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="#C8C8C8"/>
+                <Setter Property="Background" Value="{DynamicResource ControlHoverBrush}"/>
+                <Setter Property="Background" Value="{DynamicResource TextBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

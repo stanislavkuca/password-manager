@@ -10,7 +10,10 @@
     
     <SolidColorBrush x:Key="WindowBackground" Color="#F8FAFC"/>
     <SolidColorBrush x:Key="NavBackground" Color="#FFFFFF"/>
-    
+
+    <SolidColorBrush x:Key="ControlHoverBrush" Color="#F1F5F9"/>
+    <SolidColorBrush x:Key="ControlSelectedBrush" Color="#E0E7FF"/>
+
     <SolidColorBrush x:Key="PrimaryAccentBrush" Color="#4F46E5"/>
     <SolidColorBrush x:Key="PrimaryAccentHoverBrush" Color="#4338CA"/>
     <SolidColorBrush x:Key="AccentForegroundBrush" Color="#FFFFFF"/>
