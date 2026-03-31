@@ -5,10 +5,10 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Styles/Base.xaml"/>
+                <ResourceDictionary Source="/Styles/BaseStyles.xaml"/>
                 <ResourceDictionary Source="/Styles/ButtonStyles.xaml"/>
                 <ResourceDictionary Source="/Styles/Themes/WhiteTheme.xaml"/>
-                <ResourceDictionary Source="/Styles/DialogWindow.xaml"/>
+                <ResourceDictionary Source="/Styles/DialogStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
