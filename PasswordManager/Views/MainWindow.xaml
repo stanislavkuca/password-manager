@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=models:AccountListData, IsDesignTimeCreatable=True}"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         Title="Password Manager Alpha"
-        Width="1550" Height="910">
+        Width="1600" Height="910">
 
     <Grid Background="{StaticResource PrimaryGradient}">
         <Grid.ColumnDefinitions>
