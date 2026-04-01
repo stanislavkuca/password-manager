@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PasswordManager.Views"
         mc:Ignorable="d"
-        Style="{StaticResource DialogWindowStyle}"
+        Style="{DynamicResource DialogWindowStyle}"
         WindowStartupLocation="CenterScreen"
         Title="Enter your password"
         ShowInTaskbar="True">
