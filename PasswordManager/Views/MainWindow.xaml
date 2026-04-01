@@ -20,8 +20,9 @@
         </Grid.ColumnDefinitions>
 
         <!-- LEFT MENU -->
-        <StackPanel Grid.Column="0">
-            <TextBlock FontSize="23"
+        <DockPanel Grid.Column="0" HorizontalAlignment="Center">
+            <StackPanel>
+                <TextBlock FontSize="23"
                        FontWeight="Bold"
                        Margin="20"
                        HorizontalAlignment="Center"
@@ -29,47 +30,47 @@
                 <Run Text="Password"/>
                 <LineBreak/>
                 <Run Text="Manager"/>
-            </TextBlock>
+                </TextBlock>
 
-            <Button Style="{StaticResource MainMenuButtonStyle}" Click="AllPasswords_Click">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="{StaticResource PasswordsIcon}" Width="24" Height="24" Margin="10,0,15,0"/>
-                    <TextBlock Text="All Accounts"/>
-                </StackPanel>
-            </Button>
+                <Button Style="{StaticResource MainMenuButtonStyle}" Click="AllPasswords_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{StaticResource PasswordsIcon}" Width="24" Height="24" Margin="10,0,15,0"/>
+                        <TextBlock Text="All Accounts"/>
+                    </StackPanel>
+                </Button>
 
-            <ListBox ItemsSource="{Binding Folders}"
-                     ItemContainerStyle="{StaticResource FolderItemStyle}"
-                     SelectedItem="{Binding SelectedFolder, Mode=TwoWay}"
-                     BorderThickness="0"
-                     Background="Transparent"
-                     x:Name="FoldersListBox"
-                     HorizontalAlignment="Stretch"
-                     Margin="20,0,20,0"
-                     MaxHeight="500">
-                
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name, StringFormat=• {0}}"
+                <!--FOLDER LIST -->
+                <ListBox ItemsSource="{Binding Folders}"
+                         ItemContainerStyle="{StaticResource FolderItemStyle}"
+                         SelectedItem="{Binding SelectedFolder, Mode=TwoWay}"
+                         BorderThickness="0"
+                         Background="Transparent"
+                         x:Name="FoldersListBox"
+                         HorizontalAlignment="Stretch"
+                         Margin="20,0,20,0"
+                         MaxHeight="500">
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name, StringFormat=• {0}}"
                                    Padding="30 6"
                                    FontSize="18"
                                    TextTrimming="CharacterEllipsis"
                                    MaxWidth="250"/>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                
-            </ListBox>
-        </StackPanel>
-
-        <!-- SETTINGS BUTTON AT BOTTOM -->
-        <Button Style="{StaticResource MainMenuButtonStyle}"
-                Grid.Column="1"
-                VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="8,799,20,0">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="{StaticResource SettingsIcon}" Width="24" Height="24" Margin="10,0,15,0"/>
-                <TextBlock Text="Settings"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </StackPanel>
-        </Button>
+
+            <!-- SETTINGS BUTTON AT BOTTOM -->
+            <Button Style="{StaticResource MainMenuButtonStyle}"
+                    DockPanel.Dock="Bottom" Margin="5">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{StaticResource SettingsIcon}" Width="24" Height="24" Margin="10,0,15,0"/>
+                    <TextBlock Text="Settings"/>
+                </StackPanel>
+            </Button>
+        </DockPanel>
 
         <!-- RIGHT SIDE CONTENT -->
         <Grid Grid.Column="3">
