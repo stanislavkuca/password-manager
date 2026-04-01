@@ -7,20 +7,20 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=models:AccountListData, IsDesignTimeCreatable=True}"
         WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
         ResizeMode="CanResize"
         Title="Password Manager Alpha"
-        Width="1600" Height="910">
+        Width="1400" Height="700"
+        MinWidth="1000" MinHeight="500">
 
-    <Grid Background="{StaticResource PrimaryGradient}">
+    <Grid Background="{StaticResource PrimaryGradient}" Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="12"/>
-            <ColumnDefinition Width="10.5"/>
-            <ColumnDefinition Width="277.5"/>
+            <ColumnDefinition Width="277"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!-- LEFT MENU -->
-        <StackPanel Grid.Column="0" Grid.ColumnSpan="3">
+        <StackPanel Grid.Column="0">
             <TextBlock FontSize="23"
                        FontWeight="Bold"
                        Margin="20"
@@ -148,7 +148,7 @@
                                             <ColumnDefinition Width="180"/>
                                             <ColumnDefinition Width="160"/>
                                             <ColumnDefinition Width="130"/>
-                                            <ColumnDefinition Width="500"/>
+                                            <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Text="{Binding Name}" Style="{StaticResource AccountItemTemplateStyle}"
