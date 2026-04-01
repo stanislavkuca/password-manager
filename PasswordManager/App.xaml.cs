@@ -14,6 +14,8 @@ namespace PasswordManager
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+
             base.OnStartup(e);
 
             string masterPath = Path.Combine("Data", "master.hash");
@@ -36,6 +38,7 @@ namespace PasswordManager
 
             var login = new LoginDialog();
             login.Show();
+            this.ShutdownMode = ShutdownMode.OnMainWindowClose;
         }
     }
 
