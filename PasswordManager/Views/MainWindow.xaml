@@ -15,21 +15,21 @@
 
     <Grid Background="{StaticResource PrimaryGradient}" Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="277"/>
+            <ColumnDefinition Width="Auto" MinWidth="240"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!-- LEFT MENU -->
-        <DockPanel Grid.Column="0" HorizontalAlignment="Center">
-            <StackPanel>
+        <DockPanel Grid.Column="0" HorizontalAlignment="Left">
+            <StackPanel DockPanel.Dock="Top">
                 <TextBlock FontSize="23"
                        FontWeight="Bold"
                        Margin="20"
                        HorizontalAlignment="Center"
                        FontFamily="{StaticResource AudiowideFont}">
-                <Run Text="Password"/>
-                <LineBreak/>
-                <Run Text="Manager"/>
+                    <Run Text="Password"/>
+                    <LineBreak/>
+                    <Run Text="Manager"/>
                 </TextBlock>
 
                 <Button Style="{StaticResource MainMenuButtonStyle}" Click="AllPasswords_Click">
@@ -63,7 +63,7 @@
             </StackPanel>
 
             <!-- SETTINGS BUTTON AT BOTTOM -->
-            <Button Style="{StaticResource MainMenuButtonStyle}"
+            <Button Style="{StaticResource MainMenuButtonStyle}" VerticalAlignment="Bottom"
                     DockPanel.Dock="Bottom" Margin="5">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{StaticResource SettingsIcon}" Width="24" Height="24" Margin="10,0,15,0"/>
