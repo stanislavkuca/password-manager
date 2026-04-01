@@ -20,7 +20,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="8"/>
-                        <Border x:Name="HoverOverlay" Background="{DynamicResource ControlHoverBrush}" CornerRadius="8" Opacity="0"/>
+                        <Border x:Name="HoverOverlay" Background="{TemplateBinding Background}" CornerRadius="8" Opacity="0"/>
                         
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
                     </Grid>
