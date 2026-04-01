@@ -14,29 +14,31 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Window">
-                    <Border Background="{DynamicResource NavBackground}"
-                            CornerRadius="12"
-                            Padding="24">
+                    <Border BorderBrush="Transparent" BorderThickness="10" CornerRadius="25" Background="Transparent">
+                        <Border Background="{DynamicResource NavBackground}"
+                                CornerRadius="12"
+                                Padding="24">
                         <Border.Effect>
-                            <DropShadowEffect BlurRadius="25" ShadowDepth="4" Opacity="0.15" Direction="270" Color="Black"/>
+                            <DropShadowEffect BlurRadius="15" ShadowDepth="2" Opacity="0.15" Direction="-90" Color="Black" RenderingBias="Quality"/>
                         </Border.Effect>
                         
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
 
-                            <!-- Title -->
-                            <TextBlock Text="{TemplateBinding Title}"
-                                       FontSize="20"
-                                       Foreground="{DynamicResource TextBrush}"
-                                       Margin="0 0 0 20"
-                                       FontWeight="SemiBold"/>
+                                <!-- Title -->
+                                <TextBlock Text="{TemplateBinding Title}"
+                                           FontSize="20"
+                                           Foreground="{DynamicResource TextBrush}"
+                                           Margin="0 0 0 20"
+                                           FontWeight="SemiBold"/>
 
-                            <!-- Content -->
-                            <ContentPresenter Grid.Row="1"/>
-                        </Grid>
+                                <!-- Content -->
+                                <ContentPresenter Grid.Row="1"/>
+                            </Grid>
+                        </Border>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

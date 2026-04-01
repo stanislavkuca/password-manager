@@ -182,7 +182,7 @@
                         <Grid>
                             <ScrollViewer x:Name="PART_ContentHost"
                                           VerticalAlignment="Center"
-                                          Margin="0 0 40 0"/>
+                                          Margin="0 0 20 0"/>
                             <Image Source="{StaticResource SearchIcon}" 
                                    Width="20" Height="20" 
                                    Margin="0 0 15 0" 
