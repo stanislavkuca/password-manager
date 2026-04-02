@@ -90,6 +90,7 @@
     <Style x:Key="DialogTextBlockStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Margin" Value="10"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
     <!-- Dialog Text Box -->
@@ -134,6 +135,7 @@
         <Setter Property="Background" Value="{DynamicResource NavBackground}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1.5"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
 
         <Setter Property="Template">
             <Setter.Value>
