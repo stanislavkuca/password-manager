@@ -245,22 +245,27 @@
     
     <!-- EDIT BUTTON STYLE -->
     <Style x:Key="EditButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryAccentBrush}"/>
         <Setter Property="Padding" Value="12 6"/>
+        
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource DangerHoverBrush}"/>
+                <Setter Property="Background" Value="{DynamicResource ControlHoverBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource PrimaryAccentBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
     
     <!-- DELETE BUTTON STYLE -->
     <Style x:Key="DeleteButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
-        <Setter Property="Background" Value="{DynamicResource DangerBrush}"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="{DynamicResource DangerBrush}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Padding" Value="12 6"/>
+        
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource DangerHoverBrush}"/>
+                <Setter Property="Background" Value="{DynamicResource DangerBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource DangerHoverBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
