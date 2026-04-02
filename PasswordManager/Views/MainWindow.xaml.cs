@@ -42,6 +42,18 @@ namespace PasswordManager.Views
 
             var data = DataService.Load();
 
+            for (int i = 0; i < 20;  i++)
+            {
+                AllAccounts.Add(new Account(
+                    name: "DummyName", 
+                    username: "DummyUsername", 
+                    password: "DummyName", 
+                    note: "sdfdsfsdfsdfsdfssfsdfsdfsdfsfsfs"));
+
+                Folders.Add(new Folder(
+                    name: "DummyFolder"));
+            }
+
             foreach (var acc in data.Accounts)
             {
                 acc.Password = acc.DecryptPassword(acc.Password);
