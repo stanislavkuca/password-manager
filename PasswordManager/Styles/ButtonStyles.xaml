@@ -56,6 +56,7 @@
     <Style x:Key="MainMenuButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
         <Setter Property="Height" Value="50"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="Margin" Value="20 10 20 15"/>

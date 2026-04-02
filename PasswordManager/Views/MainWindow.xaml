@@ -38,36 +38,37 @@
                         <TextBlock Text="All Accounts" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
-
-                <!--FOLDER LIST -->
-                <ListBox ItemsSource="{Binding Folders}"
-                         ItemContainerStyle="{DynamicResource FolderItemStyle}"
-                         SelectedItem="{Binding SelectedFolder, Mode=TwoWay}"
-                         BorderThickness="0"
-                         Background="Transparent"
-                         x:Name="FoldersListBox"
-                         HorizontalAlignment="Stretch"
-                         Margin="20 0 20 0">
-                    
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name, StringFormat=• {0}}"
-                                       Padding="30 6"
-                                       FontSize="18"
-                                       TextTrimming="CharacterEllipsis"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
             </StackPanel>
 
             <!-- SETTINGS BUTTON AT BOTTOM -->
             <Button Style="{DynamicResource MainMenuButtonStyle}" VerticalAlignment="Bottom"
                     DockPanel.Dock="Bottom" Margin="5">
+                
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{DynamicResource SettingsIcon}" Width="24" Height="24" Margin="10 0 15 0"/>
                     <TextBlock Text="Settings" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
+
+            <!--FOLDER LIST -->
+            <ListBox ItemsSource="{Binding Folders}"
+                    ItemContainerStyle="{DynamicResource FolderItemStyle}"
+                    SelectedItem="{Binding SelectedFolder, Mode=TwoWay}"
+                    BorderThickness="0"
+                    Background="Transparent"
+                    x:Name="FoldersListBox"
+                    HorizontalAlignment="Stretch"
+                    Margin="20 0 20 0">
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name, StringFormat=• {0}}"
+                                Padding="30 6"
+                                FontSize="18"
+                                TextTrimming="CharacterEllipsis"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </DockPanel>
 
         <!-- RIGHT SIDE CONTENT -->
