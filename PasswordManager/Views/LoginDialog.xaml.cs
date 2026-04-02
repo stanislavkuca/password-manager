@@ -30,37 +30,9 @@ namespace PasswordManager.Views
             string entered = MasterPasswordBox.Password;
             string path = Path.Combine("Data", "master.hash");
 
-            if (string.IsNullOrWhiteSpace(entered))
+            if (File.Exists(path) && AuthService.Verify(entered, File.ReadAllText(path)))
             {
-                MessageBox.Show("Enter master password.");
-                return;
-            }
-
-            if (!File.Exists(path))
-            {
-                MessageBox.Show("Master password not set. Please use Reset to create a new password.");
-                return;
-            }
-
-
-            string storedHash;
-            try
-            {
-                storedHash = File.ReadAllText(path);
-                Convert.FromBase64String(storedHash);
-            }
-            catch
-            {
-                MessageBox.Show("Master password file is corrupted. Please reset.");
-                return;
-            }
-
-            if (AuthService.Verify(entered, storedHash))
-            {
-                MainWindow main = new MainWindow();
-                Application.Current.MainWindow = main;
-                main.Show();
-                this.Close();
+                this.DialogResult = true;
             }
             else
             {
