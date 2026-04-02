@@ -37,9 +37,14 @@ namespace PasswordManager.Views
         private void Logout()
         {
             _lockTimer.Stop();
+            _lockTimer.Tick -= (s, e) => Logout();
+
             ViewModel.SaveData();
-            this.Close();
+
+            MessageBox.Show("Please sign in again.", "You have been logged out after 5 minutes");
             ((App)Application.Current).RunAuthFlow();
+
+            this.Close();
         }
 
         // --- Dialog Events ---
