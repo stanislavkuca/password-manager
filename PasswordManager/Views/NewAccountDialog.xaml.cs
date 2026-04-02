@@ -14,13 +14,10 @@ namespace PasswordManager.Views
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            var temp = new Account("", "", "");
-            string encryptedPassword = temp.EncryptPassword(AccountPasswordTextBox.Text);
-
             CreatedAccount = new Account(
                 AccountNameTextBox.Text,
                 AccountUsernameTextBox.Text,
-                encryptedPassword,
+                Account.EncryptPassword(AccountPasswordTextBox.Text),
                 AccountNoteTextBox.Text
             );
 

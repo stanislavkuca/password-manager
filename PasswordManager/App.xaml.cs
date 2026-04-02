@@ -14,32 +14,52 @@ namespace PasswordManager
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
-
             base.OnStartup(e);
 
+            this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+
+            if (EnsureMasterPasswordExists())
+            {
+                RunAuthFlow();
+            }
+        }
+
+        private bool EnsureMasterPasswordExists()
+        {
             string masterPath = Path.Combine("Data", "master.hash");
 
             if (!File.Exists(masterPath))
             {
-                var newPasswordDialog = new NewMasterPasswordDialog();
+                var setup = new NewMasterPasswordDialog();
 
-                if (newPasswordDialog.ShowDialog() != true)
+                if (setup.ShowDialog() == true)
                 {
-                    MessageBox.Show("Master password not created. Appliacation will exit.");
-                    Shutdown();
-                    return;
+                    Directory.CreateDirectory("Data");
+                    File.WriteAllText(masterPath, AuthService.Hash(setup.NewPassword));
+                    return true;
                 }
-
-                Directory.CreateDirectory("Data");
-                File.WriteAllText(masterPath, AuthService.Hash(newPasswordDialog.NewPassword));
-                MessageBox.Show("Master password created.");
+                Shutdown();
+                return false;
             }
 
+            return true;
+        }
+
+        public void RunAuthFlow()
+        {
             var login = new LoginDialog();
-            login.Show();
-            this.ShutdownMode = ShutdownMode.OnMainWindowClose;
+
+            if (login.ShowDialog() == true)
+            {
+                this.ShutdownMode = ShutdownMode.OnMainWindowClose;
+                var main = new MainWindow();
+                main.Show();
+            }
+            else
+            {
+                Shutdown();
+            }
+
         }
     }
-
 }

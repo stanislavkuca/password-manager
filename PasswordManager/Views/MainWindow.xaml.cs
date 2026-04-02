@@ -42,18 +42,6 @@ namespace PasswordManager.Views
 
             var data = DataService.Load();
 
-            //for (int i = 0; i < 40; i++)
-            //{
-            //    AllAccounts.Add(new Account(
-            //        name: "DummyName",
-            //        username: "DummyUsername",
-            //        password: "DummyName",
-            //        note: "sdfdsfsdfsdfsdfssfsdfsdfsdfsfsfs"));
-
-            //    Folders.Add(new Folder(
-            //        name: "DummyFolder"));
-            //}
-
             foreach (var acc in data.Accounts)
             {
                 acc.Password = acc.DecryptPassword(acc.Password);
@@ -64,6 +52,18 @@ namespace PasswordManager.Views
             {
                 Folders.Add(folder);
             }
+
+            //for (int i = 0; i < 40; i++)
+            //{
+            //    AllAccounts.Add(new Account(
+            //        name: "DummyName",
+            //        username: "DummyUsername",
+            //        password: Account.EncryptPassword("DummyName"),
+            //        note: "sdfdsfsdfsdfsdfssfsdfsdfsdfsfsfs"));
+
+            //    Folders.Add(new Folder(
+            //        name: "DummyFolder"));
+            //}
 
             RefreshAccountList();
         }
@@ -80,7 +80,7 @@ namespace PasswordManager.Views
             }
             else
             {
-                Application.Current.Shutdown();
+                Application.Current?.Shutdown();
             }
         }
 
@@ -89,7 +89,7 @@ namespace PasswordManager.Views
             var accountsToSave = AllAccounts.Select(a => new Account(
                 a.Name,
                 a.Username,
-                a.EncryptPassword(a.Password),
+                Account.EncryptPassword(a.Password),
                 a.Note
             )
             {
@@ -114,6 +114,9 @@ namespace PasswordManager.Views
             };
 
             DataService.Save(data);
+
+            lockTimer.Stop();
+            lockTimer.Tick -= LockTimer_LogOff;
 
             base.OnClosing(e);
         }

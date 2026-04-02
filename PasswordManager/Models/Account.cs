@@ -44,7 +44,7 @@ namespace PasswordManager.Models
         private void OnPropertyChanged(string prop)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
 
-        public string EncryptPassword(string password)
+        public static string EncryptPassword(string password)
         {
             var bytes = Encoding.UTF8.GetBytes(password);
             var encrypted = ProtectedData.Protect(bytes, null, DataProtectionScope.CurrentUser);
