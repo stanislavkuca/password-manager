@@ -126,6 +126,8 @@
         <Setter Property="Background" Value="{DynamicResource NavBackground}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1.5"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="MaxLength" Value="60"/>
 
         <Setter Property="Template">
             <Setter.Value>

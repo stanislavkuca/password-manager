@@ -14,12 +14,14 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal"
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Center" Margin="0 15 0 0">
+
             <Button Click="DeleteConfirmationButton_Click" 
-                    Content="Delete" Style="{StaticResource DialogButtonOK}" 
-                    Background="IndianRed"/>
+                    Content="Delete" Style="{DynamicResource DeleteConfirmationButtonStyle}" Margin="0 0 20 0">
+            </Button>
+
             <Button Click="CancelButton_Click" 
-                    Content="Cancel" Style="{StaticResource DialogButtonCancel}"/>
+                    Content="Cancel" Style="{DynamicResource DialogButtonCancel}"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -13,9 +13,9 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center"
-                    Margin="0,20,0,0">
-            <Button Content="Add" Click="AddButton_Click" Style="{StaticResource DialogButtonOK}"/>
-            <Button Content="Cancel" Click="CancelButton_Click" Style="{StaticResource DialogButtonCancel}"/>
+                    Margin="0 20 0 0">
+            <Button Content="Add" Click="AddButton_Click" Style="{DynamicResource DialogButtonOK}"/>
+            <Button Content="Cancel" Click="CancelButton_Click" Style="{DynamicResource DialogButtonCancel}"/>
         </StackPanel>
 
         <Grid Grid.Row="0" HorizontalAlignment="Left">
@@ -31,22 +31,22 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
-            <TextBlock Text="Service name:" Grid.Row="0" Grid.Column="0" Style="{StaticResource DialogTextBlockStyle}"/>
-            <TextBox x:Name="AccountNameTextBox" Style="{StaticResource DialogTextBoxStyle}"
+
+            <TextBlock Text="Service name:" Grid.Row="0" Grid.Column="0" Style="{DynamicResource DialogTextBlockStyle}"/>
+            <TextBox x:Name="AccountNameTextBox" Style="{DynamicResource DialogTextBoxStyle}"
                      Grid.Row="0" Grid.Column="1"/>
 
-            <TextBlock Text="Username:" Grid.Row="1" Grid.Column="0" Style="{StaticResource DialogTextBlockStyle}"/>
-            <TextBox x:Name="AccountUsernameTextBox" Style="{StaticResource DialogTextBoxStyle}"
+            <TextBlock Text="Username:" Grid.Row="1" Grid.Column="0" Style="{DynamicResource DialogTextBlockStyle}"/>
+            <TextBox x:Name="AccountUsernameTextBox" Style="{DynamicResource DialogTextBoxStyle}"
                      Grid.Row="1" Grid.Column="1"/>
 
-            <TextBlock Text="Password:" Grid.Row="2" Grid.Column="0" Style="{StaticResource DialogTextBlockStyle}"/>
-            <TextBox x:Name="AccountPasswordTextBox" Style="{StaticResource DialogTextBoxStyle}"
+            <TextBlock Text="Password:" Grid.Row="2" Grid.Column="0" Style="{DynamicResource DialogTextBlockStyle}"/>
+            <TextBox x:Name="AccountPasswordTextBox" Style="{DynamicResource DialogTextBoxStyle}"
                      Grid.Row="2" Grid.Column="1"/>
 
-            <TextBlock Text="Note:" Grid.Row="3" Grid.Column="0" Style="{StaticResource DialogTextBlockStyle}"/>
-            <TextBox x:Name="AccountNoteTextBox" Style="{StaticResource DialogTextBoxStyle}"
-                     Grid.Row="3" Grid.Column="1" TextWrapping="Wrap" MaxLines="5" MaxLength="180" MaxHeight="145"/>
+            <TextBlock Text="Note:" Grid.Row="3" Grid.Column="0" Style="{DynamicResource DialogTextBlockStyle}"/>
+            <TextBox x:Name="AccountNoteTextBox" Style="{DynamicResource DialogTextBoxStyle}"
+                     Grid.Row="3" Grid.Column="1" TextWrapping="Wrap" MaxLines="5" MaxLength="156"/>
         </Grid>
     </Grid>
 </Window>
