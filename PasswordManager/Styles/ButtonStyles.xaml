@@ -153,6 +153,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
         <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Content" Value="+"/>
 
         <Setter Property="Template">
             <Setter.Value>

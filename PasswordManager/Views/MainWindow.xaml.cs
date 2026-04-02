@@ -8,239 +8,109 @@ using PasswordManager.Models;
 using PasswordManager.Services;
 using System.Threading;
 using System.Windows.Threading;
+using PasswordManager.ViewModels;
 
 namespace PasswordManager.Views
 {
     public partial class MainWindow : Window
     {
-        public ObservableCollection<Account> Accounts { get; } = new();
-        public ObservableCollection<Account> AllAccounts { get; set; } = new();
-        public ObservableCollection<Folder> Folders { get; set; } = new();
-
-        DispatcherTimer lockTimer = new DispatcherTimer();
-
-        private Folder? _selectedFolder;
-        public Folder? SelectedFolder
-        {
-            get => _selectedFolder;
-            set
-            {
-                _selectedFolder = value;
-                OnPropertyChanged(nameof(SelectedFolder));
-                RefreshAccountList();
-            }
-        }
+        public MainViewModel ViewModel { get; }
+        private DispatcherTimer _lockTimer = new();
 
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = this;
+            ViewModel = new MainViewModel();
+            this.DataContext = ViewModel;
 
-            lockTimer.Interval = TimeSpan.FromMinutes(5);
-            lockTimer.Tick += LockTimer_LogOff;
-            lockTimer.Start();
-
-            var data = DataService.Load();
-
-            foreach (var acc in data.Accounts)
-            {
-                acc.Password = acc.DecryptPassword(acc.Password);
-                AllAccounts.Add(acc);
-            }
-
-            foreach (var folder in data.Folders)
-            {
-                Folders.Add(folder);
-            }
-
-            //for (int i = 0; i < 40; i++)
-            //{
-            //    AllAccounts.Add(new Account(
-            //        name: "DummyName",
-            //        username: "DummyUsername",
-            //        password: Account.EncryptPassword("DummyName"),
-            //        note: "sdfdsfsdfsdfsdfssfsdfsdfsdfsfsfs"));
-
-            //    Folders.Add(new Folder(
-            //        name: "DummyFolder"));
-            //}
-
-            RefreshAccountList();
+            ViewModel.LoadData();
+            StartTimer();
         }
 
-        private void LockTimer_LogOff(object? sender, EventArgs e)
+        private void StartTimer()
         {
-            lockTimer.Stop();
-
-            var login = new LoginDialog();
-
-            if (login.ShowDialog() == true)
-            {
-                lockTimer.Start();
-            }
-            else
-            {
-                Application.Current?.Shutdown();
-            }
+            _lockTimer.Interval = TimeSpan.FromMinutes(5);
+            _lockTimer.Tick += (s, e) => Logout();
+            _lockTimer.Start();
         }
 
-        private void SaveData()
+        private void Logout()
         {
-            var accountsToSave = AllAccounts.Select(a => new Account(
-                a.Name,
-                a.Username,
-                Account.EncryptPassword(a.Password),
-                a.Note
-            )
-            {
-                IsFavourite = a.IsFavourite
-            }).ToList();
-
-            var data = new AppData
-            {
-                Accounts = accountsToSave,
-                Folders = Folders.ToList(),
-            };
-
-            DataService.Save(data);
+            _lockTimer.Stop();
+            ViewModel.SaveData();
+            this.Close();
+            ((App)Application.Current).RunAuthFlow();
         }
 
-        protected override void OnClosing(CancelEventArgs e)
+        // --- Dialog Events ---
+
+        private void NewAccountButton_Click(object sender, RoutedEventArgs e)
         {
-            var data = new AppData
-            {
-                Accounts = AllAccounts.ToList(),
-                Folders = Folders.ToList()
-            };
-
-            DataService.Save(data);
-
-            lockTimer.Stop();
-            lockTimer.Tick -= LockTimer_LogOff;
-
-            base.OnClosing(e);
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        private void OnPropertyChanged(string name)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-
-        private void RefreshAccountList()
-        {
-            Accounts.Clear();
-
-            IEnumerable<Account> source;
-
-            if (SelectedFolder == null)
-            {
-                source = AllAccounts;
-            }
-            else
-            {
-                source = SelectedFolder.AccountIds
-                    .Select(id => AllAccounts.FirstOrDefault(a => a.Id == id))
-                    .Where(a => a != null)
-                    .Cast<Account>();
-            }
-
-            string query = SearchBox.Text?.Trim().ToLower() ?? "";
-
-            if (!string.IsNullOrEmpty(query))
-            {
-                source = source.Where(a =>
-                (a.Name?.ToLower().Contains(query) ?? false) ||
-                (a.Note?.ToLower().Contains(query) ?? false));
-            }
-
-            source = source
-                .OrderByDescending(a => a.IsFavourite)
-                .ThenBy(a => a.Name);
-
-            foreach (var account in source)
-            {
-                Accounts.Add(account);
-            }
-        }
-
-        private void NewAccountButton_Click(object sender, RoutedEventArgs e) 
-        { 
-            var window = new NewAccountWindow 
+            var dialog = new NewAccountWindow 
             { 
-                Owner = this, 
-                WindowStartupLocation = WindowStartupLocation.CenterOwner 
-            }; 
-            
-            if (window.ShowDialog() == true && window.CreatedAccount != null) 
-            { 
-                var acc = window.CreatedAccount; 
-                
-                AllAccounts.Add(acc); 
-                SaveData();
-                
-                if (SelectedFolder != null) 
-                { 
-                    SelectedFolder.AccountIds.Remove(acc.Id); 
-                } 
-                
-                RefreshAccountList(); 
-            } 
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+            if (dialog.ShowDialog() == true && dialog.CreatedAccount != null)
+            {
+                ViewModel.AllAccounts.Add(dialog.CreatedAccount);
+                ViewModel.SaveData();
+                ViewModel.RefreshList();
+            }
         }
 
         private void NewFolderButton_Click(object sender, RoutedEventArgs e)
         {
-            var window = new NewFolderDialog
+            var dialog = new NewFolderDialog 
             {
                 Owner = this,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner
             };
 
-            if (window.ShowDialog() == true && !string.IsNullOrWhiteSpace(window.CreatedFolderName))
+            if (dialog.ShowDialog() == true && !string.IsNullOrWhiteSpace(dialog.CreatedFolderName))
             {
-                var folder = new Folder(window.CreatedFolderName);
+                var newFolder = new Folder(dialog.CreatedFolderName);
 
-                Folders.Add(folder);
-                SaveData();
+                ViewModel.Folders.Add(newFolder);
+                ViewModel.SaveData();
+
+                MessageBox.Show($"Folder '{newFolder.Name}' has been created.");
             }
         }
 
-        private void DeleteConfirmation_Click(object sender, RoutedEventArgs e)
+        private void FavouriteButton_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button btn && btn.DataContext is Account account)
+            if (sender is Button { DataContext: Account acc })
             {
-                var dialog = new DeleteConfirmationWindow(account)
-                {
-                    Owner = this,
-                    WindowStartupLocation = WindowStartupLocation.CenterOwner
-                };
+                acc.IsFavourite = !acc.IsFavourite;
 
-                if (dialog.ShowDialog() == true)
+                ViewModel.RefreshList();
+                ViewModel.SaveData();
+            }
+        }
+
+        private void DeleteConfirmationButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button { DataContext: Account acc })
+            {
+                if (new DeleteConfirmationWindow(acc) { Owner = this, WindowStartupLocation = WindowStartupLocation.CenterOwner }.ShowDialog() == true)
                 {
-                    DeleteAccount(account.Id);
-                    SaveData();
+                    ViewModel.AllAccounts.Remove(acc);
+                    foreach (var f in ViewModel.Folders) f.AccountIds.Remove(acc.Id);
+                    ViewModel.SaveData();
+                    ViewModel.RefreshList();
                 }
             }
         }
 
-        private void DeleteAccount(Guid accountId)
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var acc = AllAccounts.FirstOrDefault(a => a.Id == accountId);
-            if (acc != null)
-                AllAccounts.Remove(acc);
-
-            foreach (var folder in Folders)
-            {
-                if (folder.AccountIds.Contains(accountId))
-                    folder.AccountIds.Remove(accountId);
-            }
-            SaveData();
-            RefreshAccountList();
+            ViewModel.SearchQuery = ((TextBox)sender).Text;
         }
 
-        private void AllPasswords_Click(object sender, RoutedEventArgs e)
+        private void AllPasswordsButton_Click(object sender, RoutedEventArgs e)
         {
-            SelectedFolder = null;
-            FoldersListBox.SelectedItem = null;
-            RefreshAccountList();
+            ViewModel.SelectedFolder = null;
         }
 
         private void FolderButton_Click(object sender, RoutedEventArgs e)
@@ -248,70 +118,43 @@ namespace PasswordManager.Views
             if (sender is Button btn)
             {
                 var menu = btn.ContextMenu;
-                menu.PlacementTarget = btn;
 
-                FolderMenu_Opened(menu, new RoutedEventArgs());
+                menu.PlacementTarget = btn;
 
                 menu.IsOpen = true;
             }
         }
 
-        private void FolderMenu_Opened(object sender, RoutedEventArgs e)
-        {
-            if (sender is ContextMenu menu)
-            {
-                if (menu.PlacementTarget is Button btn && btn.Tag is Guid accountId)
-                {
-                    menu.Items.Clear();
-
-                    foreach (var folder in Folders)
-                    {
-                        bool alreadyInFolder = folder.AccountIds.Contains(accountId);
-
-                        var item = new MenuItem
-                        {
-                            Header = alreadyInFolder ? $"✓ {folder.Name}" : folder.Name,
-                            Tag = (folder, accountId)
-                        };
-
-                        item.Click += FolderMenuItem_Click;
-                        menu.Items.Add(item);
-                    }
-                }
-            }
-        }
-
         private void FolderMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is MenuItem item && item.Tag is (Folder folder, Guid accountId))
+            if (sender is MenuItem { Tag: (Folder folder, Guid accId) })
             {
-                if (folder.AccountIds.Contains(accountId))
-                {
-                    folder.AccountIds.Remove(accountId);
-                }
+                if (folder.AccountIds.Contains(accId))
+                    folder.AccountIds.Remove(accId);
                 else
-                {
-                    folder.AccountIds.Add(accountId);
-                }
+                    folder.AccountIds.Add(accId);
 
-                if (SelectedFolder == folder)
-                {
-                    RefreshAccountList();
-                }
+                ViewModel.RefreshList();
+                ViewModel.SaveData();
             }
         }
 
-        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void FolderMenu_Opened(object sender, RoutedEventArgs e)
         {
-            RefreshAccountList();
-        }
-
-        private void FavouriteButton_Click(object sender, EventArgs e)
-        {
-            if (sender is Button btn && btn.DataContext is Account account)
+            if (sender is ContextMenu menu && menu.PlacementTarget is Button { Tag: Guid accountId })
             {
-                account.IsFavourite = !account.IsFavourite;
-                RefreshAccountList();
+                menu.Items.Clear();
+                foreach (var folder in ViewModel.Folders)
+                {
+                    var item = new MenuItem
+                    {
+                        Header = folder.AccountIds.Contains(accountId) ? $"✓ {folder.Name}" : folder.Name,
+                        Tag = (folder, accountId)
+                    };
+
+                    item.Click += FolderMenuItem_Click;
+                    menu.Items.Add(item);
+                }
             }
         }
     }

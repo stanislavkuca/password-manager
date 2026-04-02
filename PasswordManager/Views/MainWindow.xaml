@@ -32,7 +32,7 @@
                     <Run Text="Manager"/>
                 </TextBlock>
 
-                <Button Style="{DynamicResource MainMenuButtonStyle}" Click="AllPasswords_Click">
+                <Button Style="{DynamicResource MainMenuButtonStyle}" Click="AllPasswordsButton_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="{DynamicResource PasswordsIcon}" Width="24" Height="24" Margin="10 0 15 0"/>
                         <TextBlock Text="All Accounts" VerticalAlignment="Center"/>
@@ -100,13 +100,13 @@
 
                 <!-- SEARCH BOX RIGHT -->
                 <TextBox x:Name="SearchBox"
-                         TextChanged="SearchBox_TextChanged"
+                         Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
                          Style="{DynamicResource SearchBoxStyle}"/>
             </DockPanel>
 
             <!-- ACCOUNT LIST -->
             <ListBox Grid.Row="1"
-                     ItemsSource="{Binding Accounts}"
+                     ItemsSource="{Binding DisplayedAccounts}"
                      BorderThickness="0"
                      Background="Transparent"
                      HorizontalContentAlignment="Stretch"
@@ -147,14 +147,15 @@
                                 <!-- Buttons -->
                                 <StackPanel Grid.Column="1" Orientation="Horizontal">
                                     <!--<Button Content="Edit" Style="{StaticResource ItemButtonStyle}"/>-->
-                                    <Button Content="Delete" Style="{DynamicResource DeleteButtonStyle}" Click="DeleteConfirmation_Click"/>
+                                    <Button Content="Delete" Style="{DynamicResource DeleteButtonStyle}" Click="DeleteConfirmationButton_Click"/>
+                                    
                                     <Button Style="{DynamicResource FavouriteButtonStyle}" Click="FavouriteButton_Click"/>
+
                                     <Button Style="{DynamicResource PlusFolderButtonStyle}" 
                                             Tag="{Binding Id}"
-                                            Click="FolderButton_Click"
-                                            Content="+">
+                                            Click="FolderButton_Click">
                                         <Button.ContextMenu>
-                                            <ContextMenu/>
+                                            <ContextMenu Opened="FolderMenu_Opened"/>
                                         </Button.ContextMenu>
                                     </Button>
                                 </StackPanel>
