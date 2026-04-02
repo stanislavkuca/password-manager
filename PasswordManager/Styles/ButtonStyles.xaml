@@ -193,32 +193,49 @@
     
     <!-- Plus Folder Button -->
     <Style x:Key="PlusFolderButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
-        <Setter Property="Width" Value="20"/>
-        <Setter Property="Height" Value="20"/>
-        <Setter Property="Margin" Value="10 1 0 0"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Foreground" Value="{DynamicResource IconBrush}"/>
-        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Width" Value="24"/>
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="Margin" Value="10 0 0 0"/>
+        <Setter Property="BorderThickness" Value="1.5"/>
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
-        <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="Content" Value="+"/>
+        <Setter Property="Foreground" Value="{DynamicResource IconBrush}"/>
+        <Setter Property="Padding" Value="0"/>
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Name="Border"
-                            CornerRadius="10"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            Background="{TemplateBinding Background}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
+                    <Grid x:Name="RootGrid" RenderTransformOrigin="0.5, 0.5">
+                        <Grid.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        </Grid.RenderTransform>
+                        
+                        <Border Name="Circle"
+                                CornerRadius="12"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{TemplateBinding Background}">
+                            
+                            <!-- Plus Symbol -->
+                            <Grid Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Rectangle Fill="{TemplateBinding Foreground}" Height="2" Width="10" VerticalAlignment="Center"/>
+                                <Rectangle Fill="{TemplateBinding Foreground}" Width="2" Height="10" HorizontalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource ControlHoverBrush}"/>
+                            <Setter TargetName="Circle" Property="Background" Value="{DynamicResource ControlHoverBrush}"/>
+                            <Setter TargetName="Circle" Property="BorderBrush" Value="{DynamicResource PrimaryAccentBrush}"/>
                             <Setter Property="Foreground" Value="{DynamicResource PrimaryAccentBrush}"/>
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource PrimaryAccentBrush}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="RootGrid" Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
