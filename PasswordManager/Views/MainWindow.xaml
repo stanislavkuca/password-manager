@@ -146,9 +146,6 @@
 
                                 <!-- Buttons -->
                                 <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                    <!--<Button Content="Edit" Style="{StaticResource ItemButtonStyle}"/>-->
-                                    <Button Content="Delete" Style="{DynamicResource DeleteButtonStyle}" Click="DeleteConfirmationButton_Click"/>
-                                    
                                     <Button Style="{DynamicResource FavouriteButtonStyle}" Click="FavouriteButton_Click"/>
 
                                     <Button Style="{DynamicResource PlusFolderButtonStyle}" 
@@ -158,6 +155,10 @@
                                             <ContextMenu Opened="FolderMenu_Opened"/>
                                         </Button.ContextMenu>
                                     </Button>
+                                    
+                                    <Button Content="Edit" Style="{DynamicResource EditButtonStyle}"/>
+
+                                    <Button Content="Delete" Style="{DynamicResource DeleteButtonStyle}" Click="DeleteConfirmationButton_Click"/>
                                 </StackPanel>
                             </Grid>
                         </Border>
