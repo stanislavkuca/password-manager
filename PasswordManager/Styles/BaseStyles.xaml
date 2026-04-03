@@ -14,7 +14,16 @@
     <ImageSource x:Key="PasswordGeneratorIcon">pack://application:,,,/Assets/Icons/PasswordGenerator_Black.png</ImageSource>
     <ImageSource x:Key="BackupIcon">pack://application:,,,/Assets/Icons/Backup_Black.png</ImageSource>
     <ImageSource x:Key="SettingsIcon">pack://application:,,,/Assets/Icons/Settings_Black.png</ImageSource>
-
+    
+    <!-- DROP SHADOW EFFECT -->
+    <DropShadowEffect x:Key="ShadowEffect"
+                      BlurRadius="10" 
+                      ShadowDepth="2" 
+                      Opacity="0.25" 
+                      Direction="-90" 
+                      Color="{DynamicResource ShadowColor}" 
+                      RenderingBias="Performance" RenderOptions.EdgeMode="Aliased"/>
+    
     <!-- FONT -->
     <FontFamily x:Key="AudiowideFont">pack://application:,,,/Fonts/#Audiowide</FontFamily>
     
@@ -33,12 +42,7 @@
         <Setter Property="Padding" Value="10"/>
         <Setter Property="Margin" Value="2 5"/>
         <Setter Property="Background" Value="{DynamicResource PrimaryGradient}"/>
-
-        <Setter Property="Effect">
-            <Setter.Value>
-                <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.25" Direction="-90" Color="Black" RenderingBias="Quality" RenderOptions.EdgeMode="Aliased"/>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Effect" Value="{DynamicResource ShadowEffect}"/>
     </Style>
 
     <Style x:Key="CleanListBoxItemStyle" TargetType="ListBoxItem">
@@ -71,10 +75,6 @@
                             Background="Transparent"
                             Padding="{TemplateBinding Padding}">
                         <ContentPresenter/>
-                        
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="50" ShadowDepth="4" Opacity="1" Direction="90" Color="Black" RenderingBias="Quality"/>
-                        </Border.Effect>
                     </Border>
 
                     <ControlTemplate.Triggers>

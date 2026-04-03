@@ -132,7 +132,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="{Binding Name}" Style="{DynamicResource AccountItemTemplateStyle}"
-                                               Grid.Column="0"/>
+                                               Grid.Column="0" FontWeight="SemiBold"/>
 
                                     <TextBlock Text="{Binding Username}" Style="{DynamicResource AccountItemTemplateStyle}"
                                                Grid.Column="1"/>

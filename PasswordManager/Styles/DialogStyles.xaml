@@ -17,11 +17,9 @@
                     <Border BorderBrush="Transparent" BorderThickness="10" CornerRadius="25" Background="Transparent">
                         <Border Background="{DynamicResource NavBackground}"
                                 CornerRadius="12"
-                                Padding="24">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="15" ShadowDepth="2" Opacity="0.3" Direction="-90" Color="Black" RenderingBias="Quality"/>
-                        </Border.Effect>
-                        
+                                Padding="24"
+                                Effect="{DynamicResource ShadowEffect}">
+
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>

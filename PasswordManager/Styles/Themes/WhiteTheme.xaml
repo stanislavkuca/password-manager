@@ -3,31 +3,43 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     mc:Ignorable="d">
-
+    
+    <!-- TEXT AND BORDER -->
     <SolidColorBrush x:Key="TextBrush" Color="#0F172A"/>
     <SolidColorBrush x:Key="TextSecondaryBrush" Color="#64748B"/>
     <SolidColorBrush x:Key="BorderBrush" Color="#D0D3D6"/>
     
+    <!-- SHADOW -->
+    <Color x:Key="ShadowColor">#1A000000</Color>
+    <Color x:Key="DeepShadowColor">#0F172A</Color>
+    
+    <!-- BACKGROUND -->
     <SolidColorBrush x:Key="WindowBackground" Color="#F8FAFC"/>
     <SolidColorBrush x:Key="NavBackground" Color="#FFFFFF"/>
-
+    
+    <!-- BTN HOVER -->
     <SolidColorBrush x:Key="ControlHoverBrush" Color="#F1F5F9"/>
     <SolidColorBrush x:Key="ControlSelectedBrush" Color="#E0E7FF"/>
-
+    
+    <!-- ICON -->
     <SolidColorBrush x:Key="IconBrush" Color="#94A3B8"/>
     <SolidColorBrush x:Key="IconHoverBrush" Color="#64748B"/>
-
+    
+    <!-- DISABLED BTN-->
     <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#F1F5F9"/>
     <SolidColorBrush x:Key="DisabledTextBrush" Color="#CBD5E1"/>
-
+    
+    <!-- ACCENT PALETTE -->
     <SolidColorBrush x:Key="PrimaryAccentBrush" Color="#4F46E5"/>
     <SolidColorBrush x:Key="PrimaryAccentHoverBrush" Color="#4338CA"/>
     <SolidColorBrush x:Key="AccentForegroundBrush" Color="#FFFFFF"/>
     
+    <!-- BTN COLOR -->
     <SolidColorBrush x:Key="SuccessBrush" Color="#10B981"/>
     <SolidColorBrush x:Key="DangerBrush" Color="#EF4444"/>
     <SolidColorBrush x:Key="DangerHoverBrush" Color="#DC2626"/>
     
+    <!-- GRADIENT -->
     <LinearGradientBrush x:Key="PrimaryGradient" StartPoint="0,0" EndPoint="0,1">
         <GradientStop Color="#FFFFFF" Offset="0"/>
         <GradientStop Color="#F8FAFC" Offset="1"/>
