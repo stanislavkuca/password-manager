@@ -123,7 +123,7 @@ namespace PasswordManager.Views
                 if (new DeleteConfirmationWindow(acc) { Owner = this, WindowStartupLocation = WindowStartupLocation.CenterOwner }.ShowDialog() == true)
                 {
                     ViewModel.AllAccounts.Remove(acc);
-                    foreach (var f in ViewModel.Folders) f.AccountIds.Remove(acc.Id);
+
                     ViewModel.SaveData();
                     ViewModel.RefreshList();
                 }
@@ -156,13 +156,15 @@ namespace PasswordManager.Views
         {
             if (sender is MenuItem { Tag: (Folder folder, Guid accId) })
             {
-                if (folder.AccountIds.Contains(accId))
-                    folder.AccountIds.Remove(accId);
-                else
-                    folder.AccountIds.Add(accId);
+                var account = ViewModel.AllAccounts.FirstOrDefault(a => a.AccountId == accId);
 
-                ViewModel.RefreshList();
-                ViewModel.SaveData();
+                if (account != null)
+                {
+                    account.FolderId = (account.FolderId == folder.Id) ? null : folder.Id;
+
+                    ViewModel.RefreshList();
+                    ViewModel.SaveData();
+                }
             }
         }
 
@@ -171,11 +173,14 @@ namespace PasswordManager.Views
             if (sender is ContextMenu menu && menu.PlacementTarget is Button { Tag: Guid accountId })
             {
                 menu.Items.Clear();
+                var account = ViewModel.AllAccounts.FirstOrDefault(a => a.AccountId == accountId);
+                if (account == null) return;
+
                 foreach (var folder in ViewModel.Folders)
                 {
                     var item = new MenuItem
                     {
-                        Header = folder.AccountIds.Contains(accountId) ? $"✓ {folder.Name}" : folder.Name,
+                        Header = (account.FolderId == folder.Id) ? $"✓ {folder.Name}" : folder.Name,
                         Tag = (folder, accountId)
                     };
 

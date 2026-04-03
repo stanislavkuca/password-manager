@@ -57,22 +57,23 @@ namespace PasswordManager.ViewModels
 
         public void RefreshList()
         {
-            DisplayedAccounts.Clear();
-
-            var filtered = AllAccounts.AsEnumerable();
+            IEnumerable<Account> filtered = AllAccounts;
 
             if (SelectedFolder != null)
-                filtered = filtered.Where(a => SelectedFolder.AccountIds.Contains(a.Id));
-
+            {
+                filtered = filtered
+                    .Where(a => a.FolderId == SelectedFolder.Id);
+            }
+            
             if (!string.IsNullOrWhiteSpace(SearchQuery))
             {
-                var q = SearchQuery.ToLower();
-                filtered = filtered.Where(a => a.Name.ToLower().Contains(q) || (a.Note?.ToLower().Contains(q) ?? false));
+                filtered = filtered
+                    .Where(a => a.Name.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase));
             }
 
-            var sorted = filtered.OrderByDescending(a => a.IsFavourite).ThenBy(a => a.Name);
-
-            foreach (var acc in sorted) DisplayedAccounts.Add(acc);
+            DisplayedAccounts.Clear();
+            foreach (var acc in filtered)
+                DisplayedAccounts.Add(acc);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

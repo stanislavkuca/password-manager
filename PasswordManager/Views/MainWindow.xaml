@@ -163,7 +163,7 @@
                                     <Button Style="{DynamicResource FavouriteButtonStyle}" Click="FavouriteButton_Click"/>
 
                                     <Button Style="{DynamicResource PlusFolderButtonStyle}" 
-                                            Tag="{Binding Id}"
+                                            Tag="{Binding AccountId}"
                                             Click="FolderButton_Click">
                                         <Button.ContextMenu>
                                             <ContextMenu Opened="FolderMenu_Opened"/>
