@@ -54,18 +54,32 @@
             <ListBox ItemsSource="{Binding Folders}"
                     ItemContainerStyle="{DynamicResource FolderItemStyle}"
                     SelectedItem="{Binding SelectedFolder, Mode=TwoWay}"
+                    PreviewMouseRightButtonDown="OnPreviewMouseRightBtnDown"
                     BorderThickness="0"
                     Background="Transparent"
                     x:Name="FoldersListBox"
                     HorizontalAlignment="Stretch"
                     Margin="20 0 20 0">
-
+                
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name, StringFormat=• {0}}"
-                                Padding="30 6"
-                                FontSize="18"
-                                TextTrimming="CharacterEllipsis"/>
+                        <Grid Background="Transparent">
+                            <Grid.ContextMenu>
+                                <ContextMenu>
+                                    <!-- RENAME FOLDER -->
+                                    <MenuItem Header="Rename Folder" Click="RenameFolder_Click" Icon="✏️"/>
+                                    <Separator/>
+                                    
+                                    <!-- DELETE FOLDER -->
+                                    <MenuItem Header="Delete Folder" Click="DeleteFolder_Click" Icon="🗑️" Foreground="{DynamicResource DangerBrush}"/>
+                                </ContextMenu>
+                            </Grid.ContextMenu>
+
+                            <TextBlock Text="{Binding Name, StringFormat=• {0}}"
+                                        Padding="30 6"
+                                        FontSize="18"
+                                        TextTrimming="CharacterEllipsis"/>
+                        </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

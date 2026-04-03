@@ -97,6 +97,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="Padding" Value="10"/>
         <Setter Property="Cursor" Value="Hand"/>
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">

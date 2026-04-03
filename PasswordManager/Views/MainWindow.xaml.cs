@@ -9,6 +9,7 @@ using PasswordManager.Services;
 using System.Threading;
 using System.Windows.Threading;
 using PasswordManager.ViewModels;
+using System.Windows.Input;
 
 namespace PasswordManager.Views
 {
@@ -181,6 +182,27 @@ namespace PasswordManager.Views
                     item.Click += FolderMenuItem_Click;
                     menu.Items.Add(item);
                 }
+            }
+        }
+
+        public void RenameFolder_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public void DeleteFolder_Click(Object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnPreviewMouseRightBtnDown(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+
+            if (sender is ListBoxItem item && item.ContextMenu != null)
+            {
+                item.ContextMenu.PlacementTarget = item;
+                item.ContextMenu.IsOpen = true;
             }
         }
     }
