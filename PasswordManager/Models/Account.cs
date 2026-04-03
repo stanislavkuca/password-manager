@@ -51,7 +51,7 @@ namespace PasswordManager.Models
             return Convert.ToBase64String(encrypted);
         }
 
-        public string DecryptPassword(string encryptedPassword)
+        public static string DecryptPassword(string encryptedPassword)
         {
             try
             {

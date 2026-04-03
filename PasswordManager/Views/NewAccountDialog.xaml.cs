@@ -5,21 +5,46 @@ namespace PasswordManager.Views
 {
     public partial class NewAccountWindow : Window
     {
+        public Account? AccountToEdit { get; set; }
         public Account? CreatedAccount { get; private set; }
 
-        public NewAccountWindow()
+        public NewAccountWindow(Account? account = null)
         {
             InitializeComponent();
+            AccountToEdit = account;
+
+            if (account != null)
+            {
+                Title = "Edit account";
+                ConfirmBtn!.Content = "Save changes";
+
+                AccountNameTextBox!.Text = account.Name ?? string.Empty;
+                AccountUsernameTextBox!.Text = account.Username ?? string.Empty;
+                AccountPasswordTextBox!.Text = Account.DecryptPassword(account.Password);
+                AccountNoteTextBox!.Text = account.Note ?? string.Empty;
+            }
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            CreatedAccount = new Account(
-                AccountNameTextBox.Text,
-                AccountUsernameTextBox.Text,
-                Account.EncryptPassword(AccountPasswordTextBox.Text),
-                AccountNoteTextBox.Text
-            );
+            if (AccountToEdit != null)
+            {
+                AccountToEdit.Name = AccountNameTextBox!.Text;
+                AccountToEdit.Username = AccountUsernameTextBox!.Text;
+                // store encrypted password consistently
+                AccountToEdit.Password = Account.EncryptPassword(AccountPasswordTextBox!.Text);
+                AccountToEdit.Note = AccountNoteTextBox!.Text;
+                CreatedAccount = AccountToEdit;
+            }
+            else
+            {
+                CreatedAccount = new Account(
+                    AccountNameTextBox!.Text,
+                    AccountUsernameTextBox!.Text,
+                    Account.EncryptPassword(AccountPasswordTextBox!.Text),
+                    AccountNoteTextBox!.Text
+                );
+            }
 
             DialogResult = true;
             Close();

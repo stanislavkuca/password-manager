@@ -156,7 +156,7 @@
                                         </Button.ContextMenu>
                                     </Button>
                                     
-                                    <Button Content="Edit" Style="{DynamicResource EditButtonStyle}"/>
+                                    <Button Content="Edit" Style="{DynamicResource EditButtonStyle}" Click="EditAccountBtn_Click"/>
 
                                     <Button Content="Delete" Style="{DynamicResource DeleteButtonStyle}" Click="DeleteConfirmationButton_Click"/>
                                 </StackPanel>

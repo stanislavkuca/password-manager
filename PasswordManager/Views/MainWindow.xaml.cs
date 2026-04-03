@@ -94,6 +94,27 @@ namespace PasswordManager.Views
             }
         }
 
+        private void EditAccountBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button { DataContext: Account acc })
+            {
+                if (((App)Application.Current).ConfirmIdentity())
+                {
+                    var dialog = new NewAccountWindow(acc)
+                    {
+                        Owner = this,
+                        WindowStartupLocation = WindowStartupLocation.CenterOwner
+                    };
+
+                    if (dialog.ShowDialog() == true)
+                    {
+                        ViewModel.SaveData();
+                        ViewModel.RefreshList();
+                    }
+                }
+            }
+        }
+
         private void DeleteConfirmationButton_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button { DataContext: Account acc })

@@ -60,5 +60,16 @@ namespace PasswordManager
                 Shutdown();
             }
         }
+
+        public bool ConfirmIdentity()
+        {
+            var login = new LoginDialog
+            {
+                Owner = Dispatcher.CheckAccess() ? MainWindow : null,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+            };
+
+            return login.ShowDialog() == true;
+        }
     }
 }
