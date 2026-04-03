@@ -6,7 +6,7 @@
 
     <SolidColorBrush x:Key="TextBrush" Color="#0F172A"/>
     <SolidColorBrush x:Key="TextSecondaryBrush" Color="#64748B"/>
-    <SolidColorBrush x:Key="BorderBrush" Color="#E2E8F0"/>
+    <SolidColorBrush x:Key="BorderBrush" Color="#D0D3D6"/>
     
     <SolidColorBrush x:Key="WindowBackground" Color="#F8FAFC"/>
     <SolidColorBrush x:Key="NavBackground" Color="#FFFFFF"/>

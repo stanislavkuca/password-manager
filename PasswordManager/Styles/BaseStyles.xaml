@@ -17,20 +17,28 @@
 
     <!-- FONT -->
     <FontFamily x:Key="AudiowideFont">pack://application:,,,/Fonts/#Audiowide</FontFamily>
-
+    
     <Style x:Key="AccountItemTemplateStyle" TargetType="TextBlock">
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
         <Setter Property="Margin" Value="0 0 10 0"/>
     </Style>
-
+    
+    <!-- ACCOUNT BORDER -->
     <Style x:Key="AccountBorderStyle" TargetType="Border">
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="CornerRadius" Value="5"/>
         <Setter Property="Padding" Value="10"/>
-        <Setter Property="Margin" Value="0 5"/>
+        <Setter Property="Margin" Value="2 5"/>
+        <Setter Property="Background" Value="{DynamicResource PrimaryGradient}"/>
+
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.25" Direction="-90" Color="Black" RenderingBias="Quality" RenderOptions.EdgeMode="Aliased"/>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="CleanListBoxItemStyle" TargetType="ListBoxItem">
@@ -38,7 +46,7 @@
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Margin" Value="0"/>
-
+        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
@@ -63,6 +71,10 @@
                             Background="Transparent"
                             Padding="{TemplateBinding Padding}">
                         <ContentPresenter/>
+                        
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="50" ShadowDepth="4" Opacity="1" Direction="90" Color="Black" RenderingBias="Quality"/>
+                        </Border.Effect>
                     </Border>
 
                     <ControlTemplate.Triggers>
