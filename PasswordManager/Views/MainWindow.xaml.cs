@@ -73,9 +73,9 @@ namespace PasswordManager.Views
                 WindowStartupLocation = WindowStartupLocation.CenterOwner
             };
 
-            if (dialog.ShowDialog() == true && !string.IsNullOrWhiteSpace(dialog.CreatedFolderName))
+            if (dialog.ShowDialog() == true && !string.IsNullOrWhiteSpace(dialog.CreatedFolder?.Name))
             {
-                var newFolder = new Folder(dialog.CreatedFolderName);
+                var newFolder = new Folder(dialog.CreatedFolder.Name);
 
                 ViewModel.Folders.Add(newFolder);
                 ViewModel.SaveData();
@@ -187,7 +187,20 @@ namespace PasswordManager.Views
 
         public void RenameFolder_Click(object sender, RoutedEventArgs e)
         {
+            if (sender is MenuItem { DataContext: Folder folder })
+            {
+                var dialog = new NewFolderDialog(folder)
+                {
+                    Owner = this,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
 
+                if (dialog.ShowDialog() == true)
+                {
+                    ViewModel.SaveData();
+                    ViewModel.RefreshList();
+                }
+            }
         }
 
         public void DeleteFolder_Click(Object sender, RoutedEventArgs e)
