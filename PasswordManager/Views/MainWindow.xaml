@@ -172,7 +172,7 @@
                                     
                                     <Button Content="Edit" Style="{DynamicResource EditButtonStyle}" Click="EditAccountBtn_Click"/>
 
-                                    <Button Content="Delete" Style="{DynamicResource DeleteButtonStyle}" Click="DeleteConfirmationButton_Click"/>
+                                    <Button Content="Delete" Style="{DynamicResource DeleteButtonStyle}" Click="DeleteAccountButton_Click"/>
                                 </StackPanel>
                             </Grid>
                         </Border>

@@ -11,8 +11,20 @@ namespace PasswordManager.Models
 {
     public class Account : INotifyPropertyChanged
     {
-        public Guid? FolderId { get; set; }
         public Guid AccountId { get; } = Guid.NewGuid();
+        private Guid? _folderId;
+        public Guid? FolderId
+        {
+            get => _folderId;
+            set
+            {
+                if (_folderId != value)
+                {
+                    _folderId = value;
+                    OnPropertyChanged(nameof(FolderId));
+                }
+            }
+        }
 
         public string Name { get; set; }
         public string Username { get; set; }

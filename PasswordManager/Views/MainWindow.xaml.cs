@@ -116,11 +116,11 @@ namespace PasswordManager.Views
             }
         }
 
-        private void DeleteConfirmationButton_Click(object sender, RoutedEventArgs e)
+        private void DeleteAccountButton_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button { DataContext: Account acc })
             {
-                if (new DeleteConfirmationWindow(acc) { Owner = this, WindowStartupLocation = WindowStartupLocation.CenterOwner }.ShowDialog() == true)
+                if (new DeleteAccountDialog(acc) { Owner = this, WindowStartupLocation = WindowStartupLocation.CenterOwner }.ShowDialog() == true)
                 {
                     ViewModel.AllAccounts.Remove(acc);
 
@@ -210,7 +210,37 @@ namespace PasswordManager.Views
 
         public void DeleteFolder_Click(Object sender, RoutedEventArgs e)
         {
+            if (sender is MenuItem { DataContext: Folder folder })
+            {
+                var dialog = new DeleteFolderDialog { Owner = this, WindowStartupLocation = WindowStartupLocation.CenterOwner };
 
+                if (dialog.ShowDialog() == true)
+                {
+                    if (dialog.Result == DeleteFolderResult.OnlyFolder)
+                    {
+                        var accountsInFolder = ViewModel.AllAccounts.Where(a => a.FolderId == folder.Id).ToList();
+                        foreach (var acc in accountsInFolder)
+                            acc.FolderId = null;
+                    }
+                    else if (dialog.Result == DeleteFolderResult.Everything)
+                    {
+                        var accountsToRemove = ViewModel.AllAccounts.Where(a => a.FolderId == folder.Id).ToList();
+                        foreach (var acc in accountsToRemove)
+                            ViewModel.AllAccounts.Remove(acc);
+                    }
+                
+
+                    ViewModel.Folders.Remove(folder);
+
+                    if (ViewModel.SelectedFolder == folder)
+                    {
+                        ViewModel.SelectedFolder = null;
+                    }
+
+                    ViewModel.SaveData();
+                    ViewModel.RefreshList();
+                }
+            }
         }
 
         private void OnPreviewMouseRightBtnDown(object sender, MouseButtonEventArgs e)
