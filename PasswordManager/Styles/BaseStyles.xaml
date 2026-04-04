@@ -92,6 +92,12 @@
         </Setter>
     </Style>
 
+    <Style x:Key="LabelStyle" TargetType="Label">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+    
     <!-- Folder Item Style -->
     <Style x:Key="FolderItemStyle" TargetType="ListBoxItem">
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

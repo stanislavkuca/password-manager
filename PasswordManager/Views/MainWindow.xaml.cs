@@ -253,5 +253,46 @@ namespace PasswordManager.Views
                 item.ContextMenu.IsOpen = true;
             }
         }
+
+        private void CopyUsername_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuItem { DataContext: Account acc })
+            {
+                if (!string.IsNullOrWhiteSpace(acc.Username))
+                {
+                    Clipboard.SetText(acc.Username);
+
+                    MessageBox.Show("Username copied to clipoboard!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+        }
+
+        private void CopyPassword_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuItem { DataContext: Account acc })
+            {
+                string decryptedPassword = Account.DecryptPassword(acc.Password);
+
+                if (!string.IsNullOrWhiteSpace(decryptedPassword))
+                {
+                    Clipboard.SetText(decryptedPassword);
+
+                    MessageBox.Show("Password copied to clipoboard! After 30s clipboard will be cleared.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(30) };
+                    timer.Tick += (s, ev) =>
+                    {
+                        if (Clipboard.GetText() == decryptedPassword)
+                        {
+                            Clipboard.Clear();
+                        }
+
+                        timer.Stop();
+                    };
+
+                    timer.Start();
+                }
+            }
+        }
     }
 }

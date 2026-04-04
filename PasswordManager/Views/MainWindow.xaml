@@ -49,40 +49,44 @@
                     <TextBlock Text="Settings" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
+            
+            <StackPanel>
+                <Label Content="Folders:" Style="{DynamicResource LabelStyle}"/>
 
-            <!--FOLDER LIST -->
-            <ListBox ItemsSource="{Binding Folders}"
-                    ItemContainerStyle="{DynamicResource FolderItemStyle}"
-                    SelectedItem="{Binding SelectedFolder, Mode=TwoWay}"
-                    PreviewMouseRightButtonDown="OnPreviewMouseRightBtnDown"
-                    BorderThickness="0"
-                    Background="Transparent"
-                    x:Name="FoldersListBox"
-                    HorizontalAlignment="Stretch"
-                    Margin="20 0 20 0">
+                <!--FOLDER LIST -->
+                <ListBox ItemsSource="{Binding Folders}"
+                        ItemContainerStyle="{DynamicResource FolderItemStyle}"
+                        SelectedItem="{Binding SelectedFolder, Mode=TwoWay}"
+                        PreviewMouseRightButtonDown="OnPreviewMouseRightBtnDown"
+                        BorderThickness="0"
+                        Background="Transparent"
+                        x:Name="FoldersListBox"
+                        HorizontalAlignment="Stretch"
+                        Margin="20 0 20 0">
                 
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Background="Transparent">
-                            <Grid.ContextMenu>
-                                <ContextMenu>
-                                    <!-- RENAME FOLDER -->
-                                    <MenuItem Header="Rename Folder" Click="RenameFolder_Click" Icon="✏️"/>
-                                    <Separator/>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Background="Transparent">
+                                <Grid.ContextMenu>
+                                    <ContextMenu>
+                                        <!-- RENAME FOLDER -->
+                                        <MenuItem Header="Rename Folder" Icon="✏️" Click="RenameFolder_Click"/>
+                                        <Separator/>
                                     
-                                    <!-- DELETE FOLDER -->
-                                    <MenuItem Header="Delete Folder" Click="DeleteFolder_Click" Icon="🗑️" Foreground="{DynamicResource DangerBrush}"/>
-                                </ContextMenu>
-                            </Grid.ContextMenu>
+                                        <!-- DELETE FOLDER -->
+                                        <MenuItem Header="Delete Folder" Icon="🗑️" Click="DeleteFolder_Click" Foreground="{DynamicResource DangerBrush}"/>
+                                    </ContextMenu>
+                                </Grid.ContextMenu>
 
-                            <TextBlock Text="{Binding Name, StringFormat=• {0}}"
-                                        Padding="30 6"
-                                        FontSize="18"
-                                        TextTrimming="CharacterEllipsis"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                                <TextBlock Text="{Binding Name, StringFormat=• {0}}"
+                                            Padding="30 6"
+                                            FontSize="18"
+                                            TextTrimming="CharacterEllipsis"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
         </DockPanel>
 
         <!-- RIGHT SIDE CONTENT -->
@@ -130,6 +134,14 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border Style="{DynamicResource AccountBorderStyle}">
+                            <Border.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Copy Username" Icon="📋" Click="CopyUsername_Click"/>
+                                    <Separator/>
+                                    <MenuItem Header="Copy Password" Icon="📋" Click="CopyPassword_Click"/>
+                                </ContextMenu>
+                            </Border.ContextMenu>
+                            
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
