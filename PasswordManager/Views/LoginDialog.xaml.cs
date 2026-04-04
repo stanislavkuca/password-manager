@@ -83,10 +83,5 @@ namespace PasswordManager.Views
                 Application.Current.Shutdown();
             }
         }
-
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
     }
 }

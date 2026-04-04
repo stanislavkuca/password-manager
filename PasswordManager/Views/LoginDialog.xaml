@@ -33,7 +33,7 @@
             <Button Content="Reset Password" Style="{DynamicResource DeleteConfirmationButtonStyle}"
                     Margin="0 0 20 0" Click="ResetPassword_Click" Width="170"/>
 
-            <Button Content="Cancel" Style="{DynamicResource DialogButtonCancel}" Click="CancelButton_Click"/>
+            <Button Content="Cancel" Style="{DynamicResource DialogButtonCancel}" IsCancel="True"/>
         </StackPanel>
     </Grid>
 </Window>
