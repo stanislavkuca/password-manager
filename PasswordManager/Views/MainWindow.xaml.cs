@@ -28,9 +28,10 @@ namespace PasswordManager.Views
             StartTimer();
         }
 
+        private readonly TimeSpan _defaultTimer = TimeSpan.FromMinutes(5);
         private void StartTimer()
         {
-            _lockTimer.Interval = TimeSpan.FromMinutes(5);
+            _lockTimer.Interval = _defaultTimer;
             _lockTimer.Tick += (s, e) => Logout();
             _lockTimer.Start();
         }
@@ -42,10 +43,13 @@ namespace PasswordManager.Views
 
             ViewModel.SaveData();
 
-            MessageBox.Show("Please sign in again.", "You have been logged out after 5 minutes");
-            ((App)Application.Current).RunAuthFlow();
+            Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+
+            MessageBox.Show("Session expired after 5 minutes for security reasons.", "Please sign in again");
 
             this.Close();
+
+            ((App)Application.Current).RunAuthFlow();
         }
 
         // --- Dialog Events ---

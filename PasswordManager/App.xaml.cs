@@ -51,8 +51,11 @@ namespace PasswordManager
 
             if (login.ShowDialog() == true)
             {
-                this.ShutdownMode = ShutdownMode.OnMainWindowClose;
                 var main = new MainWindow();
+
+                this.MainWindow = main;
+
+                this.ShutdownMode = ShutdownMode.OnMainWindowClose;
                 main.Show();
             }
             else
