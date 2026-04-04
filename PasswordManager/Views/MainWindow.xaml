@@ -170,19 +170,20 @@
                                                Grid.Column="3" Margin="0 0 40 0"/>
                                 </Grid>
 
-                                <!-- Buttons -->
+                                <!-- ACCOUNT BUTTONS -->
                                 <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                    <Button Style="{DynamicResource FavouriteButtonStyle}" Click="FavouriteButton_Click"/>
+                                    <Button Style="{DynamicResource FavouriteButtonStyle}" Click="FavouriteButton_Click" Margin="0 0 15 0"/>
 
                                     <Button Style="{DynamicResource PlusFolderButtonStyle}" 
                                             Tag="{Binding AccountId}"
-                                            Click="FolderButton_Click">
+                                            Click="FolderButton_Click"
+                                            Margin="0 0 10 0">
                                         <Button.ContextMenu>
                                             <ContextMenu Opened="FolderMenu_Opened"/>
                                         </Button.ContextMenu>
                                     </Button>
                                     
-                                    <Button Content="Edit" Style="{DynamicResource EditButtonStyle}" Click="EditAccountBtn_Click"/>
+                                    <Button Content="Edit" Style="{DynamicResource EditButtonStyle}" Click="EditAccountBtn_Click" Margin="0 0 20 0"/>
 
                                     <Button Content="Delete" Style="{DynamicResource DeleteButtonStyle}" Click="DeleteAccountButton_Click"/>
                                 </StackPanel>
