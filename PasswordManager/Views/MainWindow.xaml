@@ -90,7 +90,10 @@
         </DockPanel>
 
         <!-- RIGHT SIDE CONTENT -->
-        <Grid Grid.Column="1" Margin="10 0 0 0">
+        <Grid Grid.Column="1" Margin="10 0 0 0"
+              Focusable="True" Background="Transparent"
+              MouseDown="Grid_MouseDown">
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -120,7 +123,8 @@
                 <!-- SEARCH BOX RIGHT -->
                 <TextBox x:Name="SearchBox"
                          Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
-                         Style="{DynamicResource SearchBoxStyle}"/>
+                         Style="{DynamicResource SearchBoxStyle}"
+                         KeyDown="SearchBox_KeyDown"/>
             </DockPanel>
 
             <!-- ACCOUNT LIST -->

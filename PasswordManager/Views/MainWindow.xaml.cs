@@ -316,5 +316,24 @@ namespace PasswordManager.Views
                 }
             }
         }
+
+        private void Grid_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (sender is IInputElement element)
+            {
+                element.Focus();
+                Keyboard.ClearFocus();
+            }
+        }
+
+        private void SearchBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                Keyboard.ClearFocus();
+
+                SearchBox.Text = string.Empty;
+            }
+        }
     }
 }
