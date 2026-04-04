@@ -28,18 +28,36 @@ namespace PasswordManager.Views
             StartTimer();
         }
 
-        private readonly TimeSpan _defaultTimer = TimeSpan.FromMinutes(5);
+        private int _secondsLeft;
+        private const int DefaultTimeoutSeconds = 300;
+
         private void StartTimer()
         {
-            _lockTimer.Interval = _defaultTimer;
-            _lockTimer.Tick += (s, e) => Logout();
+            _secondsLeft = DefaultTimeoutSeconds;
+
+            _lockTimer.Interval = TimeSpan.FromSeconds(1);
+            _lockTimer.Tick += Timer_Tick!;
             _lockTimer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            _secondsLeft--;
+
+            TimeSpan time = TimeSpan.FromSeconds(_secondsLeft);
+            TimerDisplay.Text = $"{time.ToString(@"mm\:ss")}";
+
+            if (_secondsLeft <= 0)
+            {
+                _lockTimer.Stop();
+                Logout();
+            }
         }
 
         private void Logout()
         {
             _lockTimer.Stop();
-            _lockTimer.Tick -= (s, e) => Logout();
+            _lockTimer.Tick -= Timer_Tick!;
 
             ViewModel.SaveData();
 

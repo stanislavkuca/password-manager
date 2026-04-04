@@ -303,4 +303,10 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!-- TIMER DISPLAY TEXT -->
+    <Style x:Key="TimerDisplayText" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
 </ResourceDictionary>
