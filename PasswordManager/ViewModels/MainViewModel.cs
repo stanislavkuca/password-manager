@@ -68,11 +68,17 @@ namespace PasswordManager.ViewModels
             if (!string.IsNullOrWhiteSpace(SearchQuery))
             {
                 filtered = filtered
-                    .Where(a => a.Name.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase));
+                    .Where(a => a.Name.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase) ||
+                                a.Note!.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase));
             }
 
+            var finalData = filtered
+                .OrderByDescending(a => a.IsFavourite)
+                .ThenBy(a => a.Name)
+                .ToList();
+
             DisplayedAccounts.Clear();
-            foreach (var acc in filtered)
+            foreach (var acc in finalData)
                 DisplayedAccounts.Add(acc);
         }
 
