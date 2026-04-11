@@ -40,7 +40,7 @@
                 </Button>
             </StackPanel>
 
-            <!-- SETTINGS BUTTON AT BOTTOM -->
+            <!-- SETTINGS BUTTON AT BOTTOM 
             <Button Style="{DynamicResource MainMenuButtonStyle}" VerticalAlignment="Bottom"
                     DockPanel.Dock="Bottom" Margin="5">
                 
@@ -49,7 +49,15 @@
                     <TextBlock Text="Settings" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
-            
+            -->
+            <CheckBox x:Name="ThemeToggleButton"
+                      Style="{DynamicResource ThemeToggleSwitch}"
+                      Content="Dark Theme"
+                      Margin="20 10"
+                      VerticalAlignment="Bottom"
+                      Checked="ThemeToggleButton_Checked"
+                      Unchecked="ThemeToggleButton_Unchecked"/>
+
             <StackPanel>
                 <Label Content="Folders:" Style="{DynamicResource LabelStyle}"/>
 

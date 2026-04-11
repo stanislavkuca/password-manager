@@ -335,5 +335,10 @@ namespace PasswordManager.Views
                 SearchBox.Text = string.Empty;
             }
         }
+
+        private void ThemeToggleButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
