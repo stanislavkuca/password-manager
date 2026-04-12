@@ -13,7 +13,7 @@
         Width="1400" Height="700"
         MinWidth="1000" MinHeight="500">
 
-    <Grid Background="{DynamicResource PrimaryGradient}" Margin="10">
+    <Grid Background="{DynamicResource PrimaryGradient}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="240"/>
             <ColumnDefinition Width="*"/>
