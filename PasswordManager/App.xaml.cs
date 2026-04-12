@@ -16,12 +16,28 @@ namespace PasswordManager
         {
             base.OnStartup(e);
 
+            bool isDark = PasswordManager.Properties.Settings.Default.IsDarkMode;
+            ChangeTheme(isDark);
+
             this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
             if (EnsureMasterPasswordExists())
             {
                 RunAuthFlow();
             }
+        }
+
+        public void ChangeTheme(bool isDark)
+        {
+            string themeName = isDark ? "DarkTheme.xaml" : "WhiteTheme.xaml";
+            var uri = new Uri($"Styles/Themes/{themeName}", UriKind.Relative);
+
+            ResourceDictionary newTheme = new ResourceDictionary { Source = uri };
+
+            Current.Resources.MergedDictionaries[0] = newTheme;
+
+            PasswordManager.Properties.Settings.Default.IsDarkMode = isDark;
+            PasswordManager.Properties.Settings.Default.Save();
         }
 
         private bool EnsureMasterPasswordExists()

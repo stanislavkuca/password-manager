@@ -53,6 +53,7 @@
             <CheckBox x:Name="ThemeToggleButton"
                       Style="{DynamicResource ThemeToggleSwitch}"
                       Content="Dark Theme"
+                      DockPanel.Dock="Bottom"
                       Margin="20 10"
                       VerticalAlignment="Bottom"
                       Checked="ThemeToggleButton_Checked"

@@ -10,6 +10,7 @@ using System.Threading;
 using System.Windows.Threading;
 using PasswordManager.ViewModels;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace PasswordManager.Views
 {
@@ -336,9 +337,14 @@ namespace PasswordManager.Views
             }
         }
 
+        private void ThemeToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            ((App)Application.Current).ChangeTheme(true);
+        }
+
         private void ThemeToggleButton_Unchecked(object sender, RoutedEventArgs e)
         {
-
+            ((App)Application.Current).ChangeTheme(false);
         }
     }
 }
