@@ -26,8 +26,13 @@
     
     <!-- FONT -->
     <FontFamily x:Key="AudiowideFont">pack://application:,,,/Fonts/#Audiowide</FontFamily>
+
+    <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+    </Style>
     
     <Style x:Key="AccountItemTemplateStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="FontSize" Value="17"/>
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
@@ -103,6 +108,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="Padding" Value="10"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentForegroundBrush}"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -130,6 +136,7 @@
     
     <!-- Dialog Text Block -->
     <Style x:Key="DialogTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Margin" Value="10"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
