@@ -25,6 +25,17 @@ namespace PasswordManager.Views
             }
         }
 
+        private void OpenGenerator_Click(object sender, RoutedEventArgs e)
+        {
+            PasswordGeneratorWindow generatorWindow = new PasswordGeneratorWindow();
+            generatorWindow.Owner = this;
+
+            if (generatorWindow.ShowDialog() == true)
+            {
+                AccountPasswordTextBox.Text = generatorWindow.GeneratedPassword;
+            }
+        }
+
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             if (AccountToEdit != null)

@@ -52,7 +52,7 @@
 
                 <Button Grid.Column="1" Content="🎲" Width="50" Height="42" Margin="0 8 0 16"
                         FontSize="24" Cursor="Hand" ToolTip="Generate Password"
-                        Click="OpenGenerator_Click" Style="{DynamicResource DialogButtonOK}"/>
+                        Click="OpenGenerator_Click" Style="{DynamicResource DefaultButtonStyle}"/>
             </Grid>
 
             <TextBlock Text="Note:" Grid.Row="3" Grid.Column="0" Style="{DynamicResource DialogTextBlockStyle}"/>
