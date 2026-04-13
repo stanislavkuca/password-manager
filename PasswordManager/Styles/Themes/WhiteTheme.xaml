@@ -3,7 +3,18 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     mc:Ignorable="d">
-    
+
+    <!-- ICONS -->
+    <ImageSource x:Key="FavouriteIconEmpty">pack://application:,,,/Assets/Icons/Favourite_Empty_Black.png</ImageSource>
+    <ImageSource x:Key="FavouriteIconFilled">pack://application:,,,/Assets/Icons/Favourite_Black_FilledYellow.png</ImageSource>
+    <ImageSource x:Key="NewAccountIcon">pack://application:,,,/Assets/Icons/NewAccount_Black.png</ImageSource>
+    <ImageSource x:Key="NewFolderIcon">pack://application:,,,/Assets/Icons/NewFolder_Black.png</ImageSource>
+    <ImageSource x:Key="SearchIcon">pack://application:,,,/Assets/Icons/Search_Black.png</ImageSource>
+    <ImageSource x:Key="PasswordsIcon">pack://application:,,,/Assets/Icons/Passwords_Black.png</ImageSource>
+    <ImageSource x:Key="PasswordGeneratorIcon">pack://application:,,,/Assets/Icons/PasswordGenerator_Black.png</ImageSource>
+    <ImageSource x:Key="BackupIcon">pack://application:,,,/Assets/Icons/Backup_Black.png</ImageSource>
+    <ImageSource x:Key="SettingsIcon">pack://application:,,,/Assets/Icons/Settings_Black.png</ImageSource>
+
     <!-- TEXT AND BORDER -->
     <SolidColorBrush x:Key="TextBrush" Color="#0F172A"/>
     <SolidColorBrush x:Key="TextSecondaryBrush" Color="#64748B"/>

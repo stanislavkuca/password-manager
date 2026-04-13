@@ -1,6 +1,17 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <!-- ICONS -->
+    <ImageSource x:Key="FavouriteIconEmpty">pack://application:,,,/Assets/Icons/Favourite_Empty_White.png</ImageSource>
+    <ImageSource x:Key="FavouriteIconFilled">pack://application:,,,/Assets/Icons/Favourite_Black_FilledYellow.png</ImageSource>
+    <ImageSource x:Key="NewAccountIcon">pack://application:,,,/Assets/Icons/NewAccount_White.png</ImageSource>
+    <ImageSource x:Key="NewFolderIcon">pack://application:,,,/Assets/Icons/NewFolder_White.png</ImageSource>
+    <ImageSource x:Key="SearchIcon">pack://application:,,,/Assets/Icons/Search_White.png</ImageSource>
+    <ImageSource x:Key="PasswordsIcon">pack://application:,,,/Assets/Icons/Passwords_White.png</ImageSource>
+    <ImageSource x:Key="PasswordGeneratorIcon">pack://application:,,,/Assets/Icons/PasswordGenerator_White.png</ImageSource>
+    <ImageSource x:Key="BackupIcon">pack://application:,,,/Assets/Icons/Backup_White.png</ImageSource>
+    <ImageSource x:Key="SettingsIcon">pack://application:,,,/Assets/Icons/Settings_White.png</ImageSource>
+
     <!-- TEXT AND BORDER -->
     <SolidColorBrush x:Key="TextBrush" Color="#F8FAFC"/>
     <SolidColorBrush x:Key="TextSecondaryBrush" Color="#94A3B8"/>

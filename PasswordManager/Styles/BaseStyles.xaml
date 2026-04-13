@@ -4,17 +4,6 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     mc:Ignorable="d">
 
-    <!-- ICONS -->
-    <ImageSource x:Key="FavouriteIconEmpty">pack://application:,,,/Assets/Icons/Favourite_Black_Empty.png</ImageSource>
-    <ImageSource x:Key="FavouriteIconFilled">pack://application:,,,/Assets/Icons/Favourite_Black_FilledYellow.png</ImageSource>
-    <ImageSource x:Key="NewAccountIcon">pack://application:,,,/Assets/Icons/NewAccount_Black.png</ImageSource>
-    <ImageSource x:Key="NewFolderIcon">pack://application:,,,/Assets/Icons/NewFolder_Black.png</ImageSource>
-    <ImageSource x:Key="SearchIcon">pack://application:,,,/Assets/Icons/Search_Black.png</ImageSource>
-    <ImageSource x:Key="PasswordsIcon">pack://application:,,,/Assets/Icons/Passwords_Black.png</ImageSource>
-    <ImageSource x:Key="PasswordGeneratorIcon">pack://application:,,,/Assets/Icons/PasswordGenerator_Black.png</ImageSource>
-    <ImageSource x:Key="BackupIcon">pack://application:,,,/Assets/Icons/Backup_Black.png</ImageSource>
-    <ImageSource x:Key="SettingsIcon">pack://application:,,,/Assets/Icons/Settings_Black.png</ImageSource>
-    
     <!-- DROP SHADOW EFFECT -->
     <DropShadowEffect x:Key="ShadowEffect"
                       BlurRadius="10" 
@@ -238,7 +227,7 @@
                             <ScrollViewer x:Name="PART_ContentHost"
                                           VerticalAlignment="Center"
                                           Margin="0 0 20 0"/>
-                            <Image Source="{StaticResource SearchIcon}" 
+                            <Image Source="{DynamicResource SearchIcon}" 
                                    Width="20" Height="20" 
                                    Margin="0 0 15 0" 
                                    HorizontalAlignment="Right" 
@@ -315,5 +304,110 @@
     <Style x:Key="TimerDisplayText" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
         <Setter Property="FontSize" Value="14"/>
+    </Style>
+    
+    <!-- CONTEXT MENU -->
+    <Style TargetType="{x:Type ContextMenu}">
+        <Setter Property="Background" Value="{DynamicResource NavBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+        <Setter Property="Padding" Value="4"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContextMenu}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="8"
+                            Effect="{DynamicResource ShadowEffect}">
+                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- MENU ITEM -->
+    <Style TargetType="{x:Type MenuItem}">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+        <Setter Property="Padding" Value="10 8"/>
+        <Setter Property="FontSize" Value="14"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MenuItem}">
+                    <Border x:Name="templateRoot"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            CornerRadius="4"
+                            Margin="2"
+                            SnapsToDevicePixels="True">
+                        
+                        <Grid VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIconColumnGroup"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIGTColumnGroup"/>
+                            </Grid.ColumnDefinitions>
+
+                            <ContentPresenter x:Name="Icon"
+                                              ContentSource="Icon"
+                                              Width="18" Height="18"
+                                              Margin="8 0"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+
+                            <ContentPresenter Grid.Column="1"
+                                              ContentSource="Header"
+                                              Margin="{TemplateBinding Margin}"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+
+                            <TextBlock Grid.Column="2"
+                                       Text="{TemplateBinding InputGestureText}"
+                                       Margin="15 0 10 0"
+                                       VerticalAlignment="Center"
+                                       Foreground="{DynamicResource TextSecondaryBrush}"
+                                       FontSize="12"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource ControlHoverBrush}"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource ControlHoverBrush}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- SEPARATOR -->
+    <Style TargetType="{x:Type Separator}">
+        <Setter Property="Background" Value="{DynamicResource BorderBrush}"/>
+        <Setter Property="Margin" Value="4"/>
+        <Setter Property="Height" Value="1"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Separator}">
+                    <Rectangle Height="{TemplateBinding Height}"
+                               Fill="{TemplateBinding Background}"
+                               SnapsToDevicePixels="True"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>
