@@ -410,4 +410,85 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!-- SLIDER -->
+    <Style TargetType="{x:Type Slider}">
+        <Setter Property="Background" Value="{DynamicResource BorderBrush}"/>
+        <Setter Property="Height" Value="20"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Slider}">
+                    <Grid VerticalAlignment="Center">
+                        <Border Height="6"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="3"
+                                VerticalAlignment="Center"
+                                Margin="5 0"/>
+
+                        <Track x:Name="PART_Track">
+                            <Track.Thumb>
+                                <Thumb>
+                                    <Thumb.Template>
+                                        <ControlTemplate TargetType="{x:Type Thumb}">
+                                            <Border Width="18" Height="18"
+                                                    Background="{DynamicResource PrimaryAccentBrush}"
+                                                    BorderBrush="White"
+                                                    BorderThickness="2"
+                                                    CornerRadius="9"
+                                                    Effect="{DynamicResource ShadowEffect}"/>
+                                        </ControlTemplate>
+                                    </Thumb.Template>
+                                </Thumb>
+                            </Track.Thumb>
+                        </Track>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- CHECKBOX -->
+    <Style TargetType="{x:Type CheckBox}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <BulletDecorator Background="Transparent" Cursor="Hand">
+                        <BulletDecorator.Bullet>
+                            <Grid Width="20" Height="20">
+                                <Border x:Name="Box"
+                                        Background="{DynamicResource BorderBrush}"
+                                        BorderThickness="2"
+                                        CornerRadius="4"/>
+
+                                <Path x:Name="CheckMark"
+                                      Data="M 4,10 L 8,14 L 16,6"
+                                      Stroke="{DynamicResource PrimaryAccentBrush}"
+                                      StrokeThickness="3"
+                                      Visibility="Collapsed"
+                                      StrokeStartLineCap="Round"
+                                      StrokeEndLineCap="Round"/>
+                            </Grid>
+                        </BulletDecorator.Bullet>
+                        <ContentPresenter Margin="10 0 0 0" VerticalAlignment="Center"/>
+                    </BulletDecorator>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource PrimaryAccentBrush}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Box" Property="Background" Value="{DynamicResource ControlHoverBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
