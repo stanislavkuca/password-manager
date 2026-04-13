@@ -51,7 +51,7 @@
                          Grid.Column="0" Margin="0 8 10 16" Width="290"/>
 
                 <Button Grid.Column="1" Content="🎲" Width="50" Height="42" Margin="0 8 0 16"
-                        FontSize="24" Cursor="Hand" ToolTip="Generate Password"
+                        FontSize="24" Cursor="Hand" ToolTip="Generate Password" Padding="0"
                         Click="OpenGenerator_Click" Style="{DynamicResource DefaultButtonStyle}"/>
             </Grid>
 
