@@ -30,6 +30,15 @@ namespace PasswordManager.Views
             PasswordGeneratorWindow generatorWindow = new PasswordGeneratorWindow();
             generatorWindow.Owner = this;
 
+            generatorWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+            generatorWindow.Left = this.Left + this.Width + 10;
+            generatorWindow.Top = this.Top;
+
+            if (generatorWindow.Left + generatorWindow.Width > SystemParameters.WorkArea.Width)
+            {
+                generatorWindow.Left = this.Left - generatorWindow.Width - 10;
+            }
+
             if (generatorWindow.ShowDialog() == true)
             {
                 AccountPasswordTextBox.Text = generatorWindow.GeneratedPassword;
