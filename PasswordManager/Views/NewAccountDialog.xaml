@@ -34,14 +34,27 @@
                 <TextBlock Text="Username:" Grid.Row="1" Style="{DynamicResource DialogTextBlockStyle}"/>
                 <TextBox x:Name="AccountUsernameTextBox" Grid.Row="1" Grid.Column="1" Style="{DynamicResource DialogTextBoxStyle}"/>
 
-                <TextBlock Text="Password:" Grid.Row="2" Style="{DynamicResource DialogTextBlockStyle}"/>
-                <DockPanel Grid.Row="2" Grid.Column="1" LastChildFill="True">
-                    <Button DockPanel.Dock="Right" Content="🎲" Width="45" Height="42" Margin="5 8 0 16"
-                            FontSize="20" Cursor="Hand" ToolTip="Show Generator" Padding="0"
+                <TextBlock Text="Password:" Grid.Row="2" Grid.Column="0" Style="{DynamicResource DialogTextBlockStyle}"/>
+                <Grid Grid.Row="2" Grid.Column="1" Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="AccountPasswordTextBox" 
+                             Grid.Column="0"
+                             Style="{DynamicResource DialogTextBoxStyle}"
+                             Margin="0 8 0 16"
+                             Width="300"/>
+
+                    <Button Grid.Column="1"
+                            Content="🎲" 
+                            Width="45" Height="42" 
+                            Margin="5 8 0 16"
+                            FontSize="20" Cursor="Hand" 
+                            ToolTip="Show Generator" Padding="0"
                             Click="ToggleGenerator_Click" Style="{DynamicResource DefaultButtonStyle}"/>
-                    <TextBox x:Name="AccountPasswordTextBox" Style="{DynamicResource DialogTextBoxStyle}"
-                             Margin="0 8 0 16"/>
-                </DockPanel>
+                </Grid>
 
                 <TextBlock Text="Note:" Grid.Row="3" Style="{DynamicResource DialogTextBlockStyle}"/>
                 <TextBox x:Name="AccountNoteTextBox" Grid.Row="3" Grid.Column="1" Style="{DynamicResource DialogTextBoxStyle}"
