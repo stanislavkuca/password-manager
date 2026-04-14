@@ -25,6 +25,14 @@ namespace PasswordManager.Views
             ViewModel = new MainViewModel();
             this.DataContext = ViewModel;
 
+            var currentTheme = Application.Current.Resources.MergedDictionaries
+                .FirstOrDefault(d => d.Source != null && d.Source.OriginalString.Contains("Dark"));
+
+            this.Loaded += (s, e) =>
+            {
+                ThemeToggleButton.IsChecked = (currentTheme != null);
+            };
+
             ViewModel.LoadData();
             StartTimer();
         }
