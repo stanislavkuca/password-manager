@@ -22,14 +22,9 @@
         <!-- LEFT MENU -->
         <DockPanel Grid.Column="0">
             <StackPanel DockPanel.Dock="Top">
-                <TextBlock FontSize="23"
-                       FontWeight="Bold"
-                       Margin="20"
-                       HorizontalAlignment="Center"
-                       FontFamily="{DynamicResource AudiowideFont}">
-                    <Run Text="Password"/>
-                    <LineBreak/>
-                    <Run Text="Manager"/>
+                <TextBlock FontSize="23" Margin="20" HorizontalAlignment="Center">
+                    <Run Text="Pass" FontWeight="Bold"/>
+                    <Run Text="Manager" FontWeight="Light"/>
                 </TextBlock>
 
                 <Button Style="{DynamicResource MainMenuButtonStyle}" Click="AllPasswordsButton_Click">

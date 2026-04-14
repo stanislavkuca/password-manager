@@ -14,7 +14,9 @@
                       RenderingBias="Performance" RenderOptions.EdgeMode="Aliased"/>
     
     <!-- FONT -->
-    <FontFamily x:Key="AudiowideFont">pack://application:,,,/Fonts/#Audiowide</FontFamily>
+    <Style TargetType="{x:Type Window}">
+        <Setter Property="FontFamily" Value="Segoe UI" />
+    </Style>
 
     <Style TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
