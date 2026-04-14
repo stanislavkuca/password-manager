@@ -32,7 +32,7 @@ namespace PasswordManager.Views
 
             double mainWidth = this.ActualWidth;
             double mainLeft = this.Left;
-            double gap = 10;
+            double gap = 5;
             double screenWidth = SystemParameters.WorkArea.Width;
 
             generatorWindow.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -47,7 +47,7 @@ namespace PasswordManager.Views
                 double newMainLeft = Math.Max(0, this.Left - overflow);
                 this.Left = newMainLeft;
 
-                targetLeft = this.Left + this.Width + gap;
+                targetLeft = this.Left + this.ActualWidth + gap;
 
                 if (targetLeft + genWidth > screenWidth)
                 {
