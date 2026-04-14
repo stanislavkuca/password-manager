@@ -30,14 +30,34 @@ namespace PasswordManager.Views
             PasswordGeneratorWindow generatorWindow = new PasswordGeneratorWindow();
             generatorWindow.Owner = this;
 
-            generatorWindow.WindowStartupLocation = WindowStartupLocation.Manual;
-            generatorWindow.Left = this.Left + this.Width + 10;
-            generatorWindow.Top = this.Top;
+            double mainWidth = this.ActualWidth;
+            double mainLeft = this.Left;
+            double gap = 10;
+            double screenWidth = SystemParameters.WorkArea.Width;
 
-            if (generatorWindow.Left + generatorWindow.Width > SystemParameters.WorkArea.Width)
+            generatorWindow.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            double genWidth = generatorWindow.DesiredSize.Width;
+
+            double targetLeft = mainLeft + mainWidth + gap;
+
+            if (targetLeft + genWidth > screenWidth)
             {
-                generatorWindow.Left = this.Left - generatorWindow.Width - 10;
+                double overflow = (targetLeft + genWidth) - screenWidth;
+
+                double newMainLeft = Math.Max(0, this.Left - overflow);
+                this.Left = newMainLeft;
+
+                targetLeft = this.Left + this.Width + gap;
+
+                if (targetLeft + genWidth > screenWidth)
+                {
+                    targetLeft = this.Left - genWidth - gap;
+                }
             }
+
+            generatorWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+            generatorWindow.Left = targetLeft;
+            generatorWindow.Top = this.Top;
 
             if (generatorWindow.ShowDialog() == true)
             {
