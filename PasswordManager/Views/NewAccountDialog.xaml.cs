@@ -1,5 +1,7 @@
-﻿using System.Windows;
-using PasswordManager.Models;
+﻿using PasswordManager.Models;
+using System.Security.Cryptography;
+using System.Text;
+using System.Windows;
 
 namespace PasswordManager.Views
 {
@@ -25,46 +27,63 @@ namespace PasswordManager.Views
             }
         }
 
-        private void OpenGenerator_Click(object sender, RoutedEventArgs e)
+        private void ToggleGenerator_Click(object sender, RoutedEventArgs e)
         {
-            PasswordGeneratorWindow generatorWindow = new PasswordGeneratorWindow();
-            generatorWindow.Owner = this;
-
-            double mainWidth = this.ActualWidth;
-            double mainLeft = this.Left;
-            double gap = 5;
-            double screenWidth = SystemParameters.WorkArea.Width;
-
-            generatorWindow.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-            double genWidth = generatorWindow.DesiredSize.Width;
-
-            double targetLeft = mainLeft + mainWidth + gap;
-
-            if (targetLeft + genWidth > screenWidth)
+            if (GeneratorPanel.Visibility == Visibility.Visible)
             {
-                double overflow = (targetLeft + genWidth) - screenWidth;
-
-                double newMainLeft = Math.Max(0, this.Left - overflow);
-                this.Left = newMainLeft;
-
-                targetLeft = this.Left + this.ActualWidth + gap;
-
-                if (targetLeft + genWidth > screenWidth)
-                {
-                    targetLeft = this.Left - genWidth - gap;
-                }
+                GeneratorPanel.Visibility = Visibility.Collapsed;
             }
-
-            generatorWindow.WindowStartupLocation = WindowStartupLocation.Manual;
-            generatorWindow.Left = targetLeft;
-            generatorWindow.Top = this.Top;
-
-            if (generatorWindow.ShowDialog() == true)
+            else
             {
-                AccountPasswordTextBox.Text = generatorWindow.GeneratedPassword;
+                GeneratorPanel.Visibility = Visibility.Visible;
+                GeneratePassword();
             }
         }
 
+        // --- PW GENERATOR LOGIC ---
+        private void LengthSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (LengthText != null)
+            {
+                LengthText.Text = e.NewValue.ToString("0");
+                GeneratePassword();
+            }
+        }
+
+        private void Option_Changed(object sender, RoutedEventArgs e)
+        {
+            if (IsLoaded) GeneratePassword();
+        }
+
+        private void GeneratePassword()
+        {
+            int length = (int)LengthSlider.Value;
+            string validChars = "";
+
+            if (CbUppercase?.IsChecked == true) validChars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            if (CbLowercase?.IsChecked == true) validChars += "abcdefghijklmnopqrstuvwxyz";
+            if (CbNumbers?.IsChecked == true) validChars += "0123456789";
+            if (CbSpecial?.IsChecked == true) validChars += "!@#$%^&*()_-+=[{]};:<>|./?";
+
+            if (string.IsNullOrEmpty(validChars)) return;
+
+            StringBuilder res = new StringBuilder();
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                byte[] uintBuffer = new byte[sizeof(uint)];
+                while (length-- > 0)
+                {
+                    rng.GetBytes(uintBuffer);
+                    uint num = BitConverter.ToUInt32(uintBuffer, 0);
+                    res.Append(validChars[(int)(num % (uint)validChars.Length)]);
+                }
+            }
+
+            AccountPasswordTextBox.Text = res.ToString();
+        }
+
+
+        // --- BUTTON LOGIC ---
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             if (AccountToEdit != null)
@@ -87,12 +106,6 @@ namespace PasswordManager.Views
             }
 
             DialogResult = true;
-            Close();
-        }
-
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = false;
             Close();
         }
     }

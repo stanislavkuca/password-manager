@@ -4,61 +4,91 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Style="{DynamicResource DialogWindowStyle}"
-        WindowStartupLocation="Manual"
+        WindowStartupLocation="CenterOwner"
         Title="Create new account">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Column="0" Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center"
-                    Margin="0 20 0 0">
-            <Button x:Name="ConfirmBtn" Content="Add" Click="AddButton_Click" Style="{DynamicResource DialogButtonOK}"/>
-            <Button Content="Cancel" Click="CancelButton_Click" Style="{DynamicResource DialogButtonCancel}"/>
-        </StackPanel>
-
-        <Grid Grid.Row="0" HorizontalAlignment="Left">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <TextBlock Text="Service name:" Grid.Row="0" Grid.Column="0" Style="{DynamicResource DialogTextBlockStyle}"/>
-            <TextBox x:Name="AccountNameTextBox" Style="{DynamicResource DialogTextBoxStyle}"
-                     Grid.Row="0" Grid.Column="1"/>
-
-            <TextBlock Text="Username:" Grid.Row="1" Grid.Column="0" Style="{DynamicResource DialogTextBlockStyle}"/>
-            <TextBox x:Name="AccountUsernameTextBox" Style="{DynamicResource DialogTextBoxStyle}"
-                     Grid.Row="1" Grid.Column="1"/>
-
-            <TextBlock Text="Password:" Grid.Row="2" Grid.Column="0" Style="{DynamicResource DialogTextBlockStyle}"/>
-            <Grid Grid.Row="2" Grid.Column="1" Margin="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                
-                <TextBox x:Name="AccountPasswordTextBox" Style="{DynamicResource DialogTextBoxStyle}"
-                         Grid.Column="0" Margin="0 8 10 16" Width="290"/>
 
-                <Button Grid.Column="1" Content="🎲" Width="50" Height="42" Margin="0 8 0 16"
-                        FontSize="24" Cursor="Hand" ToolTip="Generate Password" Padding="0"
-                        Click="OpenGenerator_Click" Style="{DynamicResource DefaultButtonStyle}"/>
+                <TextBlock Text="Service name:" Grid.Row="0" Grid.Column="0" Style="{DynamicResource DialogTextBlockStyle}"/>
+                <TextBox x:Name="AccountNameTextBox" Grid.Row="0" Grid.Column="1" Style="{DynamicResource DialogTextBoxStyle}" 
+                         Width="350"/>
+
+                <TextBlock Text="Username:" Grid.Row="1" Style="{DynamicResource DialogTextBlockStyle}"/>
+                <TextBox x:Name="AccountUsernameTextBox" Grid.Row="1" Grid.Column="1" Style="{DynamicResource DialogTextBoxStyle}"/>
+
+                <TextBlock Text="Password:" Grid.Row="2" Style="{DynamicResource DialogTextBlockStyle}"/>
+                <DockPanel Grid.Row="2" Grid.Column="1" LastChildFill="True">
+                    <Button DockPanel.Dock="Right" Content="🎲" Width="45" Height="42" Margin="5 8 0 16"
+                            FontSize="20" Cursor="Hand" ToolTip="Show Generator" Padding="0"
+                            Click="ToggleGenerator_Click" Style="{DynamicResource DefaultButtonStyle}"/>
+                    <TextBox x:Name="AccountPasswordTextBox" Style="{DynamicResource DialogTextBoxStyle}"
+                             Margin="0 8 0 16"/>
+                </DockPanel>
+
+                <TextBlock Text="Note:" Grid.Row="3" Style="{DynamicResource DialogTextBlockStyle}"/>
+                <TextBox x:Name="AccountNoteTextBox" Grid.Row="3" Grid.Column="1" Style="{DynamicResource DialogTextBoxStyle}"
+                         TextWrapping="Wrap" Height="110" MaxLines="5" VerticalAlignment="Top" MaxLength="184" AcceptsReturn="True"/>
             </Grid>
 
-            <TextBlock Text="Note:" Grid.Row="3" Grid.Column="0" Style="{DynamicResource DialogTextBlockStyle}"/>
-            <TextBox x:Name="AccountNoteTextBox" Style="{DynamicResource DialogTextBoxStyle}"
-                     Grid.Row="3" Grid.Column="1" TextWrapping="Wrap" MaxLines="5" MaxLength="156"/>
-        </Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
+                        Margin="0 20 0 0">
+                <Button x:Name="ConfirmBtn" Content="Add" Click="AddButton_Click" Style="{DynamicResource DialogButtonOK}"/>
+                <Button Content="Cancel" IsCancel="True" Style="{DynamicResource DialogButtonCancel}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Border x:Name="GeneratorPanel" Grid.Column="1" Visibility="Collapsed"
+                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1 0 0 0"
+                Margin="10 0 0 0" Padding="20 0 10 0">
+            
+            <StackPanel Width="280">
+                <TextBlock Text="Password Generator" FontFamily="18" FontWeight="Bold"
+                           Margin="0 0 0 20" Foreground="{DynamicResource TextBrush}"/>
+
+                <DockPanel Margin="0 0 0 10">
+                    <TextBlock Text="Length:" Foreground="{DynamicResource TextBrush}"/>
+                    <TextBlock x:Name="LengthText" Text="16" Foreground="{DynamicResource PrimaryAccentBrush}" 
+                               FontWeight="Bold" HorizontalAlignment="Right"/>
+                </DockPanel>
+
+                <Slider x:Name="LengthSlider" Minimum="8" Maximum="64" Value="16"
+                        TickFrequency="1" IsSnapToTickEnabled="True" Margin="0 0 0 20"
+                        ValueChanged="LengthSlider_ValueChanged"/>
+
+                <CheckBox x:Name="CbUppercase" Content="Uppercase (A-Z)" IsChecked="True" 
+                          Margin="0 5" Foreground="{DynamicResource TextBrush}" FontSize="14" 
+                          Checked="Option_Changed" Unchecked="Option_Changed"/>
+                <CheckBox x:Name="CbLowercase" Content="Lowercase (a-z)" IsChecked="True" 
+                          Margin="0 5" Foreground="{DynamicResource TextBrush}" FontSize="14" 
+                          Checked="Option_Changed" Unchecked="Option_Changed"/>
+                <CheckBox x:Name="CbNumbers" Content="Numbers (0-9)" IsChecked="True" 
+                          Margin="0 5" Foreground="{DynamicResource TextBrush}" FontSize="14" 
+                          Checked="Option_Changed" Unchecked="Option_Changed"/>
+                <CheckBox x:Name="CbSpecial" Content="Special characters (!@#...)" IsChecked="True" 
+                          Margin="0 5" Foreground="{DynamicResource TextBrush}" FontSize="14" 
+                          Checked="Option_Changed" Unchecked="Option_Changed"/>
+
+                <Button Content="Close Generator" Click="ToggleGenerator_Click" Margin="0 30 0 0"
+                        Style="{DynamicResource DialogButtonCancel}" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
