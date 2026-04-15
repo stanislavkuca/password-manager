@@ -11,7 +11,9 @@
         ResizeMode="CanResize"
         Title="Password Manager Alpha"
         Width="1400" Height="700"
-        MinWidth="1000" MinHeight="500">
+        MinWidth="1000" MinHeight="500"
+        PreviewMouseMove="Window_UserActivity"
+        PreviewKeyDown="Window_UserActivity">
 
     <Grid Background="{DynamicResource PrimaryGradient}">
         <Grid.ColumnDefinitions>

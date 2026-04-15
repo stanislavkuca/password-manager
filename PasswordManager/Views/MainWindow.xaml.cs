@@ -56,11 +56,25 @@ namespace PasswordManager.Views
             TimeSpan time = TimeSpan.FromSeconds(_secondsLeft);
             TimerDisplay.Text = $"{time.ToString(@"mm\:ss")}";
 
+            if (_secondsLeft < 60)
+            {
+                TimerDisplay.Foreground = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                TimerDisplay.ClearValue(TextBlock.ForegroundProperty);
+            }
+
             if (_secondsLeft <= 0)
             {
                 _lockTimer.Stop();
                 Logout();
             }
+        }
+
+        private void Window_UserActivity(object sender, RoutedEventArgs e)
+        {
+            _secondsLeft = DefaultTimeoutSeconds;
         }
 
         private void Logout()
@@ -353,6 +367,11 @@ namespace PasswordManager.Views
         private void ThemeToggleButton_Unchecked(object sender, RoutedEventArgs e)
         {
             ((App)Application.Current).ChangeTheme(false);
+        }
+
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+
         }
     }
 }
