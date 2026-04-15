@@ -175,11 +175,6 @@ namespace PasswordManager.Views
             }
         }
 
-        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            ViewModel.SearchQuery = ((TextBox)sender).Text;
-        }
-
         private void AllPasswordsButton_Click(object sender, RoutedEventArgs e)
         {
             ViewModel.SelectedFolder = null;

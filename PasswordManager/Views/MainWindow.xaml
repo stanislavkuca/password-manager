@@ -140,6 +140,7 @@
                      Background="Transparent"
                      HorizontalContentAlignment="Stretch"
                      ItemContainerStyle="{DynamicResource CleanListBoxItemStyle}"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      x:Name="AccountList">
 
                 <ListBox.ItemTemplate>
@@ -160,25 +161,25 @@
                                 </Grid.ColumnDefinitions>
 
                                 <!-- Account fields -->
-                                <Grid Grid.Column="0" VerticalAlignment="Center" Margin="0 0 20 0">
+                                <Grid Grid.Column="0" VerticalAlignment="Center" Margin="0">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="180"/>
-                                        <ColumnDefinition Width="160"/>
-                                        <ColumnDefinition Width="130"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="3*"/>
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="{Binding Name}" Style="{DynamicResource AccountItemTemplateStyle}"
-                                               Grid.Column="0" FontWeight="SemiBold"/>
+                                               Grid.Column="0" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
 
                                     <TextBlock Text="{Binding Username}" Style="{DynamicResource AccountItemTemplateStyle}"
-                                               Grid.Column="1"/>
+                                               Grid.Column="1" TextTrimming="CharacterEllipsis"/>
 
                                     <TextBlock Text="********" Style="{DynamicResource AccountItemTemplateStyle}"
-                                               Grid.Column="2"/>
+                                               Grid.Column="2" TextTrimming="CharacterEllipsis"/>
 
                                     <TextBlock Text="{Binding Note}" Style="{DynamicResource AccountItemTemplateStyle}"
-                                               Grid.Column="3" Margin="0 0 40 0"/>
+                                               Grid.Column="3" Margin="0 0 40 0" TextTrimming="CharacterEllipsis"/>
                                 </Grid>
 
                                 <!-- ACCOUNT BUTTONS -->

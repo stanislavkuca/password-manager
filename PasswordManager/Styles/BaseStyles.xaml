@@ -24,10 +24,9 @@
     
     <Style x:Key="AccountItemTemplateStyle" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="FontSize" Value="17"/>
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
-        <Setter Property="Margin" Value="0 0 10 0"/>
+        <Setter Property="Margin" Value="0 0 40 0"/>
     </Style>
     
     <!-- ACCOUNT BORDER -->
