@@ -57,7 +57,8 @@
                       Unchecked="ThemeToggleButton_Unchecked"/>
 
             <StackPanel>
-                <Label Content="Folders:" Style="{DynamicResource LabelStyle}"/>
+                <Label Content="Folders:" Margin="20 0 20 0"
+                       Style="{DynamicResource LabelStyle}"/>
 
                 <!--FOLDER LIST -->
                 <ListBox ItemsSource="{Binding Folders}"
@@ -69,7 +70,7 @@
                         x:Name="FoldersListBox"
                         HorizontalAlignment="Stretch"
                         Margin="20 0 20 0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                
+                    
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid Background="Transparent">
