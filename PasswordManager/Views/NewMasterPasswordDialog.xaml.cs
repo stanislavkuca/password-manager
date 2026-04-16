@@ -15,7 +15,8 @@ using System.Windows.Shapes;
 namespace PasswordManager.Views
 {
     /// <summary>
-    /// Interaction logic for NewMasterPasswordDialog.xaml
+    /// Dialog used to create a new master password.
+    /// Keep UI logic to minimal here; validation and persistence are intentionally simple.
     /// </summary>
     public partial class NewMasterPasswordDialog : Window
     {
@@ -24,8 +25,12 @@ namespace PasswordManager.Views
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Entered master password. Avoid logging.
+        /// </summary>
         public string NewPassword => MasterPasswordBox.Password;
 
+        // Prevent accidental empty master password; more complex validation lives in a shared service.
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(MasterPasswordBox.Password) ||
@@ -42,11 +47,6 @@ namespace PasswordManager.Views
             }
 
             DialogResult = true;
-        }
-
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = false;
         }
     }
 }
