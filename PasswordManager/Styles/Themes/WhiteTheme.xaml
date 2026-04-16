@@ -43,7 +43,7 @@
     <!-- ACCENT PALETTE -->
     <SolidColorBrush x:Key="PrimaryAccentBrush" Color="#4F46E5"/>
     <SolidColorBrush x:Key="PrimaryAccentHoverBrush" Color="#4338CA"/>
-    <SolidColorBrush x:Key="AccentForegroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="AccentForegroundBrush" Color="#E7E7E7"/>
     
     <!-- BTN COLOR -->
     <SolidColorBrush x:Key="SuccessBrush" Color="#10B981"/>
