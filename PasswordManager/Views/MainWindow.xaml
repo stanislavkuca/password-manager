@@ -68,7 +68,7 @@
                         Background="Transparent"
                         x:Name="FoldersListBox"
                         HorizontalAlignment="Stretch"
-                        Margin="20 0 20 0">
+                        Margin="20 0 20 0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -84,10 +84,23 @@
                                     </ContextMenu>
                                 </Grid.ContextMenu>
 
-                                <TextBlock Text="{Binding Name, StringFormat=• {0}}"
-                                            Padding="30 6"
-                                            FontSize="18"
-                                            TextTrimming="CharacterEllipsis"/>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Path Grid.Column="0"
+                                      Width="16" Height="16"
+                                      Margin="12 8 12 8"
+                                      Stretch="Uniform"
+                                      Fill="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=Foreground}"
+                                      Data="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding Name}"
+                                           VerticalAlignment="Center"
+                                           FontSize="15"
+                                           TextTrimming="CharacterEllipsis"/>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
