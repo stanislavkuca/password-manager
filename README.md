@@ -1,6 +1,7 @@
 # Password Manager (WPF)
 
-Password Manager is a simple desktop application created as a high school graduation (maturita) project. The application is used to store and manage login credentials for different services, with focus on easy use.
+Password Manager is a simple desktop application for managing login credentials, developed as a high school graduation (maturita) project. 
+It focuses on a clean user experience, intuitive organization, and essential security features.
 
 ---
 ## Project Description
@@ -12,35 +13,45 @@ The project focuses on desktop UI development, data model design, and applicatio
 ## Project Goal
 
 The goal of this project was to create a functional desktop application using WPF that demonstrates:
-- work with data models and collections
-- user interface design
-- basic application logic
+- Work with data models and collections (ObservableCollections)
+- Modern user interface design using XAML
+- Basic application security and logic
 
 ---
 ## Features
 
-- create, edit, and delete accounts
-- folder management
-- view all accounts (All Accounts)
-- assign accounts to folders
-- mark accounts as favourites and sort them
-- search by service name and note
-- confirmation dialogs for delete actions
+- **Account Management:** Create, edit, and delete service accounts.
+- **Folder Organization:** Create folders and assign accounts to them.
+- **Favourites:** Mark important accounts as favourites for quick access.
+- **Instant Search:** Search through accounts by service name or notes.
+- **Security Timer:** Automatic session logout after 5 minutes of inactivity.
+- **Clipboard Safety:** Passwords copied to the clipboard are automatically cleared after 30 seconds.
+- **Theme Toggle:** Switch between Dark and Light modes.
+- **Context Menus:** Quick actions (Copy, Rename, Delete) available via right-click.
 
 ---
 ## Technologies Used
 
-- C#
-- .NET (WPF)
-- XAML
-
-Developed using Visual Studio
+- **Language:** C#
+- **Framework:** .NET (WPF)
+- **Styling:** XAML
+- **IDE:** Visual Studio 2026
 
 ---
 ## How to Run
 
-1. Open the project in Visual Studio
-2. Run the application by pressing **F5**
+If you want to use the application without opening the source code:
+1. Go to the **Releases** section on the right side of the GitHub page.
+2. Download the latest version (zip file).
+3. Extract the file and run `PasswordManager.exe`.
+
+---
+## How to Run (for Developers)
+
+1. Clone the repository or download the source code.
+2. Open the `.sln` file in **Visual Studio**.
+3. Ensure you have the **.NET Desktop Development** workload installed.
+4. Build and run the application by pressing **F5**.
 
 ---
 ## Author
