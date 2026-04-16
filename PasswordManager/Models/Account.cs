@@ -11,6 +11,7 @@ namespace PasswordManager.Models
 {
     public class Account : INotifyPropertyChanged
     {
+        // Stable identifier so accounts can be referenced and persisted reliably.
         public Guid AccountId { get; } = Guid.NewGuid();
         private Guid? _folderId;
         public Guid? FolderId
@@ -57,6 +58,7 @@ namespace PasswordManager.Models
         private void OnPropertyChanged(string prop)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
 
+        // Use DPAPI (CurrentUser) so encrypted passwords are tied to the current Windows user profile.
         public static string EncryptPassword(string password)
         {
             var bytes = Encoding.UTF8.GetBytes(password);
@@ -64,6 +66,7 @@ namespace PasswordManager.Models
             return Convert.ToBase64String(encrypted);
         }
 
+        // Decrypt and return plain text
         public static string DecryptPassword(string encryptedPassword)
         {
             try

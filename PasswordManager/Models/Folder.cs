@@ -11,6 +11,7 @@ namespace PasswordManager.Models
 {
     public class Folder : INotifyPropertyChanged
     {
+        // Stable identifier so folders can be referenced and persisted reliably.
         public Guid Id { get; } = Guid.NewGuid();
 
         private string _name;

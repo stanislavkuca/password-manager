@@ -5,6 +5,9 @@ using System.Windows;
 
 namespace PasswordManager.Views
 {
+    /// <summary>
+    /// Dialog for creating or editing an account.
+    /// </summary>
     public partial class NewAccountWindow : Window
     {
         public Account? AccountToEdit { get; set; }
@@ -68,6 +71,7 @@ namespace PasswordManager.Views
             if (string.IsNullOrEmpty(validChars)) return;
 
             StringBuilder res = new StringBuilder();
+            // Use cryptographic RNG to avoid predictable passwords.
             using (var rng = RandomNumberGenerator.Create())
             {
                 byte[] uintBuffer = new byte[sizeof(uint)];

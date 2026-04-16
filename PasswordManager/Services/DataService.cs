@@ -9,6 +9,9 @@ using System.IO;
 
 namespace PasswordManager.Services
 {
+    /// <summary>
+    /// Persisted data handling.
+    /// </summary>
     public static class DataService
     {
         private static string path = "Data/data.json";

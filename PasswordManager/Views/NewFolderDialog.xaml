@@ -31,7 +31,7 @@
                     Click="AddButton_Click"/>
 
             <Button Content="Cancel" Style="{DynamicResource DialogButtonCancel}"
-                    Click="CancelButton_Click"/>
+                    IsCancel="True"/>
         </StackPanel>
     </Grid>
 </Window>

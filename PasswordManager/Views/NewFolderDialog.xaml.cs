@@ -15,6 +15,9 @@ using System.Windows.Shapes;
 
 namespace PasswordManager.Views
 {
+    /// <summary>
+    /// Dialog for creating or editing a folder.
+    /// </summary>
     public partial class NewFolderDialog : Window
     {
         public Folder? FolderToEdit { get; set; }
@@ -30,12 +33,14 @@ namespace PasswordManager.Views
                 Title = "Rename Folder";
                 ConfirmBtn.Content = "Rename folder";
 
+                // Pre-fill name to edit
                 FolderNameTextBox!.Text = folder.Name ?? string.Empty;
             }
 
             FolderNameTextBox.Focus();
         }
 
+        // Validate input and produce CreatedFolder for the caller.
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(FolderNameTextBox.Text))
@@ -55,12 +60,6 @@ namespace PasswordManager.Views
             }
             
             DialogResult = true;
-            Close();
-        }
-
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = false;
             Close();
         }
     }

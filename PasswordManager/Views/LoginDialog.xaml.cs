@@ -16,7 +16,7 @@ using System.IO;
 namespace PasswordManager.Views
 {
     /// <summary>
-    /// Interaction logic for LoginDialog.xaml
+    /// Login dialog. Keeps auth logic minimal and delegates hashing/verification to AuthService.
     /// </summary>
     public partial class LoginDialog : Window
     {
@@ -64,6 +64,7 @@ namespace PasswordManager.Views
                 return;
             }
 
+            // After successful deletion prompt for a new master passsword.
             var newPasswordDialog = new NewMasterPasswordDialog();
             bool? dialogResult = newPasswordDialog.ShowDialog();
 

@@ -8,9 +8,15 @@ using System.Text;
 
 namespace PasswordManager.ViewModels
 {
+    /// <summary>
+    /// ViewModel holds UI-facing collections and simple filtering/search logic.
+    /// </summary>
     public class MainViewModel : INotifyPropertyChanged
     {
+        // Accounts currently shown in the UI (filtered + sorted).
         public ObservableCollection<Account> DisplayedAccounts { get; } = new();
+
+        // Source collections loaded from persistence.
         public ObservableCollection<Account> AllAccounts { get; private set; } = new();
         public ObservableCollection<Folder> Folders { get; private set; } = new();
 
@@ -38,6 +44,9 @@ namespace PasswordManager.ViewModels
             }
         }
 
+        /// <summary>
+        /// Load persisted data and replace internal collections with fresh instances.
+        /// </summary>
         public void LoadData()
         {
             var data = DataService.Load();
@@ -46,6 +55,9 @@ namespace PasswordManager.ViewModels
             RefreshList();
         }
 
+        /// <summary>
+        /// Persist current state; convert ObservableCollections to plain lists for storage.
+        /// </summary>
         public void SaveData()
         {
             DataService.Save(new AppData
@@ -55,6 +67,9 @@ namespace PasswordManager.ViewModels
             });
         }
 
+        /// <summary>
+        /// Rebuild DisplayedAccounts from AllAccounts applying folder filter, search, and ordering.
+        /// </summary>
         public void RefreshList()
         {
             IEnumerable<Account> filtered = AllAccounts;
