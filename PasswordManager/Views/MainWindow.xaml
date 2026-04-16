@@ -37,16 +37,6 @@
                 </Button>
             </StackPanel>
 
-            <!-- SETTINGS BUTTON AT BOTTOM 
-            <Button Style="{DynamicResource MainMenuButtonStyle}" VerticalAlignment="Bottom"
-                    DockPanel.Dock="Bottom" Margin="5">
-                
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="{DynamicResource SettingsIcon}" Width="24" Height="24" Margin="10 0 15 0"/>
-                    <TextBlock Text="Settings" VerticalAlignment="Center"/>
-                </StackPanel>
-            </Button>
-            -->
             <CheckBox x:Name="ThemeToggleButton"
                       Style="{DynamicResource ThemeToggleSwitch}"
                       Content="Dark Theme"
@@ -76,11 +66,10 @@
                             <Grid Background="Transparent">
                                 <Grid.ContextMenu>
                                     <ContextMenu>
-                                        <!-- RENAME FOLDER -->
                                         <MenuItem Header="Rename Folder" Icon="✏️" Click="RenameFolder_Click"/>
+                                        
                                         <Separator/>
                                     
-                                        <!-- DELETE FOLDER -->
                                         <MenuItem Header="Delete Folder" Icon="🗑️" Click="DeleteFolder_Click" Foreground="{DynamicResource DangerBrush}"/>
                                     </ContextMenu>
                                 </Grid.ContextMenu>
@@ -239,10 +228,8 @@
                                         </Button.ContextMenu>
                                     </Button>
                                     
-                                    <!-- EDIT -->
                                     <Button Content="Edit" Style="{DynamicResource EditButtonStyle}" Click="EditAccountBtn_Click" Margin="0 0 25 0"/>
                                     
-                                    <!-- DELETE -->
                                     <Button Content="Delete" Style="{DynamicResource DeleteButtonStyle}" Click="DeleteAccountButton_Click"/>
                                 </StackPanel>
                             </Grid>

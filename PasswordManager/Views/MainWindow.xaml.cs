@@ -14,8 +14,15 @@ using System.Windows.Media;
 
 namespace PasswordManager.Views
 {
+    /// <summary>
+    /// Main application window. Contains UI logic only; logic is in MainViewModel.
+    /// Keep UI code focused on view concerns (dialogs, timers, simple event handling).
+    /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// ViewModel for the main window.
+        /// </summary>
         public MainViewModel ViewModel { get; }
         private DispatcherTimer _lockTimer = new();
 
@@ -25,14 +32,17 @@ namespace PasswordManager.Views
             ViewModel = new MainViewModel();
             this.DataContext = ViewModel;
 
+            // Detect whether a "Dark" resource dictionary is loaded and set the toggle accordingly.
             var currentTheme = Application.Current.Resources.MergedDictionaries
                 .FirstOrDefault(d => d.Source != null && d.Source.OriginalString.Contains("Dark"));
 
+            // Set theme toggle after window is loaded to ensure controls are available.
             this.Loaded += (s, e) =>
             {
                 ThemeToggleButton.IsChecked = (currentTheme != null);
             };
 
+            // Load persisted data and start the inactivity timer.
             ViewModel.LoadData();
             StartTimer();
         }
@@ -40,6 +50,9 @@ namespace PasswordManager.Views
         private int _secondsLeft;
         private const int DefaultTimeoutSeconds = 300;
 
+        /// <summary>
+        /// Initialize and start the UI timer used for automatic logout on inactivity.
+        /// </summary>
         private void StartTimer()
         {
             _secondsLeft = DefaultTimeoutSeconds;
@@ -49,6 +62,9 @@ namespace PasswordManager.Views
             _lockTimer.Start();
         }
 
+        /// <summary>
+        /// Tick handler updates UI countdown and triggers logout when time expires.
+        /// </summary>
         private void Timer_Tick(object sender, EventArgs e)
         {
             _secondsLeft--;
@@ -72,11 +88,17 @@ namespace PasswordManager.Views
             }
         }
 
+        /// <summary>
+        /// Reset inactivity timer on user activity (mouse/keyboard)
+        /// </summary>
         private void Window_UserActivity(object sender, RoutedEventArgs e)
         {
             _secondsLeft = DefaultTimeoutSeconds;
         }
 
+        /// <summary>
+        /// Perform a safe logout: stop timers, save data, and start auth flow.
+        /// </summary>
         private void Logout()
         {
             _lockTimer.Stop();
@@ -175,11 +197,17 @@ namespace PasswordManager.Views
             }
         }
 
+        /// <summary>
+        /// Show all accounts by clearing selected folder filter.
+        /// </summary>
         private void AllPasswordsButton_Click(object sender, RoutedEventArgs e)
         {
             ViewModel.SelectedFolder = null;
         }
 
+        /// <summary>
+        /// Open the folder context menu attached to the plus button.
+        /// </summary>
         private void FolderButton_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button btn)
@@ -192,6 +220,9 @@ namespace PasswordManager.Views
             }
         }
 
+        /// <summary>
+        /// Assign or unassign an account to a folder based on menu selection.
+        /// </summary>
         private void FolderMenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (sender is MenuItem { Tag: (Folder folder, Guid accId) })
@@ -208,6 +239,9 @@ namespace PasswordManager.Views
             }
         }
 
+        /// <summary>
+        /// Build folder menu dynamically when opened so it reflects current folders and selection.
+        /// </summary>
         private void FolderMenu_Opened(object sender, RoutedEventArgs e)
         {
             if (sender is ContextMenu menu && menu.PlacementTarget is Button { Tag: Guid accountId })
@@ -248,6 +282,9 @@ namespace PasswordManager.Views
             }
         }
 
+        /// <summary>
+        /// Delete folder with two behaviours: remove only folder (keep accounts) or remove everything (even accounts in the folder).
+        /// </summary>
         public void DeleteFolder_Click(Object sender, RoutedEventArgs e)
         {
             if (sender is MenuItem { DataContext: Folder folder })
@@ -283,6 +320,9 @@ namespace PasswordManager.Views
             }
         }
 
+        /// <summary>
+        /// Show context menu on right-click for list items. Mark event handled to prevent default selection behaviour.
+        /// </summary>
         private void OnPreviewMouseRightBtnDown(object sender, MouseButtonEventArgs e)
         {
             e.Handled = true;
@@ -294,6 +334,9 @@ namespace PasswordManager.Views
             }
         }
 
+        /// <summary>
+        /// Copy username to clipboard and notify user. Avoid storing sensitive data in logs.
+        /// </summary>
         private void CopyUsername_Click(object sender, RoutedEventArgs e)
         {
             if (sender is MenuItem { DataContext: Account acc })
@@ -307,6 +350,9 @@ namespace PasswordManager.Views
             }
         }
 
+        /// <summary>
+        /// Decrypt password, copy to clipboard, and clear clipboard after 30s if unchanged.
+        /// </summary>
         private void CopyPassword_Click(object sender, RoutedEventArgs e)
         {
             if (sender is MenuItem { DataContext: Account acc })
@@ -335,6 +381,9 @@ namespace PasswordManager.Views
             }
         }
 
+        /// <summary>
+        /// Ensure the grid receives focus on mouse down to allow keyboard shortcuts and focus behaviours.
+        /// </summary>
         private void Grid_MouseDown(object sender, MouseEventArgs e)
         {
             if (sender is IInputElement element)
@@ -344,6 +393,9 @@ namespace PasswordManager.Views
             }
         }
 
+        /// <summary>
+        /// Escape clears search and removes focus from the search box.
+        /// </summary>
         private void SearchBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
@@ -354,6 +406,9 @@ namespace PasswordManager.Views
             }
         }
 
+        /// <summary>
+        /// Theme toggle handlers call centralized theme change in app for consistency.
+        /// </summary>
         private void ThemeToggleButton_Checked(object sender, RoutedEventArgs e)
         {
             ((App)Application.Current).ChangeTheme(true);
@@ -362,11 +417,6 @@ namespace PasswordManager.Views
         private void ThemeToggleButton_Unchecked(object sender, RoutedEventArgs e)
         {
             ((App)Application.Current).ChangeTheme(false);
-        }
-
-        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-
         }
     }
 }
