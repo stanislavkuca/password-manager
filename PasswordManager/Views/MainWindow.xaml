@@ -98,9 +98,11 @@
         <!-- RIGHT SIDE CONTENT -->
         <Grid Grid.Column="1" Margin="10 0 0 0"
               Focusable="True" Background="Transparent"
-              MouseDown="Grid_MouseDown">
+              MouseDown="Grid_MouseDown"
+              Grid.IsSharedSizeScope="True">
             
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
@@ -132,9 +134,35 @@
                          Style="{DynamicResource SearchBoxStyle}"
                          KeyDown="SearchBox_KeyDown"/>
             </DockPanel>
+            
+            <!-- HEADER -->
+            <Grid Grid.Row="1" Margin="15 0 20 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="ActionButtonsColumn"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Service name" Grid.Column="0" Foreground="{DynamicResource TextSecondaryBrush}" 
+                               FontWeight="SemiBold" FontSize="13" Opacity="0.7"/>
+                    <TextBlock Text="Username" Grid.Column="1" Foreground="{DynamicResource TextSecondaryBrush}" 
+                               FontWeight="SemiBold" FontSize="13" Opacity="0.7"/>
+                    <TextBlock Text="Password" Grid.Column="2" Foreground="{DynamicResource TextSecondaryBrush}" 
+                               FontWeight="SemiBold" FontSize="13" Opacity="0.7"/>
+                    <TextBlock Text="Note" Grid.Column="3" Foreground="{DynamicResource TextSecondaryBrush}" 
+                               FontWeight="SemiBold" FontSize="13" Opacity="0.7"/>
+                </Grid>
+            </Grid>
 
             <!-- ACCOUNT LIST -->
-            <ListBox Grid.Row="1"
+            <ListBox Grid.Row="2"
                      ItemsSource="{Binding DisplayedAccounts}"
                      BorderThickness="0"
                      Background="Transparent"
@@ -157,7 +185,7 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="ActionButtonsColumn"/>
                                 </Grid.ColumnDefinitions>
 
                                 <!-- Account fields -->
@@ -165,7 +193,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="2*"/>
-                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="0.5*"/>
                                         <ColumnDefinition Width="3*"/>
                                     </Grid.ColumnDefinitions>
 
@@ -210,7 +238,7 @@
             </ListBox>
             
             <!-- TIMER -->
-            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Text="Security logout in:" Margin="0 0 5 0" Style="{DynamicResource TimerDisplayText}"/>
                 <TextBlock x:Name="TimerDisplay" Text="05:00" FontWeight="SemiBold" Style="{DynamicResource TimerDisplayText}"/>
             </StackPanel>
