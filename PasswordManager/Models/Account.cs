@@ -59,25 +59,27 @@ namespace PasswordManager.Models
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
 
         // Use DPAPI (CurrentUser) so encrypted passwords are tied to the current Windows user profile.
-        public static string EncryptPassword(string password)
+        public static string Encrypt(string data)
         {
-            var bytes = Encoding.UTF8.GetBytes(password);
+            if (string.IsNullOrEmpty(data)) return string.Empty;
+            var bytes = Encoding.UTF8.GetBytes(data);
             var encrypted = ProtectedData.Protect(bytes, null, DataProtectionScope.CurrentUser);
             return Convert.ToBase64String(encrypted);
         }
 
         // Decrypt and return plain text
-        public static string DecryptPassword(string encryptedPassword)
+        public static string Decrypt(string encryptedData)
         {
+            if (string.IsNullOrEmpty(encryptedData)) return string.Empty;
             try
             {
-                var bytes = Convert.FromBase64String(encryptedPassword);
+                var bytes = Convert.FromBase64String(encryptedData);
                 var decrypted = ProtectedData.Unprotect(bytes, null, DataProtectionScope.CurrentUser);
                 return Encoding.UTF8.GetString(decrypted);
             }
             catch (FormatException)
             {
-                MessageBox.Show("Stored password is corrupted or not encrypted correctly.");
+                MessageBox.Show("Stored data is corrupted or not encrypted correctly.");
                 return string.Empty;
             }
         }

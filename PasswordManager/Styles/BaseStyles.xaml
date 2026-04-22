@@ -201,10 +201,10 @@
                             Background="{TemplateBinding Background}">
                         <Grid>
                             <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"/>
-                            <ToggleButton HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"
+                            <!--<ToggleButton HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"
                                           Width="24" Height="24" Background="Transparent" BorderThickness="0"
                                           Foreground="{DynamicResource IconBrush}" Content="👁" FontSize="14" Cursor="Hand"
-                                          ToolTip="Show/Hide password"/>
+                                          ToolTip="Show/Hide password"/>-->
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>

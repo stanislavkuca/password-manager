@@ -41,7 +41,7 @@
     <SolidColorBrush x:Key="DisabledTextBrush" Color="#CBD5E1"/>
     
     <!-- ACCENT PALETTE -->
-    <SolidColorBrush x:Key="PrimaryAccentBrush" Color="#4F46E5"/>
+    <SolidColorBrush x:Key="PrimaryAccentBrush" Color="#9D98F0"/>
     <SolidColorBrush x:Key="PrimaryAccentHoverBrush" Color="#4338CA"/>
     <SolidColorBrush x:Key="AccentForegroundBrush" Color="#E7E7E7"/>
     

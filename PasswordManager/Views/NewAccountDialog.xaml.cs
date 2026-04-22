@@ -23,9 +23,9 @@ namespace PasswordManager.Views
                 Title = "Edit account";
                 ConfirmBtn!.Content = "Save changes";
 
-                AccountNameTextBox!.Text = account.Name ?? string.Empty;
-                AccountUsernameTextBox!.Text = account.Username ?? string.Empty;
-                AccountPasswordTextBox!.Text = Account.DecryptPassword(account.Password);
+                AccountNameTextBox!.Text = account.Name;
+                AccountUsernameTextBox!.Text = account.Username;
+                AccountPasswordTextBox!.Text = account.Password;
                 AccountNoteTextBox!.Text = account.Note ?? string.Empty;
             }
         }
@@ -95,7 +95,7 @@ namespace PasswordManager.Views
                 AccountToEdit.Name = AccountNameTextBox!.Text;
                 AccountToEdit.Username = AccountUsernameTextBox!.Text;
                 // store encrypted password consistently
-                AccountToEdit.Password = Account.EncryptPassword(AccountPasswordTextBox!.Text);
+                AccountToEdit.Password = AccountPasswordTextBox!.Text;
                 AccountToEdit.Note = AccountNoteTextBox!.Text;
                 CreatedAccount = AccountToEdit;
             }
@@ -104,7 +104,7 @@ namespace PasswordManager.Views
                 CreatedAccount = new Account(
                     AccountNameTextBox!.Text,
                     AccountUsernameTextBox!.Text,
-                    Account.EncryptPassword(AccountPasswordTextBox!.Text),
+                    AccountPasswordTextBox!.Text,
                     AccountNoteTextBox!.Text
                 );
             }

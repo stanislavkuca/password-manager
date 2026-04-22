@@ -341,11 +341,26 @@ namespace PasswordManager.Views
         {
             if (sender is MenuItem { DataContext: Account acc })
             {
-                if (!string.IsNullOrWhiteSpace(acc.Username))
+                string decryptedUsername = Account.Decrypt(acc.Username);
+
+                if (!string.IsNullOrWhiteSpace(decryptedUsername))
                 {
-                    Clipboard.SetText(acc.Username);
+                    Clipboard.SetText(decryptedUsername);
 
                     MessageBox.Show("Username copied to clipoboard!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(30) };
+                    timer.Tick += (s, ev) =>
+                    {
+                        if (Clipboard.GetText() == decryptedUsername)
+                        {
+                            Clipboard.Clear();
+                        }
+
+                        timer.Stop();
+                    };
+
+                    timer.Start();
                 }
             }
         }
@@ -357,7 +372,7 @@ namespace PasswordManager.Views
         {
             if (sender is MenuItem { DataContext: Account acc })
             {
-                string decryptedPassword = Account.DecryptPassword(acc.Password);
+                string decryptedPassword = Account.Decrypt(acc.Password);
 
                 if (!string.IsNullOrWhiteSpace(decryptedPassword))
                 {
