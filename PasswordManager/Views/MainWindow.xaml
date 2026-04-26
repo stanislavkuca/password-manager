@@ -150,7 +150,7 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Service name" Grid.Column="0" Foreground="{DynamicResource TextSecondaryBrush}" 
@@ -197,13 +197,13 @@
                                         <ColumnDefinition Width="1*"/>
                                         <ColumnDefinition Width="1*"/>
                                         <ColumnDefinition Width="0.5*"/>
-                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="2*"/>
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="{Binding Name}" Style="{DynamicResource AccountItemTemplateStyle}"
                                                Grid.Column="0" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
 
-                                    <TextBlock Text="{Binding Username}" Style="{DynamicResource AccountItemTemplateStyle}"
+                                    <TextBlock Text="{Binding MaskedUsername}" Style="{DynamicResource AccountItemTemplateStyle}"
                                                Grid.Column="1" TextTrimming="CharacterEllipsis"/>
 
                                     <TextBlock Text="********" Style="{DynamicResource AccountItemTemplateStyle}"

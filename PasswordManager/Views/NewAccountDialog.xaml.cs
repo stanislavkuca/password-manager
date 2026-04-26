@@ -91,9 +91,9 @@ namespace PasswordManager.Views
         // --- BUTTON LOGIC ---
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            if ((AccountNameTextBox.Text.Length < 8 || AccountUsernameTextBox.Text.Length < 8 || AccountPasswordTextBox.Text.Length < 8))
+            if ((AccountNameTextBox.Text.Length < 4 || AccountUsernameTextBox.Text.Length < 4 || AccountPasswordTextBox.Text.Length < 8))
             {
-                MessageBox.Show("Service name, username and password must have at least 8 characters.");
+                MessageBox.Show("Service name and username must be at least 4 characters and password at least 8 characters.");
                 return;
             }
 

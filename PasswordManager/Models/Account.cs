@@ -28,7 +28,22 @@ namespace PasswordManager.Models
         }
 
         public string Name { get; set; }
-        public string Username { get; set; }
+
+        private string _username;
+        public string Username
+        {
+            get => _username;
+            set
+            {
+                if (_username != value)
+                {
+                    _username = value;
+                    OnPropertyChanged(nameof(Username));
+                    OnPropertyChanged(nameof(MaskedUsername));
+                }
+            }
+        }
+
         public string Password { get; set; }
         public string? Note { get; set; }
 
@@ -43,6 +58,20 @@ namespace PasswordManager.Models
                     _isFavourite = value;
                     OnPropertyChanged(nameof(IsFavourite));
                 }
+            }
+        }
+
+        public string MaskedUsername
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Username))
+                    return string.Empty;
+
+                if (Username.Length <= 4)
+                    return new string('*', Username.Length);
+
+                return "****" + Username.Substring(4);
             }
         }
 
