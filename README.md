@@ -60,5 +60,5 @@ If you want to use the application without opening the source code:
 - Střední průmyslová škola, Obchodní akademie a Jazyková škola s právem státní jazykové zkoušky, Frýdek≈Místek, příspěvková organizace
 - 2025/26
 
-
-
+---
+- Icons from https://icons8.com/
