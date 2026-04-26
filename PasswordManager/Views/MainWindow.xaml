@@ -147,8 +147,8 @@
 
                 <Grid Grid.Column="0" Margin="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1.5*"/>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
@@ -194,8 +194,8 @@
                                 <!-- Account fields -->
                                 <Grid Grid.Column="0" VerticalAlignment="Center" Margin="0">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1.5*"/>
-                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
                                         <ColumnDefinition Width="0.5*"/>
                                         <ColumnDefinition Width="3*"/>
                                     </Grid.ColumnDefinitions>

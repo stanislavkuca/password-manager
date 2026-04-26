@@ -34,9 +34,9 @@ namespace PasswordManager.Views
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(MasterPasswordBox.Password) ||
-                string.IsNullOrWhiteSpace(ConfirmMasterPasswordBox.Password))
+                string.IsNullOrWhiteSpace(ConfirmMasterPasswordBox.Password) || MasterPasswordBox.Password.Length < 8)
             {
-                MessageBox.Show("Enter and confirm new password.");
+                MessageBox.Show("New password must have at least 8 characters.");
                 return;
             }
 

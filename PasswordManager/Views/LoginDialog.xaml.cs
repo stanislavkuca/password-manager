@@ -52,8 +52,8 @@ namespace PasswordManager.Views
 
             try
             {
-                if (File.Exists("Data/data.json"))
-                    File.Delete("Data/data.json");
+                if (File.Exists("Data/vault.dat"))
+                    File.Delete("Data/vault.dat");
 
                 if (File.Exists("Data/master.hash"))
                     File.Delete("Data/master.hash");

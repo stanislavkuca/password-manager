@@ -2,6 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PasswordManager.Views
 {
@@ -90,6 +91,12 @@ namespace PasswordManager.Views
         // --- BUTTON LOGIC ---
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
+            if ((AccountNameTextBox.Text.Length < 8 || AccountUsernameTextBox.Text.Length < 8 || AccountPasswordTextBox.Text.Length < 8))
+            {
+                MessageBox.Show("Service name, username and password must have at least 8 characters.");
+                return;
+            }
+
             if (AccountToEdit != null)
             {
                 AccountToEdit.Name = AccountNameTextBox!.Text;
