@@ -341,18 +341,18 @@ namespace PasswordManager.Views
         {
             if (sender is MenuItem { DataContext: Account acc })
             {
-                string decryptedUsername = Account.Decrypt(acc.Username);
+                string textToCopy = acc.Username;
 
-                if (!string.IsNullOrWhiteSpace(decryptedUsername))
+                if (!string.IsNullOrWhiteSpace(textToCopy))
                 {
-                    Clipboard.SetText(decryptedUsername);
+                    Clipboard.SetText(textToCopy);
 
-                    MessageBox.Show("Username copied to clipoboard!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Username copied to clipoboard! After 30s clipboard will be cleared.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(30) };
                     timer.Tick += (s, ev) =>
                     {
-                        if (Clipboard.GetText() == decryptedUsername)
+                        if (Clipboard.GetText() == textToCopy)
                         {
                             Clipboard.Clear();
                         }
@@ -372,18 +372,18 @@ namespace PasswordManager.Views
         {
             if (sender is MenuItem { DataContext: Account acc })
             {
-                string decryptedPassword = Account.Decrypt(acc.Password);
+                string textToCopy = acc.Password;
 
-                if (!string.IsNullOrWhiteSpace(decryptedPassword))
+                if (!string.IsNullOrWhiteSpace(textToCopy))
                 {
-                    Clipboard.SetText(decryptedPassword);
+                    Clipboard.SetText(textToCopy);
 
                     MessageBox.Show("Password copied to clipoboard! After 30s clipboard will be cleared.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(30) };
                     timer.Tick += (s, ev) =>
                     {
-                        if (Clipboard.GetText() == decryptedPassword)
+                        if (Clipboard.GetText() == textToCopy)
                         {
                             Clipboard.Clear();
                         }

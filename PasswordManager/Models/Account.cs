@@ -106,7 +106,7 @@ namespace PasswordManager.Models
                 var decrypted = ProtectedData.Unprotect(bytes, null, DataProtectionScope.CurrentUser);
                 return Encoding.UTF8.GetString(decrypted);
             }
-            catch (FormatException)
+            catch (Exception ex) when(ex is FormatException || ex is System.Security.Cryptography.CryptographicException)
             {
                 MessageBox.Show("Stored data is corrupted or not encrypted correctly.");
                 return string.Empty;

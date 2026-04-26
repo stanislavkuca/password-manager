@@ -11,7 +11,7 @@
         ResizeMode="CanResize"
         Title="Password Manager Alpha"
         Width="1400" Height="700"
-        MinWidth="1000" MinHeight="500"
+        MinWidth="1100" MinHeight="500"
         PreviewMouseMove="Window_UserActivity"
         PreviewKeyDown="Window_UserActivity">
 
@@ -46,12 +46,18 @@
                       Checked="ThemeToggleButton_Checked"
                       Unchecked="ThemeToggleButton_Unchecked"/>
 
-            <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
                 <Label Content="Folders:" Margin="20 0 20 0"
-                       Style="{DynamicResource LabelStyle}"/>
+                       Style="{DynamicResource LabelStyle}" Grid.Row="0"/>
 
                 <!--FOLDER LIST -->
-                <ListBox ItemsSource="{Binding Folders}"
+                <ListBox Grid.Row="1"
+                        ItemsSource="{Binding Folders}"
                         ItemContainerStyle="{DynamicResource FolderItemStyle}"
                         SelectedItem="{Binding SelectedFolder, Mode=TwoWay}"
                         PreviewMouseRightButtonDown="OnPreviewMouseRightBtnDown"
@@ -59,7 +65,8 @@
                         Background="Transparent"
                         x:Name="FoldersListBox"
                         HorizontalAlignment="Stretch"
-                        Margin="20 0 20 0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        Margin="20 0 20 0" 
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -95,11 +102,11 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-            </StackPanel>
+            </Grid>
         </DockPanel>
 
         <!-- RIGHT SIDE CONTENT -->
-        <Grid Grid.Column="1" Margin="10 0 0 0"
+        <Grid Grid.Column="1" Margin="10 0 10 0"
               Focusable="True" Background="Transparent"
               MouseDown="Grid_MouseDown"
               Grid.IsSharedSizeScope="True">
